@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="らくらくレシピ">
   
-  <title>ゴーヤーキムチ炒め - らくらく電子レシピ</title>
+  <title>インタラクションレシピ - ゴーヤーたっぷり豚キムチ</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -56,12 +56,12 @@
 
   <div id="app" class="relative w-full h-full flex flex-col justify-between overflow-hidden p-4">
     
-    <!-- ==================== 视图 0：つかいかた案内（使用指南，已去除所有注音与跳动动画） ==================== -->
+    <!-- ==================== 视图 0：つかいかた案内（使用指南，无注音，无跳动动画） ==================== -->
     <div v-if="currentView === 'guide'" class="absolute inset-0 z-50 bg-brandCream flex flex-col justify-between p-6 overflow-y-auto">
       <!-- 头部 -->
       <div class="text-center py-2">
         <h1 class="text-4xl font-extrabold text-brandOrange tracking-wide flex justify-center items-center gap-2">
-          🍳 簡単！料理レシピアプリ
+          🍳 インタラクションレシピ
         </h1>
         <p class="text-xl text-gray-600 mt-2 font-bold">
           このアプリの操作方法
@@ -132,15 +132,75 @@
           </div>
           <h3 class="text-xl font-bold text-brandOrange mb-1">目安タイマー</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
-            調理時間の目安をカウントダウンします。一時停止も可能です。
+            調理時間の目安をカウントダウンします。一时停止も可能です。
           </p>
         </div>
       </div>
 
-      <!-- 底部静态开始按钮（已去除 jump 跳动动画） -->
+      <!-- 底部静态开始按钮（无 bounce 晃眼跳动） -->
       <div class="text-center mt-6">
-        <button @click="goToView('checklist')" class="inline-flex items-center justify-center px-12 py-5 bg-brandOrange hover:bg-brandOrangeHover text-white text-3xl font-black rounded-full shadow-2xl transition duration-300 transform active:scale-95 border-4 border-white cursor-pointer min-h-[70px]">
-          👍 内容を確認した！食材の準備へ
+        <button @click="goToView('preview')" class="inline-flex items-center justify-center px-12 py-5 bg-brandOrange hover:bg-brandOrangeHover text-white text-3xl font-black rounded-full shadow-2xl transition duration-300 transform active:scale-95 border-4 border-white cursor-pointer min-h-[70px]">
+          👍 内容を確認した！レシピを見る
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ==================== 🎬 额外新增视图 1.5：レシピ紹介（菜谱预览与来源） ==================== -->
+    <div v-if="currentView === 'preview'" class="absolute inset-0 z-45 bg-brandCream flex flex-col justify-between p-6 overflow-y-auto">
+      <!-- 头部：应用Logo / 标题 -->
+      <div class="text-center py-2 shrink-0">
+        <h1 class="text-4xl font-extrabold text-brandOrange tracking-wide">
+          🍳 インタラクションレシピ
+        </h1>
+      </div>
+
+      <!-- 主介绍版面：双栏网格，完美利用 iPad 7 横屏比例 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-auto max-w-5xl mx-auto w-full items-center">
+        <!-- 左侧：菜品官方美图 -->
+        <div class="flex flex-col items-center">
+          <div class="bg-white p-3 rounded-3xl shadow-xl border-4 border-orange-100">
+            <!-- 引入官方图片封面 -->
+            <img src="image_c877dd.jpg" alt="ゴーヤーたっぷり豚キムチ" class="rounded-2xl max-w-full h-auto object-cover max-h-[300px] shadow-sm">
+          </div>
+        </div>
+
+        <!-- 右侧：菜品介绍、口号、来源指引 -->
+        <div class="flex flex-col justify-center space-y-5">
+          <div>
+            <span class="bg-brandOrange text-white text-sm font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">今日の料理</span>
+            <h2 class="text-4xl font-black text-gray-800 mt-2">
+              ゴーヤーたっぷり豚キムチ
+            </h2>
+          </div>
+
+          <!-- 精美引用卡片 -->
+          <div class="bg-orange-50 border-l-4 border-brandOrange p-4 rounded-r-xl shadow-inner">
+            <p class="text-lg text-gray-700 leading-relaxed font-bold">
+              “旬のゴーヤーをたっぷり使い、相性ぴったりの豚肉と炒めてキムチでピリッと味つけしました。これぞ夏のスタミナ料理です。”
+            </p>
+          </div>
+
+          <!-- 来源展示 -->
+          <div class="text-sm text-gray-500 font-bold bg-white p-3 rounded-xl border border-gray-200">
+            <p class="flex items-center gap-1">
+              <span>🌾</span>
+              <span>レシピ参考元：<strong>JAグループ「とれたてレシピ」</strong></span>
+            </p>
+            <a href="https://life.ja-group.jp/recipe/detail?id=33" target="_blank" class="text-brandOrange hover:underline text-xs mt-1 block break-all font-mono">
+              https://life.ja-group.jp/recipe/detail?id=33
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部控制按钮 -->
+      <div class="flex justify-between items-center max-w-5xl w-full mx-auto mt-6 shrink-0 gap-4">
+        <button @click="goToView('guide')" class="px-8 py-4 bg-gray-300 hover:bg-gray-400 text-gray-800 text-xl font-bold rounded-2xl active:scale-95 transition">
+          ⬅️ 操作方法へもどる
+        </button>
+        <button @click="goToView('checklist')" class="flex-1 py-5 bg-brandOrange hover:bg-brandOrangeHover text-white text-3xl font-black rounded-full shadow-2xl border-4 border-white transition active:scale-95 text-center cursor-pointer min-h-[70px]">
+          🥗 食材と道具の確認へ進む 👍
         </button>
       </div>
     </div>
@@ -215,8 +275,8 @@
 
       <!-- 底部启动烹饪按钮 -->
       <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-6 shrink-0 gap-4">
-        <button @click="goToView('guide')" class="px-6 py-4 bg-gray-300 hover:bg-gray-400 text-gray-800 text-xl font-bold rounded-xl active:scale-95 transition">
-          ⬅️ 操作説明へもどる
+        <button @click="goToView('preview')" class="px-6 py-4 bg-gray-300 hover:bg-gray-400 text-gray-800 text-xl font-bold rounded-xl active:scale-95 transition">
+          ⬅️ レシピ紹介へもどる
         </button>
         <button @click="startCooking" class="flex-1 max-w-2xl py-5 bg-brandGreen hover:bg-brandGreenHover text-white text-3xl font-black rounded-full shadow-2xl border-4 border-white transition active:scale-95 text-center cursor-pointer min-h-[70px]">
           🔥 準備完了！料理をスタート
@@ -229,7 +289,7 @@
     <div v-if="currentView === 'cooking'" class="w-full h-full flex flex-col justify-between"
          @touchstart="handleTouchStart" @touchend="handleTouchEnd">
       
-      <!-- 中部主屏幕：现在完全占据上方区域，视频纵向扩张至红框区域 -->
+      <!-- 中部主屏幕：完全占据上方区域，视频纵向扩张，顶部按钮收缩为悬浮控制条 -->
       <div class="relative flex-1 bg-black rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center">
         
         <!-- 视频容器，绑定长按事件 -->
@@ -252,7 +312,7 @@
             お使いの端末はビデオ再生に対応していません。
           </video>
 
-          <!-- ==================== 浮层1：左上角配料小卡片 (悬浮式，极为紧凑) ==================== -->
+          <!-- ==================== 悬浮面板1：左上角配料小卡片 (高对比悬浮样式，不占网格空间) ==================== -->
           <div class="absolute top-4 left-4 z-30 bg-white/95 backdrop-blur-md border-2 border-brandOrange rounded-2xl p-3 shadow-xl max-w-[320px] pointer-events-none">
             <div class="text-xs font-bold text-brandOrange tracking-wider flex items-center gap-1 mb-1">
               📌 この手順で使う材料
@@ -267,8 +327,8 @@
             </div>
           </div>
 
-          <!-- ==================== 浮层2：右上角控制矩阵 (悬浮式，紧凑分配) ==================== -->
-          <div class="absolute top-4 right-4 z-30 flex gap-2 items-center bg-white/80 backdrop-blur-md p-2 rounded-2xl shadow-xl">
+          <!-- ==================== 悬浮面板2：右上角控制矩阵 (紧凑分布在紫色区域) ==================== -->
+          <div class="absolute top-4 right-4 z-30 flex gap-2 items-center bg-white/85 backdrop-blur-md p-2 rounded-2xl shadow-xl">
             <!-- 字幕切换 -->
             <button @click.stop="toggleSubtitle" 
                     class="h-16 px-4 rounded-xl flex flex-col items-center justify-center transition active:scale-95 border-2 min-w-[85px] cursor-pointer"
@@ -316,7 +376,7 @@
             <p class="text-white text-xl font-bold mt-4">動画を読み込み中...</p>
           </div>
 
-          <!-- CC 实时字幕：纯日语（已去除任何中文） -->
+          <!-- CC 实时字幕：纯日语（去除所有中文） -->
           <div v-if="isSubtitleOn" class="absolute bottom-6 left-4 right-4 text-center pointer-events-none z-10">
             <div class="inline-block bg-black/85 px-8 py-4 rounded-2xl border-2 border-white shadow-2xl max-w-[90%]">
               <p class="text-white text-2xl font-black leading-relaxed tracking-wider">
@@ -378,7 +438,7 @@
 
         <!-- 步骤详情与番茄钟底栏 -->
         <div class="flex justify-between items-center mt-2 flex-1">
-          <!-- 步骤详细名称（纯净大字版，无拼音） -->
+          <!-- 步骤详细名称（无注音） -->
           <div class="flex items-center gap-3">
             <span class="text-4xl font-black text-brandOrange tracking-tighter">
               {{ formatStepNumber(currentStep.id) }} <span class="text-2xl text-gray-400">/ 09</span>
@@ -432,7 +492,7 @@
           完成しました！
         </h1>
         <p class="text-2xl font-bold text-gray-700 mt-4 leading-relaxed">
-          とっても美味しそうな<br>ゴーヤーキムチ炒めのできあがりです！
+          とっても美味しそうな<br>ゴーヤーたっぷり豚キムチのできあがりです！
         </p>
         <p class="text-lg text-brandOrange font-extrabold mt-2">
           温かいうちにお召し上がりください。
@@ -456,7 +516,7 @@
 
     createApp({
       setup() {
-        const currentView = ref('guide'); // 'guide', 'checklist', 'cooking'
+        const currentView = ref('guide'); // 'guide', 'preview', 'checklist', 'cooking'
         const currentStepIndex = ref(0);
         const isPlaying = ref(false);
         const isSubtitleOn = ref(true);
@@ -506,7 +566,7 @@
           { name: 'フライパン', checked: false }
         ]);
 
-        // 精心编排的 9 步电子菜谱数据（已去除所有中文翻译）
+        // 精心编排的 9 步电子菜谱数据（纯净日语版，1.mov~9.mov 后缀）
         const steps = [
           {
             id: 1,
