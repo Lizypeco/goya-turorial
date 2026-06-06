@@ -56,12 +56,12 @@
 
   <div id="app" class="relative w-full h-full flex flex-col justify-between overflow-hidden p-4">
     
-    <!-- ==================== 视图 0：つかいかた案内（使用指南，无注音，无跳动动画） ==================== -->
+    <!-- ==================== 视图 0：つかいかた案内（使用指南） ==================== -->
     <div v-if="currentView === 'guide'" class="absolute inset-0 z-50 bg-brandCream flex flex-col justify-between p-6 overflow-y-auto">
       <!-- 头部 -->
-      <div class="text-center py-2">
+      <div class="text-center py-2 text-brandDark">
         <h1 class="text-4xl font-extrabold text-brandOrange tracking-wide flex justify-center items-center gap-2">
-          🍳 インタラクションレシピ
+          インタラクションレシピ
         </h1>
         <p class="text-xl text-gray-600 mt-2 font-bold">
           このアプリの操作方法
@@ -73,7 +73,9 @@
         <!-- 卡片：上一步/下一步 -->
         <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center">
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-            <span class="text-3xl">⬅️ ➡️</span>
+            <svg class="w-8 h-8 text-brandOrange" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18m-3.75-3.75L21 12m0 0l-3.75 3.75"/>
+            </svg>
           </div>
           <h3 class="text-xl font-bold text-brandOrange mb-1">進む・もどる</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
@@ -84,7 +86,16 @@
         <!-- 卡片：暂停与播放 -->
         <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center">
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-            <span class="text-3xl">⏸️</span>
+            <!-- 采用用户提供的暂停/播放SVG设计元素作为引导说明 -->
+            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM10.72 15.03C10.72 15.51 10.52 15.7 10.01 15.7H8.71C8.2 15.7 8 15.51 8 15.03V8.97C8 8.49 8.2 8.3 8.71 8.3H10C10.51 8.3 10.71 8.49 10.71 8.97V15.03H10.72ZM16 15.03C16 15.51 15.8 15.7 15.29 15.7H14C13.49 15.7 13.29 15.51 13.29 15.03V8.97C13.29 8.49 13.49 8.3 14 8.3H15.29C15.8 8.3 16 8.49 16 8.97V15.03Z" fill="url(#paint0_linear_guide_pause)"/>
+              <defs>
+                <linearGradient id="paint0_linear_guide_pause" x1="1.97" y1="12" x2="21.97" y2="12" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FF8904"/>
+                  <stop offset="1" stop-color="#FF6900"/>
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
           <h3 class="text-xl font-bold text-brandOrange mb-1">一時停止 / 再生</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
@@ -95,7 +106,9 @@
         <!-- 卡片：字幕开关 -->
         <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center">
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-            <span class="text-3xl">💬</span>
+            <svg class="w-8 h-8 text-brandOrange" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/>
+            </svg>
           </div>
           <h3 class="text-xl font-bold text-brandOrange mb-1">字幕の表示</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
@@ -106,7 +119,9 @@
         <!-- 卡片：重播 -->
         <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center">
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-            <span class="text-3xl">🔄</span>
+            <svg class="w-8 h-8 text-brandOrange" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/>
+            </svg>
           </div>
           <h3 class="text-xl font-bold text-brandOrange mb-1">最初から見直す</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
@@ -117,9 +132,11 @@
         <!-- 卡片：1.5倍速 -->
         <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center col-span-1">
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-            <span class="text-3xl">⏩</span>
+            <svg class="w-8 h-8 text-brandOrange" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+            </svg>
           </div>
-          <h3 class="text-xl font-bold text-brandOrange mb-1">長押しで早送り</h3>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">长押しで早送り</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
             動画の部分を長く指で押している間、動画が少し早く進みます。
           </p>
@@ -128,11 +145,13 @@
         <!-- 卡片：温馨定时器 -->
         <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center col-span-1 md:col-span-1">
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-            <span class="text-3xl">⏰</span>
+            <svg class="w-8 h-8 text-brandOrange" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
           </div>
           <h3 class="text-xl font-bold text-brandOrange mb-1">目安タイマー</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
-            調理時間の目安をカウントダウンします。一时停止も可能です。
+            調理時間の目安をカウントダウンします。一時停止も可能です。
           </p>
         </div>
       </div>
@@ -140,18 +159,18 @@
       <!-- 底部静态开始按钮（无 bounce 晃眼跳动） -->
       <div class="text-center mt-6">
         <button @click="goToView('preview')" class="inline-flex items-center justify-center px-12 py-5 bg-brandOrange hover:bg-brandOrangeHover text-white text-3xl font-black rounded-full shadow-2xl transition duration-300 transform active:scale-95 border-4 border-white cursor-pointer min-h-[70px]">
-          👍 内容を確認した！レシピを見る
+          内容を確認した！レシピを見る
         </button>
       </div>
     </div>
 
 
-    <!-- ==================== 🎬 额外新增视图 1.5：レシピ紹介（菜谱预览与来源） ==================== -->
+    <!-- ==================== 🎬 视图 1.5：レシピ紹介（菜谱预览与来源） ==================== -->
     <div v-if="currentView === 'preview'" class="absolute inset-0 z-45 bg-brandCream flex flex-col justify-between p-6 overflow-y-auto">
       <!-- 头部：应用Logo / 标题 -->
       <div class="text-center py-2 shrink-0">
         <h1 class="text-4xl font-extrabold text-brandOrange tracking-wide">
-          🍳 インタラクションレシピ
+          インタラクションレシピ
         </h1>
       </div>
 
@@ -160,7 +179,7 @@
         <!-- 左侧：菜品官方美图 -->
         <div class="flex flex-col items-center">
           <div class="bg-white p-3 rounded-3xl shadow-xl border-4 border-orange-100">
-            <!-- 引入官方图片封面 -->
+            <!-- 引用 `image_c877dd.jpg` 官方图片封面 -->
             <img src="image_c877dd.jpg" alt="ゴーヤーたっぷり豚キムチ" class="rounded-2xl max-w-full h-auto object-cover max-h-[300px] shadow-sm">
           </div>
         </div>
@@ -183,8 +202,8 @@
 
           <!-- 来源展示 -->
           <div class="text-sm text-gray-500 font-bold bg-white p-3 rounded-xl border border-gray-200">
-            <p class="flex items-center gap-1">
-              <span>🌾</span>
+            <p class="flex items-center gap-1.5 text-gray-700">
+              <span class="text-brandOrange font-black">●</span>
               <span>レシピ参考元：<strong>JAグループ「とれたてレシピ」</strong></span>
             </p>
             <a href="https://life.ja-group.jp/recipe/detail?id=33" target="_blank" class="text-brandOrange hover:underline text-xs mt-1 block break-all font-mono">
@@ -197,10 +216,10 @@
       <!-- 底部控制按钮 -->
       <div class="flex justify-between items-center max-w-5xl w-full mx-auto mt-6 shrink-0 gap-4">
         <button @click="goToView('guide')" class="px-8 py-4 bg-gray-300 hover:bg-gray-400 text-gray-800 text-xl font-bold rounded-2xl active:scale-95 transition">
-          ⬅️ 操作方法へもどる
+          もどる
         </button>
         <button @click="goToView('checklist')" class="flex-1 py-5 bg-brandOrange hover:bg-brandOrangeHover text-white text-3xl font-black rounded-full shadow-2xl border-4 border-white transition active:scale-95 text-center cursor-pointer min-h-[70px]">
-          🥗 食材と道具の確認へ進む 👍
+          食材と道具の確認へ進む
         </button>
       </div>
     </div>
@@ -212,20 +231,20 @@
       <!-- 头部：标题与引导语 -->
       <div class="text-center py-2 shrink-0">
         <h2 class="text-3xl font-black text-brandOrange flex justify-center items-center gap-2">
-          🥗 調理準備：材料と道具の確認
+          調理準備：材料と道具の確認
         </h2>
         <p class="text-lg text-gray-700 mt-2 font-bold">
           必要なものを机の上にそろえましょう。準備できたら丸を押してチェックしてください。
         </p>
       </div>
 
-      <!-- 主要内容：物料列表 -->
+      <!-- 主要内容：物料列表（彻底不带 Emoji） -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto max-w-6xl mx-auto w-full">
         
         <!-- 食材分类 -->
         <div class="bg-white p-5 rounded-2xl shadow-lg border-t-8 border-brandOrange flex flex-col">
           <h3 class="text-2xl font-bold text-brandOrange mb-4 flex items-center gap-2">
-            🍖 食材
+            食材
           </h3>
           <div class="space-y-3 flex-1">
             <label v-for="(item, index) in ingredients" :key="index" 
@@ -241,7 +260,7 @@
         <!-- 调味料分类 -->
         <div class="bg-white p-5 rounded-2xl shadow-lg border-t-8 border-brandGreen flex flex-col">
           <h3 class="text-2xl font-bold text-brandGreen mb-4 flex items-center gap-2">
-            🧂 調味料
+            調味料
           </h3>
           <div class="space-y-3 flex-1 overflow-y-auto max-h-[320px] pr-1">
             <label v-for="(item, index) in seasonings" :key="index" 
@@ -258,7 +277,7 @@
         <!-- 厨房工具分类 -->
         <div class="bg-white p-5 rounded-2xl shadow-lg border-t-8 border-blue-500 flex flex-col">
           <h3 class="text-2xl font-bold text-blue-600 mb-4 flex items-center gap-2">
-            🍳 使う道具
+            使う道具
           </h3>
           <div class="space-y-3 flex-1">
             <label v-for="(item, index) in tools" :key="index" 
@@ -276,16 +295,16 @@
       <!-- 底部启动烹饪按钮 -->
       <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-6 shrink-0 gap-4">
         <button @click="goToView('preview')" class="px-6 py-4 bg-gray-300 hover:bg-gray-400 text-gray-800 text-xl font-bold rounded-xl active:scale-95 transition">
-          ⬅️ レシピ紹介へもどる
+          もどる
         </button>
         <button @click="startCooking" class="flex-1 max-w-2xl py-5 bg-brandGreen hover:bg-brandGreenHover text-white text-3xl font-black rounded-full shadow-2xl border-4 border-white transition active:scale-95 text-center cursor-pointer min-h-[70px]">
-          🔥 準備完了！料理をスタート
+          準備完了！料理をスタート
         </button>
       </div>
     </div>
 
 
-    <!-- ==================== 视图 2：メイン調理ワークスペース（主烹饪界面，视频高宽比已最大化） ==================== -->
+    <!-- ==================== 视图 2：メイン調理ワークスペース（主烹饪界面，无Emoji版） ==================== -->
     <div v-if="currentView === 'cooking'" class="w-full h-full flex flex-col justify-between"
          @touchstart="handleTouchStart" @touchend="handleTouchEnd">
       
@@ -315,7 +334,7 @@
           <!-- ==================== 悬浮面板1：左上角配料小卡片 (高对比悬浮样式，不占网格空间) ==================== -->
           <div class="absolute top-4 left-4 z-30 bg-white/95 backdrop-blur-md border-2 border-brandOrange rounded-2xl p-3 shadow-xl max-w-[320px] pointer-events-none">
             <div class="text-xs font-bold text-brandOrange tracking-wider flex items-center gap-1 mb-1">
-              📌 この手順で使う材料
+              この手順で使う材料
             </div>
             <div class="text-lg font-black text-gray-800 flex flex-wrap gap-x-2 gap-y-1">
               <span v-for="(ing, idx) in currentStep.ingredients" :key="idx" class="inline-block bg-orange-50 px-2 py-0.5 rounded-lg border border-orange-100">
@@ -333,16 +352,39 @@
             <button @click.stop="toggleSubtitle" 
                     class="h-16 px-4 rounded-xl flex flex-col items-center justify-center transition active:scale-95 border-2 min-w-[85px] cursor-pointer"
                     :class="isSubtitleOn ? 'bg-brandOrange border-brandOrange text-white' : 'bg-white border-gray-300 text-gray-700'">
-              <span class="text-xl mb-0.5">💬</span>
+              <svg class="w-6 h-6 mb-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/>
+              </svg>
               <span class="text-[11px] font-black tracking-tighter">字幕 {{ isSubtitleOn ? 'ON' : 'OFF' }}</span>
             </button>
 
-            <!-- 播放/暂停 -->
+            <!-- 播放/暂停 (根据isPlaying动态应用用户提供的播放/暂停SVG) -->
             <button @click.stop="togglePlay" 
-                    class="h-16 px-4 rounded-xl flex flex-col items-center justify-center transition active:scale-95 border-2 min-w-[95px] cursor-pointer"
-                    :class="isPlaying ? 'bg-brandGreen border-brandGreen text-white' : 'bg-red-500 border-red-500 text-white animate-pulse'">
-              <span class="text-xl mb-0.5">{{ isPlaying ? '⏸️' : '▶️' }}</span>
-              <span class="text-[11px] font-black tracking-tighter">
+                    class="h-16 px-4 rounded-xl flex flex-col items-center justify-center transition active:scale-95 border-2 min-w-[95px] cursor-pointer bg-white border-gray-300"
+                    :class="!isPlaying ? 'animate-pulse' : ''">
+              <!-- isPlaying 为真（播放中）：显示用户定制的【暂停】键 SVG -->
+              <svg v-if="isPlaying" width="30" height="30" viewBox="0 0 24 24" fill="none" class="mb-0.5">
+                <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM10.72 15.03C10.72 15.51 10.52 15.7 10.01 15.7H8.71C8.2 15.7 8 15.51 8 15.03V8.97C8 8.49 8.2 8.3 8.71 8.3H10C10.51 8.3 10.71 8.49 10.71 8.97V15.03H10.72ZM16 15.03C16 15.51 15.8 15.7 15.29 15.7H14C13.49 15.7 13.29 15.51 13.29 15.03V8.97C13.29 8.49 13.49 8.3 14 8.3H15.29C15.8 8.3 16 8.49 16 8.97V15.03Z" fill="url(#paint0_linear_cooking_pause)"/>
+                <defs>
+                  <linearGradient id="paint0_linear_cooking_pause" x1="1.97" y1="12" x2="21.97" y2="12" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FF8904"/>
+                    <stop offset="1" stop-color="#FF6900"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+
+              <!-- isPlaying 为假（暂停中）：显示用户定制的【播放/切换播放】键 SVG -->
+              <svg v-else width="30" height="30" viewBox="0 0 24 24" fill="none" class="mb-0.5">
+                <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM14.97 14.23L12.07 15.9C11.71 16.11 11.31 16.21 10.92 16.21C10.52 16.21 10.13 16.11 9.77 15.9C9.05 15.48 8.62 14.74 8.62 13.9V10.55C8.62 9.72 9.05 8.97 9.77 8.55C10.49 8.13 11.35 8.13 12.08 8.55L14.98 10.22C15.7 10.64 16.13 11.38 16.13 12.22C16.13 13.06 15.7 13.81 14.97 14.23Z" fill="url(#paint0_linear_cooking_play)"/>
+                <defs>
+                  <linearGradient id="paint0_linear_cooking_play" x1="1.97" y1="12" x2="21.97" y2="12" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FF8904"/>
+                    <stop offset="1" stop-color="#FF6900"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+
+              <span class="text-[11px] font-black tracking-tighter text-gray-700">
                 <span v-if="isPlaying">一時停止</span>
                 <span v-else>再生する</span>
               </span>
@@ -351,7 +393,9 @@
             <!-- 重播 -->
             <button @click.stop="restartStep" 
                     class="h-16 px-4 bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 rounded-xl flex flex-col items-center justify-center transition active:scale-95 min-w-[85px] cursor-pointer">
-              <span class="text-xl mb-0.5">🔄</span>
+              <svg class="w-6 h-6 mb-0.5 text-gray-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/>
+              </svg>
               <span class="text-[11px] font-black tracking-tighter">もう一度</span>
             </button>
           </div>
@@ -359,15 +403,24 @@
           <!-- 1.5倍速长按动画浮层 -->
           <div v-show="isFastForwarding" class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none transition-all duration-200">
             <div class="bg-brandOrange text-white text-2xl font-black px-6 py-4 rounded-2xl shadow-2xl border-4 border-white flex items-center gap-3 animate-pulse">
-              <span>⏩ 1.5倍速（はやおくり中）</span>
+              <span>1.5倍速（はやおくり中）</span>
             </div>
             <p class="text-white font-bold mt-2 text-md text-shadow">指を離すといつもの速さにもどります</p>
           </div>
 
-          <!-- 暂停状态巨大提示浮层 -->
+          <!-- 暂停状态巨大提示浮层 (使用定制暂停SVG的放大版) -->
           <div v-show="!isPlaying && !isFastForwarding" class="absolute inset-0 bg-black/30 flex items-center justify-center pointer-events-none">
-            <div class="w-20 h-20 bg-brandOrange/90 rounded-full flex items-center justify-center shadow-lg border-2 border-white animate-ping"></div>
-            <span class="absolute text-5xl text-white">⏸️</span>
+            <div class="w-24 h-24 bg-white/95 rounded-full flex items-center justify-center shadow-2xl border-4 border-brandOrange animate-scale-loop">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM10.72 15.03C10.72 15.51 10.52 15.7 10.01 15.7H8.71C8.2 15.7 8 15.51 8 15.03V8.97C8 8.49 8.2 8.3 8.71 8.3H10C10.51 8.3 10.71 8.49 10.71 8.97V15.03H10.72ZM16 15.03C16 15.51 15.8 15.7 15.29 15.7H14C13.49 15.7 13.29 15.51 13.29 15.03V8.97C13.29 8.49 13.49 8.3 14 8.3H15.29C15.8 8.3 16 8.49 16 8.97V15.03Z" fill="url(#paint0_linear_overlay_pause)"/>
+                <defs>
+                  <linearGradient id="paint0_linear_overlay_pause" x1="1.97" y1="12" x2="21.97" y2="12" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FF8904"/>
+                    <stop offset="1" stop-color="#FF6900"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
           </div>
 
           <!-- 加载中浮层 -->
@@ -376,7 +429,7 @@
             <p class="text-white text-xl font-bold mt-4">動画を読み込み中...</p>
           </div>
 
-          <!-- CC 实时字幕：纯日语（去除所有中文） -->
+          <!-- CC 实时字幕：纯日语（去除了所有的中文翻译） -->
           <div v-if="isSubtitleOn" class="absolute bottom-6 left-4 right-4 text-center pointer-events-none z-10">
             <div class="inline-block bg-black/85 px-8 py-4 rounded-2xl border-2 border-white shadow-2xl max-w-[90%]">
               <p class="text-white text-2xl font-black leading-relaxed tracking-wider">
@@ -387,23 +440,27 @@
 
         </div>
 
-        <!-- 左右大物理箭头（超大透明触控热区） -->
+        <!-- 左右大物理箭头（超大透明触控热区，改用精致 SVG 替代 Emoji） -->
         <!-- 左侧【まえへ】 -->
         <button @click="prevStep" 
-                class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black/50 to-transparent hover:from-black/70 flex items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
+                class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black/50 to-transparent hover:from-black/70 flex flex-col items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
           <div class="bg-black/40 p-4 rounded-full group-hover:bg-brandOrange/80 border-2 border-white/50 transition">
-            <span class="text-4xl block transform group-active:-translate-x-2 transition">◀️</span>
+            <svg class="w-8 h-8 text-white transform group-active:-translate-x-2 transition" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+            </svg>
           </div>
-          <span class="absolute bottom-4 left-2 text-xs font-extrabold text-white bg-black/80 px-1 py-0.5 rounded border border-white/20">まえへ</span>
+          <span class="absolute bottom-4 left-2 text-xs font-extrabold text-white bg-black/80 px-2 py-1 rounded border border-white/20">まえへ</span>
         </button>
 
         <!-- 右侧【つぎへ】 -->
         <button @click="nextStep" 
-                class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black/50 to-transparent hover:from-black/70 flex items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
+                class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black/50 to-transparent hover:from-black/70 flex flex-col items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
           <div class="bg-black/40 p-4 rounded-full group-hover:bg-brandOrange/80 border-2 border-white/50 transition">
-            <span class="text-4xl block transform group-active:translate-x-2 transition">▶️</span>
+            <svg class="w-8 h-8 text-white transform group-active:translate-x-2 transition" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+            </svg>
           </div>
-          <span class="absolute bottom-4 right-2 text-xs font-extrabold text-white bg-black/80 px-1 py-0.5 rounded border border-white/20">つぎへ</span>
+          <span class="absolute bottom-4 right-2 text-xs font-extrabold text-white bg-black/80 px-2 py-1 rounded border border-white/20">つぎへ</span>
         </button>
 
       </div>
@@ -454,16 +511,17 @@
             </div>
           </div>
 
-          <!-- 番茄钟：倒计时小闹钟组件 -->
+          <!-- 番茄钟：倒计时小闹钟组件 (使用精美的 SVG 钟替代 Emoji) -->
           <div class="flex items-center gap-3 bg-orange-50 px-4 py-2 rounded-2xl border-2 border-brandOrange/30 shadow-inner">
             <button @click="toggleTimer" 
-                    class="w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow transition active:scale-95 cursor-pointer"
+                    class="w-12 h-12 rounded-full flex items-center justify-center shadow transition active:scale-95 cursor-pointer bg-white"
                     :class="[
-                      timerRunning ? 'bg-brandOrange text-white animate-spin-slow' : 'bg-gray-300 text-gray-600',
+                      timerRunning ? 'text-brandOrange ring-2 ring-brandOrange' : 'text-gray-600',
                       timer === 0 ? 'bg-brandGreen text-white' : ''
-                    ]"
-                    :style="timerRunning ? 'animation: spin 12s linear infinite' : ''">
-              ⏰
+                    ]">
+              <svg class="w-7 h-7" :class="timerRunning ? 'animate-spin-slow' : ''" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+              </svg>
             </button>
             <div class="text-right flex flex-col justify-center select-none">
               <span class="text-xs font-extrabold text-gray-500">目安残り時間</span>
@@ -484,11 +542,15 @@
 
     </div>
 
-    <!-- 顶层遮罩：恭喜完成层 -->
+    <!-- 顶层遮罩：恭喜完成层 (去除了所有 Emoji) -->
     <div v-if="showSuccessOverlay" class="absolute inset-0 z-50 bg-black/80 flex flex-col items-center justify-center p-6 text-center">
       <div class="bg-brandCream rounded-3xl p-8 max-w-2xl border-8 border-brandGreen shadow-2xl">
-        <span class="text-8xl">🎉</span>
-        <h1 class="text-5xl font-black text-brandGreen mt-6">
+        <div class="w-20 h-20 bg-brandGreen/10 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-brandGreen">
+          <svg class="w-12 h-12 text-brandGreen" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+          </svg>
+        </div>
+        <h1 class="text-5xl font-black text-brandGreen mt-2">
           完成しました！
         </h1>
         <p class="text-2xl font-bold text-gray-700 mt-4 leading-relaxed">
@@ -499,11 +561,17 @@
         </p>
         
         <div class="flex gap-4 justify-center mt-8">
-          <button @click="restartFromBeginning" class="px-8 py-4 bg-brandOrange hover:bg-brandOrangeHover text-white text-2xl font-black rounded-full shadow-lg transition active:scale-95 border-2 border-white cursor-pointer">
-            🔄 もう一度作る
+          <button @click="restartFromBeginning" class="px-8 py-4 bg-brandOrange hover:bg-brandOrangeHover text-white text-2xl font-black rounded-full shadow-lg transition active:scale-95 border-2 border-white cursor-pointer flex items-center gap-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/>
+            </svg>
+            もう一度作る
           </button>
-          <button @click="showSuccessOverlay = false" class="px-8 py-4 bg-gray-500 text-white text-2xl font-black rounded-full shadow-lg transition active:scale-95 border-2 border-white cursor-pointer">
-            ❌ 閉じる
+          <button @click="showSuccessOverlay = false" class="px-8 py-4 bg-gray-500 hover:bg-gray-600 text-white text-2xl font-black rounded-full shadow-lg transition active:scale-95 border-2 border-white cursor-pointer flex items-center gap-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+            閉じる
           </button>
         </div>
       </div>
