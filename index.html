@@ -57,24 +57,24 @@
   <div id="app" class="relative w-full h-full flex flex-col justify-between overflow-hidden p-3">
     
     <!-- ==================== 视图 0：つかいかた案内（使用指南） ==================== -->
-    <div v-if="currentView === 'guide'" class="absolute inset-0 z-50 bg-brandCream flex flex-col justify-between p-4 overflow-hidden">
-      <!-- 头部：行间距与外边距大幅压缩，确保 iPad 7 完美显示 -->
-      <div class="text-center py-1 mt-1">
-        <h1 class="text-3xl font-extrabold text-brandOrange tracking-wide flex justify-center items-center gap-2">
+    <div v-if="currentView === 'guide'" class="absolute inset-0 z-50 bg-brandCream flex flex-col justify-between p-3 overflow-hidden">
+      <!-- 头部：行间距与外边距极限压缩，确保 iPad 7 完美显示 -->
+      <div class="text-center py-1 mt-0.5 shrink-0">
+        <h1 class="text-2xl font-extrabold text-brandOrange tracking-wide flex justify-center items-center gap-2">
           インタラクションレシピ
         </h1>
-        <p class="text-lg text-gray-600 mt-1 font-bold">
+        <p class="text-sm text-gray-600 mt-0.5 font-bold">
           このアプリの操作方法
         </p>
       </div>
 
-      <!-- 操作卡片网格：gap由4缩减为3，确保高度完全可控 -->
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 my-auto max-w-5xl mx-auto w-full">
+      <!-- 操作卡片网格：极致收缩内边距和高度，完美预留底部空间 -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5 my-auto max-w-5xl mx-auto w-full">
         <!-- 卡片：上一步/下一步 -->
-        <div class="bg-white p-3 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center">
-          <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-1 gap-1">
+        <div class="bg-white p-2.5 rounded-2xl shadow-sm border-2 border-orange-100 flex flex-col items-center text-center justify-center min-h-[110px]">
+          <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mb-1 gap-1">
             <!-- もどる SVG -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
               <path d="M20.24 7.22V16.79C20.24 18.75 18.11 19.98 16.41 19L12.26 16.61L8.11001 14.21C6.41001 13.23 6.41001 10.78 8.11001 9.8L12.26 7.4L16.41 5.01C18.11 4.03 20.24 5.25 20.24 7.22Z" fill="url(#paint0_linear_guide_back)"/>
               <path d="M3.75999 18.93C3.34999 18.93 3.00999 18.59 3.00999 18.18V5.82C3.00999 5.41 3.34999 5.07 3.75999 5.07C4.16999 5.07 4.50999 5.41 4.50999 5.82V18.18C4.50999 18.59 4.16999 18.93 3.75999 18.93Z" fill="url(#paint1_guide_back)"/>
               <defs>
@@ -87,7 +87,7 @@
               </defs>
             </svg>
             <!-- 次へ SVG -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
               <path d="M3.75999 7.22V16.79C3.75999 18.75 5.88999 19.98 7.58999 19L11.74 16.61L15.89 14.21C17.59 13.23 17.59 10.78 15.89 9.8L11.74 7.4L7.58999 5.01C5.88999 4.03 3.75999 5.25 3.75999 7.22Z" fill="url(#paint0_linear_guide_next)"/>
               <path d="M20.24 18.93C19.83 18.93 19.49 18.59 19.49 18.18V5.82C19.49 5.41 19.83 5.07 20.24 5.07C20.65 5.07 20.99 5.41 20.99 5.82V18.18C20.99 18.59 20.66 18.93 20.24 18.93Z" fill="url(#paint1_linear_guide_next)"/>
               <defs>
@@ -100,16 +100,16 @@
               </defs>
             </svg>
           </div>
-          <h3 class="text-lg font-bold text-brandOrange mb-0.5">進む・もどる</h3>
-          <p class="text-xs text-gray-600 leading-tight font-semibold">
+          <h3 class="text-base font-bold text-brandOrange mb-0.5">進む・もどる</h3>
+          <p class="text-[11px] text-gray-600 leading-tight font-semibold">
             画面の左右にある大きな矢印を押すか、画面を左右に指でスライドします。
           </p>
         </div>
 
         <!-- 卡片：暂停与播放 -->
-        <div class="bg-white p-3 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center">
-          <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-1">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        <div class="bg-white p-2.5 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center min-h-[110px]">
+          <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mb-1">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
               <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM10.72 15.03C10.72 15.51 10.52 15.7 10.01 15.7H8.71C8.2 15.7 8 15.51 8 15.03V8.97C8 8.49 8.2 8.3 8.71 8.3H10C10.51 8.3 10.71 8.49 10.71 8.97V15.03H10.72ZM16 15.03C16 15.51 15.8 15.7 15.29 15.7H14C13.49 15.7 13.29 15.51 13.29 15.03V8.97C13.29 8.49 13.49 8.3 14 8.3H15.29C15.8 8.3 16 8.49 16 8.97V15.03Z" fill="url(#paint0_linear_guide_pause)"/>
               <defs>
                 <linearGradient id="paint0_linear_guide_pause" x1="1.97" y1="12" x2="21.97" y2="12" gradientUnits="userSpaceOnUse">
@@ -118,16 +118,16 @@
               </defs>
             </svg>
           </div>
-          <h3 class="text-lg font-bold text-brandOrange mb-0.5">一時停止 / 再生</h3>
-          <p class="text-xs text-gray-600 leading-tight font-semibold">
+          <h3 class="text-base font-bold text-brandOrange mb-0.5">一時停止 / 再生</h3>
+          <p class="text-[11px] text-gray-600 leading-tight font-semibold">
             動画を止めたい時は、右上の「一時停止」ボタンを押します。
           </p>
         </div>
 
         <!-- 卡片：字幕开关 -->
-        <div class="bg-white p-3 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center">
-          <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-1">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        <div class="bg-white p-2.5 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center min-h-[110px]">
+          <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mb-1">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
               <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM6.5 12.57H9.27C9.68 12.57 10.02 12.91 10.02 13.32C10.02 13.73 9.68 14.07 9.27 14.07H6.5C6.09 14.07 5.75 13.73 5.75 13.32C5.75 12.91 6.09 12.57 6.5 12.57ZM12.97 17.83H6.5C6.09 17.83 5.75 17.49 5.75 17.08C5.75 16.67 6.09 16.33 6.5 16.33H12.97C13.38 16.33 13.72 16.67 13.72 17.08C13.72 17.49 13.39 17.83 12.97 17.83ZM17.5 17.83H15.65C15.24 17.83 14.9 17.49 14.9 17.08C14.9 16.67 15.24 16.33 15.65 16.33H17.5C17.91 16.33 18.25 16.67 18.25 17.08C18.25 17.49 17.91 17.83 17.5 17.83ZM17.5 14.07H11.97C11.56 14.07 11.22 13.73 11.22 13.32C11.22 12.91 11.56 12.57 11.97 12.57H17.5C17.91 12.57 18.25 12.91 18.25 13.32C18.25 13.73 17.91 14.07 17.5 14.07Z" fill="url(#paint0_linear_guide_sub)"/>
               <defs>
                 <linearGradient id="paint0_linear_guide_sub" x1="2" y1="12" x2="21.99" y2="12" gradientUnits="userSpaceOnUse">
@@ -136,16 +136,16 @@
               </defs>
             </svg>
           </div>
-          <h3 class="text-lg font-bold text-brandOrange mb-0.5">字幕の表示</h3>
-          <p class="text-xs text-gray-600 leading-tight font-semibold">
+          <h3 class="text-base font-bold text-brandOrange mb-0.5">字幕の表示</h3>
+          <p class="text-[11px] text-gray-600 leading-tight font-semibold">
             話している言葉を文字で読みたい時は「字幕」ボタンを押します。
           </p>
         </div>
 
         <!-- 卡片：重播 -->
-        <div class="bg-white p-3 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center">
-          <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-1">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        <div class="bg-white p-2.5 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center min-h-[110px]">
+          <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mb-1">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
               <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM12 18.58C8.83 18.58 6.25 16 6.25 12.83C6.25 9.72 8.73 7.19 11.81 7.08L11.44 6.65C11.17 6.34 11.2 5.86 11.51 5.59C11.82 5.32 12.3 5.35 12.57 5.66L14.23 7.56C14.25 7.58 14.26 7.6 14.28 7.62C14.32 7.68 14.36 7.75 14.38 7.82C14.39 7.86 14.4 7.9 14.41 7.94C14.43 8.03 14.42 8.13 14.4 8.22C14.38 8.3 14.35 8.38 14.31 8.46C14.3 8.48 14.28 8.5 14.27 8.52C14.23 8.58 14.17 8.63 14.11 8.67C14.11 8.67 14.1 8.67 14.1 8.68L12.16 10.1C11.82 10.34 11.36 10.27 11.11 9.94C10.87 9.61 10.94 9.14 11.27 8.89L11.68 8.59C9.48 8.75 7.74 10.59 7.74 12.83C7.74 15.17 9.65 17.08 11.99 17.08C14.33 17.08 16.24 15.17 16.24 12.83C16.24 11.99 15.99 11.17 15.53 10.47C15.3 10.13 15.39 9.66 15.74 9.43C16.09 9.2 16.55 9.29 16.78 9.64C17.41 10.59 17.75 11.69 17.75 12.83C17.75 16 15.17 18.58 12 18.58Z" fill="url(#paint0_linear_guide_restart)"/>
               <defs>
                 <linearGradient id="paint0_linear_guide_restart" x1="2" y1="12" x2="21.99" y2="12" gradientUnits="userSpaceOnUse">
@@ -154,16 +154,16 @@
               </defs>
             </svg>
           </div>
-          <h3 class="text-lg font-bold text-brandOrange mb-0.5">最初から見直す</h3>
-          <p class="text-xs text-gray-600 leading-tight font-semibold">
+          <h3 class="text-base font-bold text-brandOrange mb-0.5">最初から見直す</h3>
+          <p class="text-[11px] text-gray-600 leading-tight font-semibold">
             今のステップをもう一度見たい時は「もう一度」ボタンを押します。
           </p>
         </div>
 
         <!-- 卡片：早送り -->
-        <div class="bg-white p-3 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center col-span-2 md:col-span-1">
-          <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-1">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        <div class="bg-white p-2.5 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center col-span-2 md:col-span-1 min-h-[110px]">
+          <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mb-1">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
               <path d="M2 8.34V15.66C2 17.16 3.63 18.1 4.93 17.35L8.1 15.52L11.27 13.69L11.76 13.41V10.59L11.27 10.31L8.1 8.48L4.93 6.65C3.63 5.9 2 6.84 2 8.34Z" fill="url(#paint0_linear_guide_ff)"/>
               <path d="M11.76 8.34V15.66C11.76 17.16 13.39 18.1 14.68 17.35L17.86 15.52L21.03 13.69C22.32 12.94 22.32 11.06 21.03 10.31L17.86 8.48L14.68 6.65C13.39 5.9 11.76 6.84 11.76 8.34Z" fill="url(#paint1_linear_guide_ff)"/>
               <defs>
@@ -176,16 +176,16 @@
               </defs>
             </svg>
           </div>
-          <h3 class="text-lg font-bold text-brandOrange mb-0.5">長押しで早送り</h3>
-          <p class="text-xs text-gray-600 leading-tight font-semibold">
+          <h3 class="text-base font-bold text-brandOrange mb-0.5">長押しで早送り</h3>
+          <p class="text-[11px] text-gray-600 leading-tight font-semibold">
             動画の部分を長く指で押している間、動画が少し早く進みます。
           </p>
         </div>
       </div>
 
-      <!-- 底部静态开始按钮（去除闪烁跳动，高度上移，确保 iPad 7 完美闭合） -->
-      <div class="text-center mt-3 mb-1 shrink-0">
-        <button @click="goToView('preview')" class="inline-flex items-center justify-center px-10 py-3.5 bg-brandOrange hover:bg-brandOrangeHover text-white text-2xl font-black rounded-full shadow-lg transition duration-300 transform active:scale-95 border-2 border-white cursor-pointer">
+      <!-- 底部静态开始按钮（安全收缩高度 py-2.5，杜绝 Safari 遮挡） -->
+      <div class="text-center mt-2 mb-2 shrink-0">
+        <button @click="goToView('preview')" class="inline-flex items-center justify-center px-8 py-2.5 bg-brandOrange hover:bg-brandOrangeHover text-xl font-black text-white rounded-full shadow-md transition duration-300 transform active:scale-95 border-2 border-white cursor-pointer">
           内容を確認した！レシピを見る
         </button>
       </div>
@@ -193,59 +193,59 @@
 
 
     <!-- ==================== 🎬 视图 1.5：レシピ紹介（菜谱预览与来源） ==================== -->
-    <div v-if="currentView === 'preview'" class="absolute inset-0 z-45 bg-brandCream flex flex-col justify-between p-4 overflow-hidden">
+    <div v-if="currentView === 'preview'" class="absolute inset-0 z-45 bg-brandCream flex flex-col justify-between p-3 overflow-hidden">
       <!-- 头部：应用Logo / 标题 -->
-      <div class="text-center py-1 mt-1 shrink-0">
-        <h1 class="text-3xl font-extrabold text-brandOrange tracking-wide">
+      <div class="text-center py-1 mt-0.5 shrink-0">
+        <h1 class="text-2xl font-extrabold text-brandOrange tracking-wide">
           インタラクションレシピ
         </h1>
       </div>
 
-      <!-- 主介绍版面：双栏网格，完美利用 iPad 7 横屏比例 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto max-w-5xl mx-auto w-full items-center">
+      <!-- 主介绍版面：双栏网格，高度预算深度优化 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto max-w-5xl mx-auto w-full items-center">
         <!-- 左侧：菜品官方美图 -->
         <div class="flex flex-col items-center">
-          <div class="bg-white p-2 rounded-2xl shadow-md border-2 border-orange-100">
-            <!-- 直接使用指定的 JA 官方图片，同时保留降级容错 -->
-            <img :src="coverImageSrc" @error="handleImageError" alt="ゴーヤーたっぷり豚キムチ" class="rounded-xl max-w-full h-auto object-cover max-h-[220px] shadow-sm">
+          <div class="bg-white p-1.5 rounded-2xl shadow-md border-2 border-orange-100">
+            <!-- 限制图片最大高度，完美为下方留出安全空间 -->
+            <img :src="coverImageSrc" @error="handleImageError" alt="ゴーヤーたっぷり豚キムチ" class="rounded-xl max-w-full h-auto object-cover max-h-[170px] shadow-sm">
           </div>
         </div>
 
         <!-- 右侧：菜品介绍、口号、来源指引 -->
-        <div class="flex flex-col justify-center space-y-3">
+        <div class="flex flex-col justify-center space-y-2.5 text-left">
           <div>
-            <span class="bg-brandOrange text-white text-xs font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">今日の料理</span>
-            <h2 class="text-3xl font-black text-gray-800 mt-1">
+            <span class="bg-brandOrange text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">今日の料理</span>
+            <h2 class="text-2xl font-black text-gray-800 mt-0.5">
               ゴーヤーたっぷり豚キムチ
             </h2>
           </div>
 
           <!-- 精美引用卡片 -->
-          <div class="bg-orange-50 border-l-4 border-brandOrange p-3 rounded-r-xl shadow-inner">
-            <p class="text-sm text-gray-700 leading-relaxed font-bold">
+          <div class="bg-orange-50 border-l-4 border-brandOrange p-2.5 rounded-r-xl shadow-inner">
+            <p class="text-xs text-gray-700 leading-relaxed font-bold">
               “旬のゴーヤーをたっぷり使い、相性ぴったりの豚肉と炒めてキムチでピリッと味つけしました。これぞ夏のスタミナ料理です。”
             </p>
           </div>
 
           <!-- 来源展示 -->
-          <div class="text-xs text-gray-500 font-bold bg-white p-2 rounded-xl border border-gray-200">
+          <div class="text-[10px] text-gray-500 font-bold bg-white p-2 rounded-xl border border-gray-200">
             <p class="flex items-center gap-1.5 text-gray-700">
               <span class="text-brandOrange font-black">●</span>
               <span>レシピ参考元：<strong>JAグループ「とれたてレシピ」</strong></span>
             </p>
-            <a href="https://life.ja-group.jp/recipe/detail?id=33" target="_blank" class="text-brandOrange hover:underline text-[10px] mt-0.5 block break-all font-mono">
+            <a href="https://life.ja-group.jp/recipe/detail?id=33" target="_blank" class="text-brandOrange hover:underline text-[9px] mt-0.5 block break-all font-mono">
               https://life.ja-group.jp/recipe/detail?id=33
             </a>
           </div>
         </div>
       </div>
 
-      <!-- 底部控制按钮：高度整体上移 -->
-      <div class="flex justify-between items-center max-w-5xl w-full mx-auto mt-3 mb-1 shrink-0 gap-3">
-        <button @click="goToView('guide')" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 text-lg font-bold rounded-xl active:scale-95 transition">
+      <!-- 底部控制按钮：高度安全上推 py-2.5 -->
+      <div class="flex justify-between items-center max-w-5xl w-full mx-auto mt-2 mb-2 shrink-0 gap-3">
+        <button @click="goToView('guide')" class="px-5 py-2.5 bg-gray-300 hover:bg-gray-400 text-gray-800 text-base font-bold rounded-xl active:scale-95 transition">
           もどる
         </button>
-        <button @click="goToView('checklist')" class="flex-1 py-3.5 bg-brandOrange hover:bg-brandOrangeHover text-white text-2xl font-black rounded-full shadow-lg border-2 border-white transition active:scale-95 text-center cursor-pointer">
+        <button @click="goToView('checklist')" class="flex-1 py-2.5 bg-brandOrange hover:bg-brandOrangeHover text-white text-xl font-black rounded-full shadow-md border-2 border-white transition active:scale-95 text-center cursor-pointer">
           食材と道具の確認へ進む
         </button>
       </div>
@@ -253,64 +253,64 @@
 
 
     <!-- ==================== 视图 1：材料・道具リスト（食材与工具备料单） ==================== -->
-    <div v-if="currentView === 'checklist'" class="absolute inset-0 z-40 bg-brandCream flex flex-col justify-between p-4 overflow-hidden">
+    <div v-if="currentView === 'checklist'" class="absolute inset-0 z-40 bg-brandCream flex flex-col justify-between p-3 overflow-hidden">
       
       <!-- 头部：标题与引导语 -->
       <div class="text-center py-1 shrink-0">
         <h2 class="text-2xl font-black text-brandOrange flex justify-center items-center gap-2">
-          調理準備：材料と道具の確認
+          調理準備：材料と道具の确认
         </h2>
-        <p class="text-sm text-gray-700 mt-1 font-bold">
+        <p class="text-xs text-gray-700 mt-0.5 font-bold">
           必要なものを机の上にそろえましょう。準備できたら丸を押してチェックしてください。
         </p>
       </div>
 
       <!-- 主要内容：物料列表（彻底不带 Emoji，精简无中文汉字与注音） -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto max-w-6xl mx-auto w-full">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 my-auto max-w-6xl mx-auto w-full">
         
         <!-- 食材分类 -->
-        <div class="bg-white p-4 rounded-2xl shadow-md border-t-4 border-brandOrange flex flex-col">
-          <h3 class="text-lg font-bold text-brandOrange mb-2 flex items-center gap-2">
+        <div class="bg-white p-3 rounded-2xl shadow-sm border-t-4 border-brandOrange flex flex-col">
+          <h3 class="text-base font-bold text-brandOrange mb-1.5 flex items-center gap-2">
             食材
           </h3>
-          <div class="space-y-2 flex-1">
+          <div class="space-y-1.5 flex-1">
             <label v-for="(item, index) in ingredients" :key="index" 
-                   class="flex items-center gap-2 p-2 bg-orange-50/50 rounded-xl cursor-pointer active:bg-orange-100 transition">
-              <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-brandOrange border-gray-300 rounded focus:ring-brandOrange">
-              <span class="text-base font-extrabold" :class="{'line-through text-gray-400': item.checked}">
-                {{ item.name }} <span class="text-brandOrange ml-1 text-sm">({{ item.amount }})</span>
+                   class="flex items-center gap-2 p-1.5 bg-orange-50/50 rounded-xl cursor-pointer active:bg-orange-100 transition">
+              <input type="checkbox" v-model="item.checked" class="w-5.5 h-5.5 text-brandOrange border-gray-300 rounded focus:ring-brandOrange">
+              <span class="text-sm font-extrabold" :class="{'line-through text-gray-400': item.checked}">
+                {{ item.name }} <span class="text-brandOrange ml-1 text-xs">({{ item.amount }})</span>
               </span>
             </label>
           </div>
         </div>
 
         <!-- 调味料分类 -->
-        <div class="bg-white p-4 rounded-2xl shadow-md border-t-4 border-brandGreen flex flex-col">
-          <h3 class="text-lg font-bold text-brandGreen mb-2 flex items-center gap-2">
+        <div class="bg-white p-3 rounded-2xl shadow-sm border-t-4 border-brandGreen flex flex-col">
+          <h3 class="text-base font-bold text-brandGreen mb-1.5 flex items-center gap-2">
             調味料
           </h3>
-          <div class="space-y-2 flex-1 overflow-y-auto max-h-[180px] pr-1">
+          <div class="space-y-1.5 flex-1 overflow-y-auto max-h-[140px] pr-1">
             <label v-for="(item, index) in seasonings" :key="index" 
                    class="flex items-center gap-2 p-1.5 bg-green-50/50 rounded-xl cursor-pointer active:bg-green-100 transition">
-              <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-brandGreen border-gray-300 rounded focus:ring-brandGreen">
-              <div class="text-sm font-extrabold flex flex-col" :class="{'line-through text-gray-400': item.checked}">
+              <input type="checkbox" v-model="item.checked" class="w-5.5 h-5.5 text-brandGreen border-gray-300 rounded focus:ring-brandGreen">
+              <div class="text-xs font-extrabold flex flex-col" :class="{'line-through text-gray-400': item.checked}">
                 <span>{{ item.name }}</span>
-                <span class="text-brandGreen text-xs font-bold">{{ item.amount }}</span>
+                <span class="text-brandGreen text-[10px] font-bold">{{ item.amount }}</span>
               </div>
             </label>
           </div>
         </div>
 
         <!-- 厨房工具分类 -->
-        <div class="bg-white p-4 rounded-2xl shadow-md border-t-4 border-blue-500 flex flex-col">
-          <h3 class="text-lg font-bold text-blue-600 mb-2 flex items-center gap-2">
+        <div class="bg-white p-3 rounded-2xl shadow-sm border-t-4 border-blue-500 flex flex-col">
+          <h3 class="text-base font-bold text-blue-600 mb-1.5 flex items-center gap-2">
             使う道具
           </h3>
-          <div class="space-y-2 flex-1">
+          <div class="space-y-1.5 flex-1">
             <label v-for="(item, index) in tools" :key="index" 
-                   class="flex items-center gap-2 p-2 bg-blue-50/50 rounded-xl cursor-pointer active:bg-blue-100 transition">
-              <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-blue-500 border-gray-300 rounded focus:ring-blue-500">
-              <span class="text-base font-extrabold" :class="{'line-through text-gray-400': item.checked}">
+                   class="flex items-center gap-2 p-1.5 bg-blue-50/50 rounded-xl cursor-pointer active:bg-blue-100 transition">
+              <input type="checkbox" v-model="item.checked" class="w-5.5 h-5.5 text-blue-500 border-gray-300 rounded focus:ring-blue-500">
+              <span class="text-sm font-extrabold" :class="{'line-through text-gray-400': item.checked}">
                 {{ item.name }}
               </span>
             </label>
@@ -319,12 +319,12 @@
 
       </div>
 
-      <!-- 底部启动烹饪按钮 -->
-      <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-3 mb-1 shrink-0 gap-3">
-        <button @click="goToView('preview')" class="px-5 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 text-lg font-bold rounded-xl active:scale-95 transition">
+      <!-- 底部启动烹饪按钮：高度安全上推 py-2.5 -->
+      <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-2 mb-2 shrink-0 gap-3">
+        <button @click="goToView('preview')" class="px-5 py-2.5 bg-gray-300 hover:bg-gray-400 text-gray-800 text-base font-bold rounded-xl active:scale-95 transition">
           もどる
         </button>
-        <button @click="startCooking" class="flex-1 max-w-2xl py-3.5 bg-brandGreen hover:bg-brandGreenHover text-white text-2xl font-black rounded-full shadow-lg border-2 border-white transition active:scale-95 text-center cursor-pointer">
+        <button @click="startCooking" class="flex-1 max-w-2xl py-2.5 bg-brandGreen hover:bg-brandGreenHover text-white text-xl font-black rounded-full shadow-md border-2 border-white transition active:scale-95 text-center cursor-pointer">
           準備完了！料理をスタート
         </button>
       </div>
@@ -335,1091 +335,7 @@
     <div v-if="currentView === 'cooking'" class="w-full h-full flex flex-col justify-between"
          @touchstart="handleTouchStart" @touchend="handleTouchEnd">
       
-      <!-- 中部主屏幕：视频占据绝大多数空间，顶层按钮彻底融入视频顶部悬浮状态 -->
-      <div class="relative flex-1 bg-black rounded-3xl overflow-hidden shadow-md flex items-center justify-center">
-        
-        <!-- 视频容器，绑定长按事件 -->
-        <div class="w-full h-full relative"
-             @touchstart="handleVideoTouchStart"
-             @touchend="handleVideoTouchEnd"
-             @touchcancel="handleVideoTouchEnd"
-             @mousedown="handleVideoMouseDown"
-             @mouseup="handleVideoMouseUp"
-             @mouseleave="handleVideoMouseUp">
-          
-          <video ref="cookingVideo" 
-                 class="w-full h-full object-contain"
-                 :src="currentStep.videoUrl"
-                 playsinline
-                 webkit-playsinline
-                 @play="onVideoPlay"
-                 @pause="onVideoPause"
-                 @ended="onVideoEnded"
-                 @timeupdate="onVideoTimeUpdate"
-                 @loadedmetadata="onVideoLoadedMetadata">
-            お使いの端末はビデオ再生に対応していません。
-          </video>
-
-          <!-- ==================== 悬浮面板1：左上角配料小卡片 (高适应大字眼) ==================== -->
-          <div class="absolute top-3 left-3 z-30 bg-white/95 backdrop-blur-md border-2 border-brandOrange rounded-2xl p-2 shadow-lg max-w-[280px] pointer-events-none">
-            <div class="text-[10px] font-bold text-brandOrange tracking-wider flex items-center gap-1 mb-0.5">
-              この手順で使う材料
-            </div>
-            <div class="text-base font-black text-gray-800 flex flex-wrap gap-x-2 gap-y-0.5">
-              <span v-for="(ing, idx) in currentStep.ingredients" :key="idx" class="inline-block bg-orange-50 px-1.5 py-0.5 rounded-lg border border-orange-100">
-                {{ ing.name }} <span class="text-brandOrange font-extrabold">{{ ing.amount }}</span>
-              </span>
-              <span v-if="!currentStep.ingredients || currentStep.ingredients.length === 0" class="text-gray-400 text-xs">
-                特別な材料はありません
-              </span>
-            </div>
-          </div>
-
-          <!-- ==================== 悬浮面板2：右上角控制矩阵 ==================== -->
-          <div class="absolute top-3 right-3 z-30 flex gap-1.5 items-center bg-white/85 backdrop-blur-md p-1.5 rounded-2xl shadow-lg">
-            <!-- 字幕切换 -->
-            <button @click.stop="toggleSubtitle" 
-                    class="h-14 px-3 rounded-xl flex flex-col items-center justify-center transition active:scale-95 border-2 min-w-[75px] cursor-pointer"
-                    :class="isSubtitleOn ? 'bg-brandOrange border-brandOrange text-white' : 'bg-white border-gray-300 text-gray-700'">
-              <!-- 字幕表示 SVG -->
-              <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none">
-                <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM6.5 12.57H9.27C9.68 12.57 10.02 12.91 10.02 13.32C10.02 13.73 9.68 14.07 9.27 14.07H6.5C6.09 14.07 5.75 13.73 5.75 13.32C5.75 12.91 6.09 12.57 6.5 12.57ZM12.97 17.83H6.5C6.09 17.83 5.75 17.49 5.75 17.08C5.75 16.67 6.09 16.33 6.5 16.33H12.97C13.38 16.33 13.72 16.67 13.72 17.08C13.72 17.49 13.39 17.83 12.97 17.83ZM17.5 17.83H15.65C15.24 17.83 14.9 17.49 14.9 17.08C14.9 16.67 15.24 16.33 15.65 16.33H17.5C17.91 16.33 18.25 16.67 18.25 17.08C18.25 17.49 17.91 17.83 17.5 17.83ZM17.5 14.07H11.97C11.56 14.07 11.22 13.73 11.22 13.32C11.22 12.91 11.56 12.57 11.97 12.57H17.5C17.91 12.57 18.25 12.91 18.25 13.32C18.25 13.73 17.91 14.07 17.5 14.07Z" :fill="isSubtitleOn ? '#FFFFFF' : 'url(#paint0_linear_cooking_sub)'"/>
-                <defs v-if="!isSubtitleOn">
-                  <linearGradient id="paint0_linear_cooking_sub" x1="2" y1="12" x2="21.99" y2="12" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-              <span class="text-[10px] font-black tracking-tighter">字幕 {{ isSubtitleOn ? 'ON' : 'OFF' }}</span>
-            </button>
-
-            <!-- 播放/暂停（彻底移除闪烁） -->
-            <button @click.stop="togglePlay" 
-                    class="h-14 px-3 rounded-xl flex flex-col items-center justify-center transition active:scale-95 border-2 min-w-[85px] cursor-pointer bg-white border-gray-300">
-              <!-- isPlaying 为真（播放中）：显示【暂停】键 SVG -->
-              <svg v-if="isPlaying" width="22" height="22" viewBox="0 0 24 24" fill="none" class="mb-0.5">
-                <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM10.72 15.03C10.72 15.51 10.52 15.7 10.01 15.7H8.71C8.2 15.7 8 15.51 8 15.03V8.97C8 8.49 8.2 8.3 8.71 8.3H10C10.51 8.3 10.71 8.49 10.71 8.97V15.03H10.72ZM16 15.03C16 15.51 15.8 15.7 15.29 15.7H14C13.49 15.7 13.29 15.51 13.29 15.03V8.97C13.29 8.49 13.49 8.3 14 8.3H15.29C15.8 8.3 16 8.49 16 8.97V15.03Z" fill="url(#paint0_linear_cooking_pause)"/>
-                <defs>
-                  <linearGradient id="paint0_linear_cooking_pause" x1="1.97" y1="12" x2="21.97" y2="12" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-
-              <!-- isPlaying 为假（暂停中）：显示【播放/切换播放】键 SVG -->
-              <svg v-else width="22" height="22" viewBox="0 0 24 24" fill="none" class="mb-0.5">
-                <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM14.97 14.23L12.07 15.9C11.71 16.11 11.31 16.21 10.92 16.21C10.52 16.21 10.13 16.11 9.77 15.9C9.05 15.48 8.62 14.74 8.62 13.9V10.55C8.62 9.72 9.05 8.97 9.77 8.55C10.49 8.13 11.35 8.13 12.08 8.55L14.98 10.22C15.7 10.64 16.13 11.38 16.13 12.22C16.13 13.06 15.7 13.81 14.97 14.23Z" fill="url(#paint0_linear_cooking_play)"/>
-                <defs>
-                  <linearGradient id="paint0_linear_cooking_play" x1="1.97" y1="12" x2="21.97" y2="12" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-
-              <span class="text-[10px] font-black tracking-tighter text-gray-700">
-                <span v-if="isPlaying">一時停止</span>
-                <span v-else>再生する</span>
-              </span>
-            </button>
-
-            <!-- 重播 -->
-            <button @click.stop="restartStep" 
-                    class="h-14 px-3 bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 rounded-xl flex flex-col items-center justify-center transition active:scale-95 min-w-[75px] cursor-pointer">
-              <!-- 見直し SVG -->
-              <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none">
-                <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM12 18.58C8.83 18.58 6.25 16 6.25 12.83C6.25 9.72 8.73 7.19 11.81 7.08L11.44 6.65C11.17 6.34 11.2 5.86 11.51 5.59C11.82 5.32 12.3 5.35 12.57 5.66L14.23 7.56C14.25 7.58 14.26 7.6 14.28 7.62C14.32 7.68 14.36 7.75 14.38 7.82C14.39 7.86 14.4 7.9 14.41 7.94C14.43 8.03 14.42 8.13 14.4 8.22C14.38 8.3 14.35 8.38 14.31 8.46C14.3 8.48 14.28 8.5 14.27 8.52C14.23 8.58 14.17 8.63 14.11 8.67C14.11 8.67 14.1 8.67 14.1 8.68L12.16 10.1C11.82 10.34 11.36 10.27 11.11 9.94C10.87 9.61 10.94 9.14 11.27 8.89L11.68 8.59C9.48 8.75 7.74 10.59 7.74 12.83C7.74 15.17 9.65 17.08 11.99 17.08C14.33 17.08 16.24 15.17 16.24 12.83C16.24 11.99 15.99 11.17 15.53 10.47C15.3 10.13 15.39 9.66 15.74 9.43C16.09 9.2 16.55 9.29 16.78 9.64C17.41 10.59 17.75 11.69 17.75 12.83C17.75 16 15.17 18.58 12 18.58Z" fill="url(#paint0_linear_cooking_restart)"/>
-                <defs>
-                  <linearGradient id="paint0_linear_cooking_restart" x1="2" y1="12" x2="21.99" y2="12" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-              <span class="text-[10px] font-black tracking-tighter">もう一度</span>
-            </button>
-          </div>
-
-          <!-- 1.5倍速长按动画浮层 -->
-          <div v-show="isFastForwarding" class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none transition-all duration-200">
-            <div class="bg-brandOrange text-white text-2xl font-black px-6 py-4 rounded-2xl shadow-2xl border-4 border-white flex items-center gap-3">
-              <!-- 早送り SVG -->
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                <path d="M2 8.34V15.66C2 17.16 3.63 18.1 4.93 17.35L8.1 15.52L11.27 13.69L11.76 13.41V10.59L11.27 10.31L8.1 8.48L4.93 6.65C3.63 5.9 2 6.84 2 8.34Z" fill="#FFFFFF"/>
-                <path d="M11.76 8.34V15.66C11.76 17.16 13.39 18.1 14.68 17.35L17.86 15.52L21.03 13.69C22.32 12.94 22.32 11.06 21.03 10.31L17.86 8.48L14.68 6.65C13.39 5.9 11.76 6.84 11.76 8.34Z" fill="#FFFFFF"/>
-              </svg>
-              <span>1.5倍速（はやおくり中）</span>
-            </div>
-            <p class="text-white font-bold mt-2 text-md text-shadow">指を離すといつもの速さにもどります</p>
-          </div>
-
-          <!-- 暂停状态巨大提示浮层（移除闪烁） -->
-          <div v-show="!isPlaying && !isFastForwarding" class="absolute inset-0 bg-black/30 flex items-center justify-center pointer-events-none">
-            <div class="w-16 h-16 bg-white/95 rounded-full flex items-center justify-center shadow-lg border-2 border-brandOrange">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM10.72 15.03C10.72 15.51 10.52 15.7 10.01 15.7H8.71C8.2 15.7 8 15.51 8 15.03V8.97C8 8.49 8.2 8.3 8.71 8.3H10C10.51 8.3 10.71 8.49 10.71 8.97V15.03H10.72ZM16 15.03C16 15.51 15.8 15.7 15.29 15.7H14C13.49 15.7 13.29 15.51 13.29 15.03V8.97C13.29 8.49 13.49 8.3 14 8.3H15.29C15.8 8.3 16 8.49 16 8.97V15.03Z" fill="url(#paint0_linear_overlay_pause)"/>
-                <defs>
-                  <linearGradient id="paint0_linear_overlay_pause" x1="1.97" y1="12" x2="21.97" y2="12" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-          </div>
-
-          <!-- 加载中浮层 -->
-          <div v-show="videoLoading" class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center pointer-events-none">
-            <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-brandOrange"></div>
-            <p class="text-white text-lg font-bold mt-3">動画を読み込み中...</p>
-          </div>
-
-          <!-- CC 实时字幕：纯日语 -->
-          <div v-if="isSubtitleOn" class="absolute bottom-6 left-4 right-4 text-center pointer-events-none z-10">
-            <div class="inline-block bg-black/85 px-6 py-3 rounded-2xl border-2 border-white shadow-xl max-w-[90%]">
-              <p class="text-white text-xl font-black leading-relaxed tracking-wider">
-                {{ currentStep.subtitle }}
-              </p>
-            </div>
-          </div>
-
-          <!-- YouTube-style 独立播放进度条 (位于视频底部，方便直接拖动) -->
-          <div class="absolute bottom-0 left-0 right-0 h-2 bg-white/20 cursor-pointer z-30 flex items-end hover:h-3 transition-all"
-               @click.stop="seekVideo">
-            <div class="h-full bg-brandOrange relative"
-                 :style="{ width: (videoCurrentTime / videoDuration * 100) + '%' }">
-              <!-- 橙色圆球型指示头 -->
-              <span class="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-brandOrange border border-white rounded-full shadow-md"></span>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- 左右大物理箭头（超大透明触控热区） -->
-        <!-- 左侧【まえへ】 (もどる SVG) -->
-        <button @click="prevStep" 
-                class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black/50 to-transparent hover:from-black/70 flex flex-col items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
-          <div class="bg-black/40 p-3 rounded-full group-hover:bg-brandOrange/80 border-2 border-white/50 transition">
-            <!-- もどる SVG -->
-            <svg class="w-7 h-7 transform group-active:-translate-x-2 transition" viewBox="0 0 24 24" fill="none">
-              <path d="M20.24 7.22V16.79C20.24 18.75 18.11 19.98 16.41 19L12.26 16.61L8.11001 14.21C6.41001 13.23 6.41001 10.78 8.11001 9.8L12.26 7.4L16.41 5.01C18.11 4.03 20.24 5.25 20.24 7.22Z" fill="url(#paint0_linear_arrow_prev)"/>
-              <path d="M3.75999 18.93C3.34999 18.93 3.00999 18.59 3.00999 18.18V5.82C3.00999 5.41 3.34999 5.07 3.75999 5.07C4.16999 5.07 4.50999 5.41 4.50999 5.82V18.18C4.50999 18.59 4.16999 18.93 3.75999 18.93Z" fill="url(#paint1_linear_arrow_prev)"/>
-              <defs>
-                <linearGradient id="paint0_linear_arrow_prev" x1="6.83501" y1="12.0043" x2="20.24" y2="12.0043" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-                <linearGradient id="paint1_linear_arrow_prev" x1="3.00999" y1="12" x2="4.50999" y2="12" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <span class="absolute bottom-4 left-2 text-xs font-extrabold text-white bg-black/80 px-2 py-1 rounded border border-white/20">まえへ</span>
-        </button>
-
-        <!-- 右侧【つぎへ】 (次へ SVG) -->
-        <button @click="nextStep" 
-                class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black/50 to-transparent hover:from-black/70 flex flex-col items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
-          <div class="bg-black/40 p-3 rounded-full group-hover:bg-brandOrange/80 border-2 border-white/50 transition">
-            <!-- 次へ SVG -->
-            <svg class="w-7 h-7 transform group-active:translate-x-2 transition" viewBox="0 0 24 24" fill="none">
-              <path d="M3.75999 7.22V16.79C3.75999 18.75 5.88999 19.98 7.58999 19L11.74 16.61L15.89 14.21C17.59 13.23 17.59 10.78 15.89 9.8L11.74 7.4L7.58999 5.01C5.88999 4.03 3.75999 5.25 3.75999 7.22Z" fill="url(#paint0_linear_arrow_next)"/>
-              <path d="M20.24 18.93C19.83 18.93 19.49 18.59 19.49 18.18V5.82C19.49 5.41 19.83 5.07 20.24 5.07C20.65 5.07 20.99 5.41 20.99 5.82V18.18C20.99 18.59 20.66 18.93 20.24 18.93Z" fill="url(#paint1_linear_arrow_next)"/>
-              <defs>
-                <linearGradient id="paint0_linear_arrow_next" x1="3.75999" y1="12.0043" x2="17.165" y2="12.0043" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-                <linearGradient id="paint1_linear_arrow_next" x1="19.49" y1="12" x2="20.99" y2="12" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <span class="absolute bottom-4 right-2 text-xs font-extrabold text-white bg-black/80 px-2 py-1 rounded border border-white/20">つぎへ</span>
-        </button>
-
-      </div>
-
-      <!-- 3. 底部：整体连续时间进度条 + 居中步骤详情标题 (高度压缩为 115px，确保 iPad 7 完美闭合) -->
-      <div class="bg-white rounded-3xl border-2 border-brandOrange/60 p-3 shrink-0 flex flex-col justify-between h-[115px] mt-2">
-        
-        <!-- 进度条区域（随着播放呈现类似流水的无缝填充移动变化，圆点尺寸调整为 w-8 h-8 适配高度） -->
-        <div class="w-full flex items-center gap-3 py-0.5">
-          <span class="text-base font-bold text-gray-500 shrink-0">スタート</span>
-          
-          <div class="relative flex-1 h-4 bg-gray-200 rounded-full flex items-center justify-between px-2">
-            <!-- 连续流水式动画进度条背景 -->
-            <div class="absolute left-0 top-0 h-full bg-brandOrange/40 rounded-full pointer-events-none transition-all duration-150"
-                 :style="{ width: continuousProgress + '%' }"></div>
-            
-            <!-- 9个物理球形阶段节点，点击直达 -->
-            <button v-for="(step, idx) in steps" :key="step.id" 
-                    @click="jumpToStep(idx)"
-                    class="relative z-10 w-8 h-8 rounded-full flex items-center justify-center font-black text-xs border transition-all cursor-pointer transform active:scale-110"
-                    :class="[
-                      idx === currentStepIndex ? 'bg-brandOrange text-white scale-110 border-white shadow-md ring-2 ring-brandOrange/30' : '',
-                      idx < currentStepIndex ? 'bg-brandGreen text-white border-white shadow' : '',
-                      idx > currentStepIndex ? 'bg-white text-gray-600 border-gray-300 hover:border-brandOrange' : ''
-                    ]">
-              {{ step.id }}
-            </button>
-          </div>
-          
-          <span class="text-base font-bold text-gray-500 shrink-0">できあがり</span>
-        </div>
-
-        <!-- 步骤详情：完全水平、垂直居中排版，大字眼，护眼关怀 -->
-        <div class="flex-1 flex flex-col justify-center items-center text-center mt-1">
-          <h4 class="text-2xl font-black text-brandDark tracking-wide">
-            {{ currentStep.titleKanji }}
-          </h4>
-          <p class="text-xs text-gray-500 font-bold tracking-wider mt-0.5">
-            {{ currentStep.titleHiragana }}
-          </p>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- 顶层遮罩：恭喜完成层 -->
-    <div v-if="showSuccessOverlay" class="absolute inset-0 z-50 bg-black/80 flex flex-col items-center justify-center p-4 text-center">
-      <div class="bg-brandCream rounded-3xl p-6 max-w-2xl border-8 border-brandGreen shadow-2xl">
-        <div class="w-16 h-16 bg-brandGreen/10 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-brandGreen">
-          <svg class="w-10 h-10 text-brandGreen" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
-          </svg>
-        </div>
-        <h1 class="text-4xl font-black text-brandGreen mt-1">
-          完成しました！
-        </h1>
-        <p class="text-xl font-bold text-gray-700 mt-3 leading-relaxed">
-          とっても美味しそうな<br>ゴーヤーたっぷり豚キムチのできあがりです！
-        </p>
-        <p class="text-base text-brandOrange font-extrabold mt-1">
-          温かいうちにお召し上がりください。
-        </p>
-        
-        <div class="flex gap-3 justify-center mt-6">
-          <button @click="restartFromBeginning" class="px-6 py-3.5 bg-brandOrange hover:bg-brandOrangeHover text-white text-xl font-black rounded-full shadow-md transition active:scale-95 border-2 border-white cursor-pointer flex items-center gap-1.5">
-            <!-- 見直し SVG (白色填充) -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-              <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM12 18.58C8.83 18.58 6.25 16 6.25 12.83C6.25 9.72 8.73 7.19 11.81 7.08L11.44 6.65C11.17 6.34 11.2 5.86 11.51 5.59C11.82 5.32 12.3 5.35 12.57 5.66L14.23 7.56C14.25 7.58 14.26 7.6 14.28 7.62C14.32 7.68 14.36 7.75 14.38 7.82C14.39 7.86 14.4 7.9 14.41 7.94C14.43 8.03 14.42 8.13 14.4 8.22C14.38 8.3 14.35 8.38 14.31 8.46C14.3 8.48 14.28 8.5 14.27 8.52C14.23 8.58 14.17 8.63 14.11 8.67C14.11 8.67 14.1 8.67 14.1 8.68L12.16 10.1C11.82 10.34 11.36 10.27 11.11 9.94C10.87 9.61 10.94 9.14 11.27 8.89L11.68 8.59C9.48 8.75 7.74 10.59 7.74 12.83C7.74 15.17 9.65 17.08 11.99 17.08C14.33 17.08 16.24 15.17 16.24 12.83C16.24 11.99 15.99 11.17 15.53 10.47C15.3 10.13 15.39 9.66 15.74 9.43C16.09 9.2 16.55 9.29 16.78 9.64C17.41 10.59 17.75 11.69 17.75 12.83C17.75 16 15.17 18.58 12 18.58Z" fill="#FFFFFF"/>
-            </svg>
-            もう一度作る
-          </button>
-          <button @click="showSuccessOverlay = false" class="px-6 py-3.5 bg-gray-500 text-white text-xl font-black rounded-full shadow-md transition active:scale-95 border-2 border-white cursor-pointer flex items-center gap-1.5">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-            閉じる
-          </button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    const { createApp, ref, computed, watch, onMounted, onUnmounted, nextTick } = Vue;
-
-    createApp({
-      setup() {
-        const currentView = ref('guide'); // 'guide', 'preview', 'checklist', 'cooking'
-        const currentStepIndex = ref(0);
-        const isPlaying = ref(false);
-        const isSubtitleOn = ref(true);
-        const isFastForwarding = ref(false);
-        const videoLoading = ref(false);
-        
-        const cookingVideo = ref(null);
-        
-        // 视频播放进度管理 (用于 YouTube 播放进度条以及整体大步骤进度条)
-        const videoCurrentTime = ref(0);
-        const videoDuration = ref(1);
-
-        // 长按加速计时器
-        let longPressTimeout = null;
-        let isLongPressActive = false;
-
-        // 手势滑动的坐标状态
-        let touchStartX = 0;
-        let touchStartY = 0;
-
-        // 完结撒花浮层
-        const showSuccessOverlay = ref(false);
-
-        // 封面图调用指定的高清主图
-        const coverImageSrc = ref('https://life.ja-group.jp/upload/recipe/main/33_1.jpg');
-        function handleImageError() {
-          console.warn("JA Cover image loaded failed. Swapping to local fallback or Unsplash alternative.");
-          coverImageSrc.value = 'image_c877dd.jpg';
-        }
-
-        // 材料备选清单数据
-        const ingredients = ref([
-          { name: 'ゴーヤー', amount: '1/2 本', checked: false },
-          { name: '玉ねぎ', amount: '1/4 個', checked: false },
-          { name: '白菜キムチ', amount: '50 g', checked: false },
-          { name: '豚バラ薄切り肉', amount: '90 g', checked: false }
-        ]);
-
-        const seasonings = ref([
-          { name: '塩 (揉み込み用)', amount: '適量 (分量外)', checked: false },
-          { name: '【A】生姜の搾り汁', amount: '1/4 片分', checked: false },
-          { name: '【A】酒', amount: '大さじ 1/4', checked: false },
-          { name: '【B】酒', amount: '大さじ 1/2', checked: false },
-          { name: '【B】しょうゆ', amount: '大さじ 1/4', checked: false },
-          { name: '【B】砂糖', amount: '小さじ 1/2', checked: false },
-          { name: '【B】塩・コショウ', amount: '少々', checked: false },
-          { name: 'サラダ油', amount: '大さじ 1/2', checked: false }
-        ]);
-
-        const tools = ref([
-          { name: '包丁', checked: false },
-          { name: 'まな板', checked: false },
-          { name: 'フライパン', checked: false }
-        ]);
-
-        // 精心编排的 9 步电子菜谱数据
-        const steps = [
-          {
-            id: 1,
-            videoUrl: '1.mov',
-            titleKanji: 'ゴーヤーを縦に切り、綿と種を取る',
-            titleHiragana: 'ゴーヤーを たてにきり、わた と たねを とる',
-            subtitle: 'まずはゴーヤーを縦半分に切り、スプーンで綿と種を綺麗にくり抜きます。',
-            ingredients: [
-              { name: 'ゴーヤー', amount: '1/2本' }
-            ]
-          },
-          {
-            id: 2,
-            videoUrl: '2.mov',
-            titleKanji: 'ゴーヤーを６〜７ミリ幅で切る',
-            titleHiragana: 'ゴーヤーを ６から７ミリの はばに きる',
-            subtitle: 'ゴーヤーを6から7ミリ幅の薄切りにしていきます。厚みを揃えるのがコツです。',
-            ingredients: [
-              { name: 'ゴーヤー', amount: '切ったもの' }
-            ]
-          },
-          {
-            id: 3,
-            videoUrl: '3.mov',
-            titleKanji: '塩を振って揉み、水洗いして水気を切る',
-            titleHiragana: 'しおを ふって もみ、みずあらいして みずけを きる',
-            subtitle: '塩を振って優しく揉み込み、少し置いてから水で洗い流して、しっかり水気を切ります。',
-            ingredients: [
-              { name: '切ったゴーヤー', amount: '全量' },
-              { name: '塩', amount: '適量' }
-            ]
-          },
-          {
-            id: 4,
-            videoUrl: '4.mov',
-            titleKanji: '玉ねぎを薄切りにする',
-            titleHiragana: 'たまねぎを うすぎりに する',
-            subtitle: '玉ねぎ4分の1個を、繊維に沿って薄切りにスライスします。',
-            ingredients: [
-              { name: '玉ねぎ', amount: '1/4個' }
-            ]
-          },
-          {
-            id: 5,
-            videoUrl: '5.mov',
-            titleKanji: '白菜キムチをカットする',
-            titleHiragana: 'はくさいキムチを たべやすい おおきさに きる',
-            subtitle: '白菜キムチ50グラムを、食べやすい大きさにざっくりとカットします。',
-            ingredients: [
-              { name: '白菜キムチ', amount: '50g' }
-            ]
-          },
-          {
-            id: 6,
-            videoUrl: '6.mov',
-            titleKanji: '豚肉を一口大に切り、調味料Aを揉み込む',
-            titleHiragana: 'ぶたにくを ひとくちだいに きり、ちょうみりょうＡを もみこむ',
-            subtitle: '豚肉を一口大に切り、生姜汁と酒の調味料Aを揉み込んで下味をつけます。',
-            ingredients: [
-              { name: '豚バラ薄切り肉', amount: '90g' },
-              { name: '【A】生姜汁', amount: '1/4片分' },
-              { name: '【A】酒', amount: '大さじ1/4' }
-            ]
-          },
-          {
-            id: 7,
-            videoUrl: '7.mov',
-            titleKanji: '油を熱し、玉ねぎと豚肉を炒める',
-            titleHiragana: 'あぶらを ねっし、たまねぎ と ぶたにくを いためる',
-            subtitle: 'フライパンに油を熱し、玉ねぎと豚肉を炒めます。お肉の色が変わるまでしっかり。',
-            ingredients: [
-              { name: '下味をつけた豚肉', amount: '全量' },
-              { name: 'スライス玉ねぎ', amount: '全量' },
-              { name: 'サラダ油', amount: '大さじ1/2' }
-            ]
-          },
-          {
-            id: 8,
-            videoUrl: '8.mov',
-            titleKanji: 'ゴーヤーを加え炒め、さらにキムチを炒める',
-            titleHiragana: 'ゴーヤーを くわえて いため、さらに キムチを いためる',
-            subtitle: 'ゴーヤーを加えて少し炒め、火が通ったらキムチを投入して全体を炒め合わせます。',
-            ingredients: [
-              { name: '水気を切ったゴーヤー', amount: '全量' },
-              { name: 'カットした白菜キムチ', amount: '全量' }
-            ]
-          },
-          {
-            id: 9,
-            videoUrl: '9.mov',
-            titleKanji: '調味料Bを入れ、炒め合わせて完成！',
-            titleHiragana: 'ちょうみりょうＢを いれ、いためあわせて かんせい！',
-            subtitle: '仕上げに調味料Bを回し入れ、手早く炒め合わせたら、器に盛り付けて完成です！',
-            ingredients: [
-              { name: '【B】調味料セット', amount: '全量' }
-            ]
-          }
-        ];
-
-        const currentStep = computed(() => steps[currentStepIndex.value]);
-
-        // 【极具创新的整体连续时间进度条计算】
-        // 利用: 当前大步骤数 + 当前步骤视频百分比 动态拟合出 YouTube 般的无缝时间填充率
-        const continuousProgress = computed(() => {
-          const stepContribution = currentStepIndex.value;
-          const totalSteps = steps.length;
-          if (totalSteps <= 1) return 0;
-
-          // 视频内播放比例
-          const videoFraction = videoDuration.value ? (videoCurrentTime.value / videoDuration.value) : 0;
-          
-          // 在 9 个节点组成的 8 个区间内做归一化
-          const fraction = (stepContribution + videoFraction) / (totalSteps - 1);
-          return Math.min(Math.max(fraction * 100, 0), 100);
-        });
-
-        // 视图跳转
-        function goToView(view) {
-          currentView.value = view;
-        }
-
-        // 开始烹饪
-        function startCooking() {
-          currentView.value = 'cooking';
-          currentStepIndex.value = 0;
-          videoCurrentTime.value = 0;
-          videoDuration.value = 1;
-
-          nextTick(() => {
-            if (cookingVideo.value) {
-              videoLoading.value = true;
-              cookingVideo.value.load();
-              const playPromise = cookingVideo.value.play();
-              if (playPromise !== undefined) {
-                playPromise.then(() => {
-                  isPlaying.value = true;
-                  videoLoading.value = false;
-                }).catch(err => {
-                  console.log("Autoplay blocked or interrupted:", err);
-                  isPlaying.value = false;
-                  videoLoading.value = false;
-                });
-              }
-            }
-          });
-        }
-
-        // 切换大步骤
-        function jumpToStep(index) {
-          if (index < 0 || index >= steps.length) return;
-          currentStepIndex.value = index;
-          videoCurrentTime.value = 0;
-          videoDuration.value = 1;
-          
-          nextTick(() => {
-            if (cookingVideo.value) {
-              videoLoading.value = true;
-              cookingVideo.value.load();
-              cookingVideo.value.play()
-                .then(() => {
-                  isPlaying.value = true;
-                  videoLoading.value = false;
-                })
-                .catch(() => {
-                  isPlaying.value = false;
-                  videoLoading.value = false;
-                });
-            }
-          });
-        }
-
-        function nextStep() {
-          if (currentStepIndex.value < steps.length - 1) {
-            jumpToStep(currentStepIndex.value + 1);
-          } else {
-            // 最后一页视频播放完显示成功提示
-            showSuccessOverlay.value = true;
-          }
-        }
-
-        // 上一步
-        function prevStep() {
-          if (currentStepIndex.value > 0) {
-            jumpToStep(currentStepIndex.value - 1);
-          }
-        }
-
-        // 字幕切换
-        function toggleSubtitle() {
-          isSubtitleOn.value = !isSubtitleOn.value;
-        }
-
-        // 播放 / 一时停止
-        function togglePlay() {
-          if (!cookingVideo.value) return;
-          if (isPlaying.value) {
-            cookingVideo.value.pause();
-          } else {
-            cookingVideo.value.play().catch(e => console.log(e));
-          }
-        }
-
-        // 重播本步骤
-        function restartStep() {
-          if (!cookingVideo.value) return;
-          cookingVideo.value.currentTime = 0;
-          cookingVideo.value.play()
-            .then(() => {
-              isPlaying.value = true;
-            })
-            .catch(e => console.log(e));
-        }
-
-        // 手势：左右滑动监控
-        function handleTouchStart(e) {
-          touchStartX = e.touches[0].clientX;
-          touchStartY = e.touches[0].clientY;
-        }
-
-        function handleTouchEnd(e) {
-          const deltaX = e.changedTouches[0].clientX - touchStartX;
-          const deltaY = e.changedTouches[0].clientY - touchStartY;
-          
-          if (Math.abs(deltaX) > 100 && Math.abs(deltaY) < 60) {
-            if (deltaX > 0) {
-              prevStep();
-            } else {
-              nextStep();
-            }
-          }
-        }
-
-        // 视频播放进度更新同步
-        function onVideoTimeUpdate() {
-          if (cookingVideo.value) {
-            videoCurrentTime.value = cookingVideo.value.currentTime;
-          }
-        }
-
-        // 视频元数据获取
-        function onVideoLoadedMetadata() {
-          if (cookingVideo.value) {
-            videoDuration.value = cookingVideo.value.duration || 1;
-            videoCurrentTime.value = cookingVideo.value.currentTime;
-          }
-        }
-
-        // 视频手动拖拽进度控制
-        function seekVideo(e) {
-          if (!cookingVideo.value || !videoDuration.value) return;
-          const rect = e.currentTarget.getBoundingClientRect();
-          const clickX = e.clientX - rect.left;
-          const width = rect.width;
-          const percentage = clickX / width;
-          cookingVideo.value.currentTime = percentage * videoDuration.value;
-        }
-
-        // 视频监听器同步状态
-        function onVideoPlay() {
-          isPlaying.value = true;
-        }
-
-        // 视频暂停
-        function onVideoPause() {
-          isPlaying.value = false;
-        }
-
-        function onVideoEnded() {
-          isPlaying.value = false;
-        }
-
-        // ==================== 长按 1.5倍速播放功能 ====================
-        function startFastForward() {
-          if (!cookingVideo.value) return;
-          isFastForwarding.value = true;
-          cookingVideo.value.playbackRate = 1.5;
-        }
-
-        function stopFastForward() {
-          if (!cookingVideo.value) return;
-          isFastForwarding.value = false;
-          cookingVideo.value.playbackRate = 1.0;
-        }
-
-        // 触控版长按实现
-        function handleVideoTouchStart(e) {
-          e.preventDefault();
-          isLongPressActive = false;
-          longPressTimeout = setTimeout(() => {
-            isLongPressActive = true;
-            startFastForward();
-          }, 400);
-        }
-
-        function handleVideoTouchEnd(e) {
-          clearTimeout(longPressTimeout);
-          if (isLongPressActive) {
-            stopFastForward();
-            isLongPressActive = false;
-          } else {
-            togglePlay();
-          }
-        }
-
-        // 鼠标模拟
-        function handleVideoMouseDown(e) {
-          isLongPressActive = false;
-          longPressTimeout = setTimeout(() => {
-            isLongPressActive = true;
-            startFastForward();
-          }, 400);
-        }
-
-        function handleVideoMouseUp(e) {
-          clearTimeout(longPressTimeout);
-          if (isLongPressActive) {
-            stopFastForward();
-            isLongPressActive = false;
-          } else {
-            togglePlay();
-          }
-        }
-
-        // ==================== 🛠️ 禁止后台播放的拦截机制 ====================
-        function handleVisibilityChange() {
-          if (document.hidden && cookingVideo.value) {
-            cookingVideo.value.pause();
-            isPlaying.value = false;
-          }
-        }
-
-        function handleWindowBlur() {
-          if (cookingVideo.value) {
-            cookingVideo.value.pause();
-            isPlaying.value = false;
-          }
-        }
-
-        onMounted(() => {
-          document.addEventListener('visibilitychange', handleVisibilityChange);
-          window.addEventListener('blur', handleWindowBlur);
-        });
-
-        onUnmounted(() => {
-          document.removeEventListener('visibilitychange', handleVisibilityChange);
-          window.removeEventListener('blur', handleWindowBlur);
-        });
-
-        // 重设回第一步
-        function restartFromBeginning() {
-          showSuccessOverlay.value = false;
-          currentView.value = 'guide';
-          currentStepIndex.value = 0;
-          ingredients.value.forEach(i => i.checked = false);
-          seasonings.value.forEach(s => s.checked = false);
-          tools.value.forEach(t => t.checked = false);
-        }
-
-        return {
-          currentView,
-          currentStepIndex,
-          steps,
-          currentStep,
-          isPlaying,
-          isSubtitleOn,
-          isFastForwarding,
-          videoLoading,
-          cookingVideo,
-          videoCurrentTime,
-          videoDuration,
-          continuousProgress,
-          showSuccessOverlay,
-          coverImageSrc,
-          handleImageError,
-          ingredients,
-          seasonings,
-          tools,
-          goToView,
-          startCooking,
-          jumpToStep,
-          nextStep,
-          prevStep,
-          toggleSubtitle,
-          togglePlay,
-          restartStep,
-          handleTouchStart,
-          handleTouchEnd,
-          onVideoPlay,
-          onVideoPause,
-          onVideoEnded,
-          onVideoTimeUpdate,
-          onVideoLoadedMetadata,
-          seekVideo,
-          handleVideoTouchStart,
-          handleVideoTouchEnd,
-          handleVideoMouseDown,
-          handleVideoMouseUp,
-          restartFromBeginning
-        };
-      }
-    }).mount('#app');
-  </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <!-- 禁用缩放以防止老人误触放大页面，完美适配 iPad 7 分辨率 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  
-  <!-- Safari 全屏 Web App 支持（添加到主屏幕后体验绝佳） -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="らくらくレシピ">
-  
-  <title>インタラクションレシピ - ゴーヤーたっぷり豚キムチ</title>
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Vue 3 CDN -->
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
-  <!-- Tailwind Custom Colors Config -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brandOrange: '#e67e22',
-            brandOrangeHover: '#d35400',
-            brandGreen: '#27ae60',
-            brandGreenHover: '#219653',
-            brandCream: '#fdfcf7',
-            brandDark: '#2c3e50',
-          }
-        }
-      }
-    }
-  </script>
-
-  <style>
-    /* 针对老年人防误触、防系统菜单弹出的关键 CSS 适配 */
-    body {
-      -webkit-touch-callout: none; /* 禁用 Safari 长按呼出菜单 */
-      -webkit-user-select: none;   /* 禁用文字选中 */
-      user-select: none;
-      background-color: #fdfcf7;
-      overflow: hidden; /* iPad 7 全屏无滚动条 */
-    }
-    
-    /* 极致平滑过渡效果 */
-    .view-transition {
-      transition: all 0.4s ease-in-out;
-    }
-  </style>
-</head>
-<body class="w-screen h-screen font-sans text-brandDark">
-
-  <div id="app" class="relative w-full h-full flex flex-col justify-between overflow-hidden p-3">
-    
-    <!-- ==================== 视图 0：つかいかた案内（使用指南） ==================== -->
-    <div v-if="currentView === 'guide'" class="absolute inset-0 z-50 bg-brandCream flex flex-col justify-between p-4 overflow-hidden">
-      <!-- 头部：行间距与外边距大幅压缩，确保 iPad 7 完美显示 -->
-      <div class="text-center py-1 mt-1">
-        <h1 class="text-3xl font-extrabold text-brandOrange tracking-wide flex justify-center items-center gap-2">
-          インタラクションレシピ
-        </h1>
-        <p class="text-lg text-gray-600 mt-1 font-bold">
-          このアプリの操作方法
-        </p>
-      </div>
-
-      <!-- 操作卡片网格：gap由4缩减为3，确保高度完全可控 -->
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 my-auto max-w-5xl mx-auto w-full">
-        <!-- 卡片：上一步/下一步 -->
-        <div class="bg-white p-3 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center">
-          <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-1 gap-1">
-            <!-- もどる SVG -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-              <path d="M20.24 7.22V16.79C20.24 18.75 18.11 19.98 16.41 19L12.26 16.61L8.11001 14.21C6.41001 13.23 6.41001 10.78 8.11001 9.8L12.26 7.4L16.41 5.01C18.11 4.03 20.24 5.25 20.24 7.22Z" fill="url(#paint0_linear_guide_back)"/>
-              <path d="M3.75999 18.93C3.34999 18.93 3.00999 18.59 3.00999 18.18V5.82C3.00999 5.41 3.34999 5.07 3.75999 5.07C4.16999 5.07 4.50999 5.41 4.50999 5.82V18.18C4.50999 18.59 4.16999 18.93 3.75999 18.93Z" fill="url(#paint1_guide_back)"/>
-              <defs>
-                <linearGradient id="paint0_linear_guide_back" x1="6.83501" y1="12.0043" x2="20.24" y2="12.0043" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-                <linearGradient id="paint1_guide_back" x1="3.00999" y1="12" x2="4.50999" y2="12" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-              </defs>
-            </svg>
-            <!-- 次へ SVG -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-              <path d="M3.75999 7.22V16.79C3.75999 18.75 5.88999 19.98 7.58999 19L11.74 16.61L15.89 14.21C17.59 13.23 17.59 10.78 15.89 9.8L11.74 7.4L7.58999 5.01C5.88999 4.03 3.75999 5.25 3.75999 7.22Z" fill="url(#paint0_linear_guide_next)"/>
-              <path d="M20.24 18.93C19.83 18.93 19.49 18.59 19.49 18.18V5.82C19.49 5.41 19.83 5.07 20.24 5.07C20.65 5.07 20.99 5.41 20.99 5.82V18.18C20.99 18.59 20.66 18.93 20.24 18.93Z" fill="url(#paint1_linear_guide_next)"/>
-              <defs>
-                <linearGradient id="paint0_linear_guide_next" x1="3.75999" y1="12.0043" x2="17.165" y2="12.0043" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-                <linearGradient id="paint1_linear_guide_next" x1="19.49" y1="12" x2="20.99" y2="12" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-brandOrange mb-0.5">進む・もどる</h3>
-          <p class="text-xs text-gray-600 leading-tight font-semibold">
-            画面の左右にある大きな矢印を押すか、画面を左右に指でスライドします。
-          </p>
-        </div>
-
-        <!-- 卡片：暂停与播放 -->
-        <div class="bg-white p-3 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center">
-          <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-1">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-              <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM10.72 15.03C10.72 15.51 10.52 15.7 10.01 15.7H8.71C8.2 15.7 8 15.51 8 15.03V8.97C8 8.49 8.2 8.3 8.71 8.3H10C10.51 8.3 10.71 8.49 10.71 8.97V15.03H10.72ZM16 15.03C16 15.51 15.8 15.7 15.29 15.7H14C13.49 15.7 13.29 15.51 13.29 15.03V8.97C13.29 8.49 13.49 8.3 14 8.3H15.29C15.8 8.3 16 8.49 16 8.97V15.03Z" fill="url(#paint0_linear_guide_pause)"/>
-              <defs>
-                <linearGradient id="paint0_linear_guide_pause" x1="1.97" y1="12" x2="21.97" y2="12" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-brandOrange mb-0.5">一時停止 / 再生</h3>
-          <p class="text-xs text-gray-600 leading-tight font-semibold">
-            動画を止めたい時は、右上の「一時停止」ボタンを押します。
-          </p>
-        </div>
-
-        <!-- 卡片：字幕开关 -->
-        <div class="bg-white p-3 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center">
-          <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-1">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-              <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM6.5 12.57H9.27C9.68 12.57 10.02 12.91 10.02 13.32C10.02 13.73 9.68 14.07 9.27 14.07H6.5C6.09 14.07 5.75 13.73 5.75 13.32C5.75 12.91 6.09 12.57 6.5 12.57ZM12.97 17.83H6.5C6.09 17.83 5.75 17.49 5.75 17.08C5.75 16.67 6.09 16.33 6.5 16.33H12.97C13.38 16.33 13.72 16.67 13.72 17.08C13.72 17.49 13.39 17.83 12.97 17.83ZM17.5 17.83H15.65C15.24 17.83 14.9 17.49 14.9 17.08C14.9 16.67 15.24 16.33 15.65 16.33H17.5C17.91 16.33 18.25 16.67 18.25 17.08C18.25 17.49 17.91 17.83 17.5 17.83ZM17.5 14.07H11.97C11.56 14.07 11.22 13.73 11.22 13.32C11.22 12.91 11.56 12.57 11.97 12.57H17.5C17.91 12.57 18.25 12.91 18.25 13.32C18.25 13.73 17.91 14.07 17.5 14.07Z" fill="url(#paint0_linear_guide_sub)"/>
-              <defs>
-                <linearGradient id="paint0_linear_guide_sub" x1="2" y1="12" x2="21.99" y2="12" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-brandOrange mb-0.5">字幕の表示</h3>
-          <p class="text-xs text-gray-600 leading-tight font-semibold">
-            話している言葉を文字で読みたい時は「字幕」ボタンを押します。
-          </p>
-        </div>
-
-        <!-- 卡片：重播 -->
-        <div class="bg-white p-3 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center">
-          <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-1">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-              <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM12 18.58C8.83 18.58 6.25 16 6.25 12.83C6.25 9.72 8.73 7.19 11.81 7.08L11.44 6.65C11.17 6.34 11.2 5.86 11.51 5.59C11.82 5.32 12.3 5.35 12.57 5.66L14.23 7.56C14.25 7.58 14.26 7.6 14.28 7.62C14.32 7.68 14.36 7.75 14.38 7.82C14.39 7.86 14.4 7.9 14.41 7.94C14.43 8.03 14.42 8.13 14.4 8.22C14.38 8.3 14.35 8.38 14.31 8.46C14.3 8.48 14.28 8.5 14.27 8.52C14.23 8.58 14.17 8.63 14.11 8.67C14.11 8.67 14.1 8.67 14.1 8.68L12.16 10.1C11.82 10.34 11.36 10.27 11.11 9.94C10.87 9.61 10.94 9.14 11.27 8.89L11.68 8.59C9.48 8.75 7.74 10.59 7.74 12.83C7.74 15.17 9.65 17.08 11.99 17.08C14.33 17.08 16.24 15.17 16.24 12.83C16.24 11.99 15.99 11.17 15.53 10.47C15.3 10.13 15.39 9.66 15.74 9.43C16.09 9.2 16.55 9.29 16.78 9.64C17.41 10.59 17.75 11.69 17.75 12.83C17.75 16 15.17 18.58 12 18.58Z" fill="url(#paint0_linear_guide_restart)"/>
-              <defs>
-                <linearGradient id="paint0_linear_guide_restart" x1="2" y1="12" x2="21.99" y2="12" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-brandOrange mb-0.5">最初から見直す</h3>
-          <p class="text-xs text-gray-600 leading-tight font-semibold">
-            今のステップをもう一度見たい時は「もう一度」ボタンを押します。
-          </p>
-        </div>
-
-        <!-- 卡片：早送り -->
-        <div class="bg-white p-3 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center col-span-2 md:col-span-1">
-          <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-1">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-              <path d="M2 8.34V15.66C2 17.16 3.63 18.1 4.93 17.35L8.1 15.52L11.27 13.69L11.76 13.41V10.59L11.27 10.31L8.1 8.48L4.93 6.65C3.63 5.9 2 6.84 2 8.34Z" fill="url(#paint0_linear_guide_ff)"/>
-              <path d="M11.76 8.34V15.66C11.76 17.16 13.39 18.1 14.68 17.35L17.86 15.52L21.03 13.69C22.32 12.94 22.32 11.06 21.03 10.31L17.86 8.48L14.68 6.65C13.39 5.9 11.76 6.84 11.76 8.34Z" fill="url(#paint1_linear_guide_ff)"/>
-              <defs>
-                <linearGradient id="paint0_linear_guide_ff" x1="2" y1="12" x2="11.76" y2="12" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-                <linearGradient id="paint1_linear_guide_ff" x1="11.76" y1="12" x2="21.9975" y2="12" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <h3 class="text-lg font-bold text-brandOrange mb-0.5">長押しで早送り</h3>
-          <p class="text-xs text-gray-600 leading-tight font-semibold">
-            動画の部分を長く指で押している間、動画が少し早く進みます。
-          </p>
-        </div>
-      </div>
-
-      <!-- 底部静态开始按钮（去除闪烁跳动，高度上移，确保 iPad 7 完美闭合） -->
-      <div class="text-center mt-3 mb-1 shrink-0">
-        <button @click="goToView('preview')" class="inline-flex items-center justify-center px-10 py-3.5 bg-brandOrange hover:bg-brandOrangeHover text-white text-2xl font-black rounded-full shadow-lg transition duration-300 transform active:scale-95 border-2 border-white cursor-pointer">
-          内容を確認した！レシピを見る
-        </button>
-      </div>
-    </div>
-
-
-    <!-- ==================== 🎬 视图 1.5：レシピ紹介（菜谱预览与来源） ==================== -->
-    <div v-if="currentView === 'preview'" class="absolute inset-0 z-45 bg-brandCream flex flex-col justify-between p-4 overflow-hidden">
-      <!-- 头部：应用Logo / 标题 -->
-      <div class="text-center py-1 mt-1 shrink-0">
-        <h1 class="text-3xl font-extrabold text-brandOrange tracking-wide">
-          インタラクションレシピ
-        </h1>
-      </div>
-
-      <!-- 主介绍版面：双栏网格，完美利用 iPad 7 横屏比例 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto max-w-5xl mx-auto w-full items-center">
-        <!-- 左侧：菜品官方美图 -->
-        <div class="flex flex-col items-center">
-          <div class="bg-white p-2 rounded-2xl shadow-md border-2 border-orange-100">
-            <!-- 直接使用指定的 JA 官方图片，同时保留降级容错 -->
-            <img :src="coverImageSrc" @error="handleImageError" alt="ゴーヤーたっぷり豚キムチ" class="rounded-xl max-w-full h-auto object-cover max-h-[220px] shadow-sm">
-          </div>
-        </div>
-
-        <!-- 右侧：菜品介绍、口号、来源指引 -->
-        <div class="flex flex-col justify-center space-y-3">
-          <div>
-            <span class="bg-brandOrange text-white text-xs font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">今日の料理</span>
-            <h2 class="text-3xl font-black text-gray-800 mt-1">
-              ゴーヤーたっぷり豚キムチ
-            </h2>
-          </div>
-
-          <!-- 精美引用卡片 -->
-          <div class="bg-orange-50 border-l-4 border-brandOrange p-3 rounded-r-xl shadow-inner">
-            <p class="text-sm text-gray-700 leading-relaxed font-bold">
-              “旬のゴーヤーをたっぷり使い、相性ぴったりの豚肉と炒めてキムチでピリッと味つけしました。これぞ夏のスタミナ料理です。”
-            </p>
-          </div>
-
-          <!-- 来源展示 -->
-          <div class="text-xs text-gray-500 font-bold bg-white p-2 rounded-xl border border-gray-200">
-            <p class="flex items-center gap-1.5 text-gray-700">
-              <span class="text-brandOrange font-black">●</span>
-              <span>レシピ参考元：<strong>JAグループ「とれたてレシピ」</strong></span>
-            </p>
-            <a href="https://life.ja-group.jp/recipe/detail?id=33" target="_blank" class="text-brandOrange hover:underline text-[10px] mt-0.5 block break-all font-mono">
-              https://life.ja-group.jp/recipe/detail?id=33
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 底部控制按钮：高度整体上移 -->
-      <div class="flex justify-between items-center max-w-5xl w-full mx-auto mt-3 mb-1 shrink-0 gap-3">
-        <button @click="goToView('guide')" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 text-lg font-bold rounded-xl active:scale-95 transition">
-          もどる
-        </button>
-        <button @click="goToView('checklist')" class="flex-1 py-3.5 bg-brandOrange hover:bg-brandOrangeHover text-white text-2xl font-black rounded-full shadow-lg border-2 border-white transition active:scale-95 text-center cursor-pointer">
-          食材と道具の確認へ進む
-        </button>
-      </div>
-    </div>
-
-
-    <!-- ==================== 视图 1：材料・道具リスト（食材与工具备料单） ==================== -->
-    <div v-if="currentView === 'checklist'" class="absolute inset-0 z-40 bg-brandCream flex flex-col justify-between p-4 overflow-hidden">
-      
-      <!-- 头部：标题与引导语 -->
-      <div class="text-center py-1 shrink-0">
-        <h2 class="text-2xl font-black text-brandOrange flex justify-center items-center gap-2">
-          調理準備：材料と道具の確認
-        </h2>
-        <p class="text-sm text-gray-700 mt-1 font-bold">
-          必要なものを机の上にそろえましょう。準備できたら丸を押してチェックしてください。
-        </p>
-      </div>
-
-      <!-- 主要内容：物料列表（彻底不带 Emoji，精简无中文汉字与注音） -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto max-w-6xl mx-auto w-full">
-        
-        <!-- 食材分类 -->
-        <div class="bg-white p-4 rounded-2xl shadow-md border-t-4 border-brandOrange flex flex-col">
-          <h3 class="text-lg font-bold text-brandOrange mb-2 flex items-center gap-2">
-            食材
-          </h3>
-          <div class="space-y-2 flex-1">
-            <label v-for="(item, index) in ingredients" :key="index" 
-                   class="flex items-center gap-2 p-2 bg-orange-50/50 rounded-xl cursor-pointer active:bg-orange-100 transition">
-              <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-brandOrange border-gray-300 rounded focus:ring-brandOrange">
-              <span class="text-base font-extrabold" :class="{'line-through text-gray-400': item.checked}">
-                {{ item.name }} <span class="text-brandOrange ml-1 text-sm">({{ item.amount }})</span>
-              </span>
-            </label>
-          </div>
-        </div>
-
-        <!-- 调味料分类 -->
-        <div class="bg-white p-4 rounded-2xl shadow-md border-t-4 border-brandGreen flex flex-col">
-          <h3 class="text-lg font-bold text-brandGreen mb-2 flex items-center gap-2">
-            調味料
-          </h3>
-          <div class="space-y-2 flex-1 overflow-y-auto max-h-[180px] pr-1">
-            <label v-for="(item, index) in seasonings" :key="index" 
-                   class="flex items-center gap-2 p-1.5 bg-green-50/50 rounded-xl cursor-pointer active:bg-green-100 transition">
-              <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-brandGreen border-gray-300 rounded focus:ring-brandGreen">
-              <div class="text-sm font-extrabold flex flex-col" :class="{'line-through text-gray-400': item.checked}">
-                <span>{{ item.name }}</span>
-                <span class="text-brandGreen text-xs font-bold">{{ item.amount }}</span>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <!-- 厨房工具分类 -->
-        <div class="bg-white p-4 rounded-2xl shadow-md border-t-4 border-blue-500 flex flex-col">
-          <h3 class="text-lg font-bold text-blue-600 mb-2 flex items-center gap-2">
-            使う道具
-          </h3>
-          <div class="space-y-2 flex-1">
-            <label v-for="(item, index) in tools" :key="index" 
-                   class="flex items-center gap-2 p-2 bg-blue-50/50 rounded-xl cursor-pointer active:bg-blue-100 transition">
-              <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-blue-500 border-gray-300 rounded focus:ring-blue-500">
-              <span class="text-base font-extrabold" :class="{'line-through text-gray-400': item.checked}">
-                {{ item.name }}
-              </span>
-            </label>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- 底部启动烹饪按钮 -->
-      <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-3 mb-1 shrink-0 gap-3">
-        <button @click="goToView('preview')" class="px-5 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 text-lg font-bold rounded-xl active:scale-95 transition">
-          もどる
-        </button>
-        <button @click="startCooking" class="flex-1 max-w-2xl py-3.5 bg-brandGreen hover:bg-brandGreenHover text-white text-2xl font-black rounded-full shadow-lg border-2 border-white transition active:scale-95 text-center cursor-pointer">
-          準備完了！料理をスタート
-        </button>
-      </div>
-    </div>
-
-
-    <!-- ==================== 视图 2：メイン調理ワークスペース（主烹饪界面） ==================== -->
-    <div v-if="currentView === 'cooking'" class="w-full h-full flex flex-col justify-between"
-         @touchstart="handleTouchStart" @touchend="handleTouchEnd">
-      
-      <!-- 中部主屏幕：视频占据绝大多数空间，顶层按钮彻底融入视频顶部悬浮状态 -->
+      <!-- 中部主屏幕：视频占满全部可用高度，视频上方的独立进度条已被完全彻底删除 -->
       <div class="relative flex-1 bg-black rounded-3xl overflow-hidden shadow-md flex items-center justify-center">
         
         <!-- 视频容器，绑定长按事件 -->
@@ -1564,16 +480,6 @@
             </div>
           </div>
 
-          <!-- YouTube-style 独立播放进度条 (位于视频底部，方便直接拖动) -->
-          <div class="absolute bottom-0 left-0 right-0 h-2 bg-white/20 cursor-pointer z-30 flex items-end hover:h-3 transition-all"
-               @click.stop="seekVideo">
-            <div class="h-full bg-brandOrange relative"
-                 :style="{ width: (videoCurrentTime / videoDuration * 100) + '%' }">
-              <!-- 橙色圆球型指示头 -->
-              <span class="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-brandOrange border border-white rounded-full shadow-md"></span>
-            </div>
-          </div>
-
         </div>
 
         <!-- 左右大物理箭头（超大透明触控热区） -->
@@ -1621,40 +527,48 @@
 
       </div>
 
-      <!-- 3. 底部：整体连续时间进度条 + 居中步骤详情标题 (高度压缩为 115px，确保 iPad 7 完美闭合) -->
+      <!-- 3. 底部：点对点流水式时间轴进度条 + 居中步骤详情标题 (高度压缩为 115px，确保 iPad 7 完美闭合) -->
       <div class="bg-white rounded-3xl border-2 border-brandOrange/60 p-3 shrink-0 flex flex-col justify-between h-[115px] mt-2">
         
-        <!-- 进度条区域（随着播放呈现类似流水的无缝填充移动变化，圆点尺寸调整为 w-8 h-8 适配高度） -->
-        <div class="w-full flex items-center gap-3 py-0.5">
-          <span class="text-base font-bold text-gray-500 shrink-0">スタート</span>
+        <!-- 进度条区域（结合大步骤与视频播放百分比，在 1~9 节点之间无缝平滑变化颜色） -->
+        <div class="w-full flex items-center gap-3 py-0.5 relative">
+          <span class="text-xs font-bold text-gray-400 shrink-0 select-none">スタート</span>
           
-          <div class="relative flex-1 h-4 bg-gray-200 rounded-full flex items-center justify-between px-2">
-            <!-- 连续流水式动画进度条背景 -->
-            <div class="absolute left-0 top-0 h-full bg-brandOrange/40 rounded-full pointer-events-none transition-all duration-150"
-                 :style="{ width: continuousProgress + '%' }"></div>
+          <!-- 时间轴容器 -->
+          <div class="relative flex-1 h-6 flex items-center">
             
-            <!-- 9个物理球形阶段节点，点击直达 -->
-            <button v-for="(step, idx) in steps" :key="step.id" 
-                    @click="jumpToStep(idx)"
-                    class="relative z-10 w-8 h-8 rounded-full flex items-center justify-center font-black text-xs border transition-all cursor-pointer transform active:scale-110"
-                    :class="[
-                      idx === currentStepIndex ? 'bg-brandOrange text-white scale-110 border-white shadow-md ring-2 ring-brandOrange/30' : '',
-                      idx < currentStepIndex ? 'bg-brandGreen text-white border-white shadow' : '',
-                      idx > currentStepIndex ? 'bg-white text-gray-600 border-gray-300 hover:border-brandOrange' : ''
-                    ]">
-              {{ step.id }}
-            </button>
+            <!-- 基础贯穿背景灰色横条 (精准处于数字球的中心线上) -->
+            <div class="absolute left-3 right-3 h-2 bg-gray-200 rounded-full">
+              <!-- 精美无缝流水式活跃橙色进度条，随视频播放比率丝滑向下一个节点推进 -->
+              <div class="h-full bg-brandOrange rounded-full transition-all duration-150"
+                   :style="{ width: continuousProgress + '%' }"></div>
+            </div>
+            
+            <!-- 9个球形节点（绝对覆盖在背景条之上，点击直达对应步骤） -->
+            <div class="absolute left-0 right-0 flex justify-between pointer-events-none">
+              <button v-for="(step, idx) in steps" :key="step.id" 
+                      @click="jumpToStep(idx)"
+                      class="pointer-events-auto z-10 w-7 h-7 rounded-full flex items-center justify-center font-black text-xs border transition-all cursor-pointer transform active:scale-110"
+                      :class="[
+                        idx === currentStepIndex ? 'bg-brandOrange text-white scale-110 border-white shadow-md ring-2 ring-brandOrange/30' : '',
+                        idx < currentStepIndex ? 'bg-brandGreen text-white border-white shadow' : '',
+                        idx > currentStepIndex ? 'bg-white text-gray-600 border-gray-300 hover:border-brandOrange' : ''
+                      ]">
+                {{ step.id }}
+              </button>
+            </div>
+
           </div>
           
-          <span class="text-base font-bold text-gray-500 shrink-0">できあがり</span>
+          <span class="text-xs font-bold text-gray-400 shrink-0 select-none">できあがり</span>
         </div>
 
-        <!-- 步骤详情：完全水平、垂直居中排版，大字眼，护眼关怀 -->
+        <!-- 步骤详情：完全水平、垂直绝对居中排版，大字眼，护眼关怀 -->
         <div class="flex-1 flex flex-col justify-center items-center text-center mt-1">
-          <h4 class="text-2xl font-black text-brandDark tracking-wide">
+          <h4 class="text-xl font-black text-brandDark tracking-wide">
             {{ currentStep.titleKanji }}
           </h4>
-          <p class="text-xs text-gray-500 font-bold tracking-wider mt-0.5">
+          <p class="text-[10px] text-gray-500 font-bold tracking-wider mt-0.5">
             {{ currentStep.titleHiragana }}
           </p>
         </div>
@@ -1663,7 +577,39 @@
 
     </div>
 
-    <!-- 顶层遮罩：恭喜完成层 -->
+    <!-- ==================== 💬 弹窗 1：料理完了确认询问（替代 browser confirm） ==================== -->
+    <div v-if="showConfirmCompletionModal" class="absolute inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
+      <div class="bg-brandCream rounded-3xl p-6 max-w-md w-full border-4 border-brandOrange shadow-2xl text-center">
+        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-brandOrange">
+          <!-- 播放/切换播放 SVG 作为图标 -->
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM14.97 14.23L12.07 15.9C11.71 16.11 11.31 16.21 10.92 16.21C10.52 16.21 10.13 16.11 9.77 15.9C9.05 15.48 8.62 14.74 8.62 13.9V10.55C8.62 9.72 9.05 8.97 9.77 8.55C10.49 8.13 11.35 8.13 12.08 8.55L14.98 10.22C15.7 10.64 16.13 11.38 16.13 12.22C16.13 13.06 15.7 13.81 14.97 14.23Z" fill="url(#paint0_linear_modal_play)"/>
+            <defs>
+              <linearGradient id="paint0_linear_modal_play" x1="1.97" y1="12" x2="21.97" y2="12" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        
+        <h2 class="text-2xl font-black text-brandOrange">料理は完成しましたか？</h2>
+        <p class="text-sm font-bold text-gray-700 mt-3 leading-relaxed">
+          ゴーヤーたっぷり豚キムチが美味しく出来上がったら、完成ボタンを押してください。
+        </p>
+
+        <div class="flex gap-3 justify-center mt-6">
+          <button @click="showConfirmCompletionModal = false" class="px-5 py-2.5 bg-gray-300 hover:bg-gray-400 text-gray-800 text-sm font-bold rounded-xl active:scale-95 transition cursor-pointer">
+            まだです
+          </button>
+          <button @click="completeCooking" class="flex-1 py-3 bg-brandGreen hover:bg-brandGreenHover text-white text-base font-black rounded-xl shadow-md border border-white transition active:scale-95 cursor-pointer">
+            はい、完成しました！
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==================== 🎉 弹窗 2：おめでとう！恭喜鼓励浮层 ==================== -->
     <div v-if="showSuccessOverlay" class="absolute inset-0 z-50 bg-black/80 flex flex-col items-center justify-center p-4 text-center">
       <div class="bg-brandCream rounded-3xl p-6 max-w-2xl border-8 border-brandGreen shadow-2xl">
         <div class="w-16 h-16 bg-brandGreen/10 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-brandGreen">
@@ -1671,14 +617,16 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
           </svg>
         </div>
-        <h1 class="text-4xl font-black text-brandGreen mt-1">
-          完成しました！
+        <h1 class="text-3xl font-black text-brandGreen mt-1">
+          おめでとうございます！
         </h1>
-        <p class="text-xl font-bold text-gray-700 mt-3 leading-relaxed">
-          とっても美味しそうな<br>ゴーヤーたっぷり豚キムチのできあがりです！
+        <p class="text-lg font-bold text-gray-700 mt-4 leading-relaxed">
+          素晴らしい出来栄えです！<br>
+          愛情を込めて作った料理は、きっと格別な美味しさですね。
         </p>
-        <p class="text-base text-brandOrange font-extrabold mt-1">
-          温かいうちにお召し上がりください。
+        <p class="text-base text-brandOrange font-extrabold mt-2 leading-relaxed">
+          温かいうちに、ぜひ美味しくお召し上がりください。<br>
+          お疲れ様でした！
         </p>
         
         <div class="flex gap-3 justify-center mt-6">
@@ -1715,7 +663,7 @@
         
         const cookingVideo = ref(null);
         
-        // 视频播放进度管理 (用于 YouTube 播放进度条以及整体大步骤进度条)
+        // 视频播放进度管理 (用于整体大步骤连贯进度条运算)
         const videoCurrentTime = ref(0);
         const videoDuration = ref(1);
 
@@ -1727,13 +675,14 @@
         let touchStartX = 0;
         let touchStartY = 0;
 
-        // 完结撒花浮层
+        // 确认料理完成与成就弹窗状态
+        const showConfirmCompletionModal = ref(false);
         const showSuccessOverlay = ref(false);
 
         // 封面图调用指定的高清主图
         const coverImageSrc = ref('https://life.ja-group.jp/upload/recipe/main/33_1.jpg');
         function handleImageError() {
-          console.warn("JA Cover image loaded failed. Swapping to local fallback or Unsplash alternative.");
+          console.warn("JA Cover image loaded failed. Swapping to local fallback.");
           coverImageSrc.value = 'image_c877dd.jpg';
         }
 
@@ -1864,17 +813,17 @@
 
         const currentStep = computed(() => steps[currentStepIndex.value]);
 
-        // 【极具创新的整体连续时间进度条计算】
-        // 利用: 当前大步骤数 + 当前步骤视频百分比 动态拟合出 YouTube 般的无缝时间填充率
+        // 【大步骤点对点流水式时间轴进度计算】
+        // 利用: 当前大步骤数 + 当前视频播放比率 丝滑流淌连接在 1~9 数字节点之间
         const continuousProgress = computed(() => {
           const stepContribution = currentStepIndex.value;
           const totalSteps = steps.length;
           if (totalSteps <= 1) return 0;
 
-          // 视频内播放比例
+          // 当前步骤视频内的实时进度比率
           const videoFraction = videoDuration.value ? (videoCurrentTime.value / videoDuration.value) : 0;
           
-          // 在 9 个节点组成的 8 个区间内做归一化
+          // 在 9 个节点围成的 8 个接力线区间中做无缝归一化插值
           const fraction = (stepContribution + videoFraction) / (totalSteps - 1);
           return Math.min(Math.max(fraction * 100, 0), 100);
         });
@@ -1934,12 +883,13 @@
           });
         }
 
+        // 下一步
         function nextStep() {
           if (currentStepIndex.value < steps.length - 1) {
             jumpToStep(currentStepIndex.value + 1);
           } else {
-            // 最后一页视频播放完显示成功提示
-            showSuccessOverlay.value = true;
+            // 第九步（currentStepIndex 为 8）点击つぎへ，触发料理完成确认询问弹窗
+            showConfirmCompletionModal.value = true;
           }
         }
 
@@ -2010,16 +960,6 @@
           }
         }
 
-        // 视频手动拖拽进度控制
-        function seekVideo(e) {
-          if (!cookingVideo.value || !videoDuration.value) return;
-          const rect = e.currentTarget.getBoundingClientRect();
-          const clickX = e.clientX - rect.left;
-          const width = rect.width;
-          const percentage = clickX / width;
-          cookingVideo.value.currentTime = percentage * videoDuration.value;
-        }
-
         // 视频监听器同步状态
         function onVideoPlay() {
           isPlaying.value = true;
@@ -2030,8 +970,19 @@
           isPlaying.value = false;
         }
 
+        // 视频播放结束时的行为
         function onVideoEnded() {
           isPlaying.value = false;
+          // 如果是最后一步（第九步）播放结束，触发完成确认弹窗
+          if (currentStepIndex.value === 8) {
+            showConfirmCompletionModal.value = true;
+          }
+        }
+
+        // 确认完成并弹出恭喜浮层
+        function completeCooking() {
+          showConfirmCompletionModal.value = false;
+          showSuccessOverlay.value = true;
         }
 
         // ==================== 长按 1.5倍速播放功能 ====================
@@ -2114,6 +1065,7 @@
         // 重设回第一步
         function restartFromBeginning() {
           showSuccessOverlay.value = false;
+          showConfirmCompletionModal.value = false;
           currentView.value = 'guide';
           currentStepIndex.value = 0;
           ingredients.value.forEach(i => i.checked = false);
@@ -2134,6 +1086,7 @@
           videoCurrentTime,
           videoDuration,
           continuousProgress,
+          showConfirmCompletionModal,
           showSuccessOverlay,
           coverImageSrc,
           handleImageError,
@@ -2155,7 +1108,7 @@
           onVideoEnded,
           onVideoTimeUpdate,
           onVideoLoadedMetadata,
-          seekVideo,
+          completeCooking,
           handleVideoTouchStart,
           handleVideoTouchEnd,
           handleVideoMouseDown,
