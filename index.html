@@ -50,45 +50,34 @@
     .view-transition {
       transition: all 0.4s ease-in-out;
     }
-
-    /* 振假名拼音微调，使其在粗体字下依然清晰好看 */
-    ruby {
-      ruby-position: over;
-    }
-    rt {
-      font-size: 0.55em;
-      letter-spacing: 0.05em;
-      padding-bottom: 0.1em;
-      color: #7f8c8d;
-    }
   </style>
 </head>
 <body class="w-screen h-screen font-sans text-brandDark">
 
   <div id="app" class="relative w-full h-full flex flex-col justify-between overflow-hidden p-4">
     
-    <!-- ==================== 视图 0：つかいかた案内（使用指南） ==================== -->
+    <!-- ==================== 视图 0：つかいかた案内（使用指南，已去除所有注音与跳动动画） ==================== -->
     <div v-if="currentView === 'guide'" class="absolute inset-0 z-50 bg-brandCream flex flex-col justify-between p-6 overflow-y-auto">
       <!-- 头部 -->
       <div class="text-center py-2">
         <h1 class="text-4xl font-extrabold text-brandOrange tracking-wide flex justify-center items-center gap-2">
-          🍳 <ruby>簡単<rt>かんたん</rt></ruby>！料理レシピアプリ
+          🍳 簡単！料理レシピアプリ
         </h1>
         <p class="text-xl text-gray-600 mt-2 font-bold">
-          このアプリの <ruby>操作方法<rt>そうさほうほう</rt></ruby>
+          このアプリの操作方法
         </p>
       </div>
 
-      <!-- 操作卡片网格 -->
+      <!-- 操作说明卡片网格 -->
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4 my-auto max-w-5xl mx-auto w-full">
         <!-- 卡片：上一步/下一步 -->
         <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center">
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
             <span class="text-3xl">⬅️ ➡️</span>
           </div>
-          <h3 class="text-xl font-bold text-brandOrange mb-1"><ruby>進む<rt>すすむ</rt></ruby>・<ruby>戻る<rt>もどる</rt></ruby></h3>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">進む・もどる</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
-            画面の左右にある大きな<br><ruby>矢印<rt>やじるし</rt></ruby>を押すか、画面を左右に指でスライドします。
+            画面の左右にある大きな矢印を押すか、画面を左右に指でスライドします。
           </p>
         </div>
 
@@ -97,9 +86,9 @@
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
             <span class="text-3xl">⏸️</span>
           </div>
-          <h3 class="text-xl font-bold text-brandOrange mb-1"><ruby>一時停止<rt>いちじていし</rt></ruby> / <ruby>再生<rt>さいせい</rt></ruby></h3>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">一時停止 / 再生</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
-            動画を止めたい時は、右上の「<ruby>一時停止<rt>いちじていし</rt></ruby>」ボタンを押します。
+            動画を止めたい時は、右上の「一時停止」ボタンを押します。
           </p>
         </div>
 
@@ -108,9 +97,9 @@
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
             <span class="text-3xl">💬</span>
           </div>
-          <h3 class="text-xl font-bold text-brandOrange mb-1"><ruby>字幕<rt>じまく</rt></ruby>の表示</h3>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">字幕の表示</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
-            話している言葉を文字で読みたい時は「<ruby>字幕<rt>じまく</rt></ruby>」ボタンを押します。
+            話している言葉を文字で読みたい時は「字幕」ボタンを押します。
           </p>
         </div>
 
@@ -119,9 +108,9 @@
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
             <span class="text-3xl">🔄</span>
           </div>
-          <h3 class="text-xl font-bold text-brandOrange mb-1"><ruby>最初<rt>さいしょ</rt></ruby>から見直す</h3>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">最初から見直す</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
-            今のステップをもう一度見たい時は「<ruby>もう一度<rt>もういちど</rt></ruby>」ボタンを押します。
+            今のステップをもう一度見たい時は「もう一度」ボタンを押します。
           </p>
         </div>
 
@@ -130,7 +119,7 @@
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
             <span class="text-3xl">⏩</span>
           </div>
-          <h3 class="text-xl font-bold text-brandOrange mb-1"><ruby>長押し<rt>ながおし</rt></ruby>で早送り</h3>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">長押しで早送り</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
             動画の部分を長く指で押している間、動画が少し早く進みます。
           </p>
@@ -141,17 +130,17 @@
           <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
             <span class="text-3xl">⏰</span>
           </div>
-          <h3 class="text-xl font-bold text-brandOrange mb-1"><ruby>目安タイマー<rt>めやすたいまー</rt></ruby></h3>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">目安タイマー</h3>
           <p class="text-sm text-gray-600 leading-relaxed font-semibold">
             調理時間の目安をカウントダウンします。一時停止も可能です。
           </p>
         </div>
       </div>
 
-      <!-- 底部巨大闪烁开始按钮 -->
+      <!-- 底部静态开始按钮（已去除 jump 跳动动画） -->
       <div class="text-center mt-6">
-        <button @click="goToView('checklist')" class="animate-bounce inline-flex items-center justify-center px-12 py-5 bg-brandOrange hover:bg-brandOrangeHover text-white text-3xl font-black rounded-full shadow-2xl transition duration-300 transform active:scale-95 border-4 border-white cursor-pointer min-h-[70px]">
-          👍 <ruby>内容<rt>ないよう</rt></ruby>を確認した！食材の準備へ
+        <button @click="goToView('checklist')" class="inline-flex items-center justify-center px-12 py-5 bg-brandOrange hover:bg-brandOrangeHover text-white text-3xl font-black rounded-full shadow-2xl transition duration-300 transform active:scale-95 border-4 border-white cursor-pointer min-h-[70px]">
+          👍 内容を確認した！食材の準備へ
         </button>
       </div>
     </div>
@@ -163,20 +152,20 @@
       <!-- 头部：标题与引导语 -->
       <div class="text-center py-2 shrink-0">
         <h2 class="text-3xl font-black text-brandOrange flex justify-center items-center gap-2">
-          🥗 <ruby>調理準備<rt>じゅんび</rt></ruby>：材料と道具の確認
+          🥗 調理準備：材料と道具の確認
         </h2>
         <p class="text-lg text-gray-700 mt-2 font-bold">
-          必要なものを机の上にそろえましょう。準備できたら<ruby>丸<rt>まる</rt></ruby>を押してチェックしてください。
+          必要なものを机の上にそろえましょう。準備できたら丸を押してチェックしてください。
         </p>
       </div>
 
-      <!-- 主要内容：物料列表（网格布局适配 iPad 7） -->
+      <!-- 主要内容：物料列表 -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto max-w-6xl mx-auto w-full">
         
         <!-- 食材分类 -->
         <div class="bg-white p-5 rounded-2xl shadow-lg border-t-8 border-brandOrange flex flex-col">
           <h3 class="text-2xl font-bold text-brandOrange mb-4 flex items-center gap-2">
-            🍖 <ruby>食材<rt>しょくざい</rt></ruby>
+            🍖 食材
           </h3>
           <div class="space-y-3 flex-1">
             <label v-for="(item, index) in ingredients" :key="index" 
@@ -192,7 +181,7 @@
         <!-- 调味料分类 -->
         <div class="bg-white p-5 rounded-2xl shadow-lg border-t-8 border-brandGreen flex flex-col">
           <h3 class="text-2xl font-bold text-brandGreen mb-4 flex items-center gap-2">
-            🧂 <ruby>調味料<rt>ちょうみりょう</rt></ruby>
+            🧂 調味料
           </h3>
           <div class="space-y-3 flex-1 overflow-y-auto max-h-[320px] pr-1">
             <label v-for="(item, index) in seasonings" :key="index" 
@@ -209,7 +198,7 @@
         <!-- 厨房工具分类 -->
         <div class="bg-white p-5 rounded-2xl shadow-lg border-t-8 border-blue-500 flex flex-col">
           <h3 class="text-2xl font-bold text-blue-600 mb-4 flex items-center gap-2">
-            🍳 <ruby>使う道具<rt>どうぐ</rt></ruby>
+            🍳 使う道具
           </h3>
           <div class="space-y-3 flex-1">
             <label v-for="(item, index) in tools" :key="index" 
@@ -227,70 +216,21 @@
       <!-- 底部启动烹饪按钮 -->
       <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-6 shrink-0 gap-4">
         <button @click="goToView('guide')" class="px-6 py-4 bg-gray-300 hover:bg-gray-400 text-gray-800 text-xl font-bold rounded-xl active:scale-95 transition">
-          ⬅️ <ruby>操作説明へ戻る<rt>せつめいへもどる</rt></ruby>
+          ⬅️ 操作説明へもどる
         </button>
         <button @click="startCooking" class="flex-1 max-w-2xl py-5 bg-brandGreen hover:bg-brandGreenHover text-white text-3xl font-black rounded-full shadow-2xl border-4 border-white transition active:scale-95 text-center cursor-pointer min-h-[70px]">
-          🔥 <ruby>準備完了！料理をスタート<rt>じゅんびかんりょう！りょうりをすたーと</rt></ruby>
+          🔥 準備完了！料理をスタート
         </button>
       </div>
     </div>
 
 
-    <!-- ==================== 视图 2：メイン調理ワークスペース（主烹饪界面） ==================== -->
+    <!-- ==================== 视图 2：メイン調理ワークスペース（主烹饪界面，视频高宽比已最大化） ==================== -->
     <div v-if="currentView === 'cooking'" class="w-full h-full flex flex-col justify-between"
          @touchstart="handleTouchStart" @touchend="handleTouchEnd">
       
-      <!-- 1. 顶部：实时信息卡 + 控制矩阵 -->
-      <div class="w-full flex justify-between items-stretch gap-4 h-[115px] shrink-0">
-        
-        <!-- 左侧：【实时配料卡片】动态呈现当前步骤所需耗材 -->
-        <div class="flex-1 bg-white border-2 border-brandOrange rounded-2xl p-3 shadow-md flex flex-col justify-center">
-          <div class="text-xs font-bold text-brandOrange tracking-wider flex items-center gap-1 mb-1">
-            📌 <ruby>この手順で使う材料<rt>このてじゅんでつかうざいりょう</rt></ruby>
-          </div>
-          <div class="text-lg font-black text-gray-800 flex flex-wrap gap-x-4 gap-y-1">
-            <span v-for="(ing, idx) in currentStep.ingredients" :key="idx" class="inline-block bg-orange-50 px-2 py-0.5 rounded-lg border border-orange-100">
-              {{ ing.name }} <span class="text-brandOrange font-extrabold">{{ ing.amount }}</span>
-            </span>
-            <span v-if="!currentStep.ingredients || currentStep.ingredients.length === 0" class="text-gray-400 text-md">
-              <ruby>特別な材料はありません<rt>とくべつなざいりょうはありません</rt></ruby>
-            </span>
-          </div>
-        </div>
-
-        <!-- 右侧：【控制矩阵】3个大字号操作按钮，防老人误触、带文字标签 -->
-        <div class="flex gap-2 shrink-0 items-center">
-          <!-- 字幕切换 -->
-          <button @click="toggleSubtitle" 
-                  class="h-full px-4 rounded-2xl flex flex-col items-center justify-center shadow-md transition active:scale-95 border-2 min-w-[95px] cursor-pointer"
-                  :class="isSubtitleOn ? 'bg-brandOrange border-brandOrange text-white' : 'bg-white border-gray-300 text-gray-700'">
-            <span class="text-2xl mb-1">💬</span>
-            <span class="text-xs font-black tracking-tighter"><ruby>字幕<rt>じまく</rt></ruby> {{ isSubtitleOn ? 'ＯＮ' : 'ＯＦＦ' }}</span>
-          </button>
-
-          <!-- 播放/暂停 -->
-          <button @click="togglePlay" 
-                  class="h-full px-4 rounded-2xl flex flex-col items-center justify-center shadow-md transition active:scale-95 border-2 min-w-[110px] cursor-pointer"
-                  :class="isPlaying ? 'bg-brandGreen border-brandGreen text-white' : 'bg-red-500 border-red-500 text-white animate-pulse'">
-            <span class="text-2xl mb-1">{{ isPlaying ? '⏸️' : '▶️' }}</span>
-            <span class="text-xs font-black tracking-tighter">
-              <ruby v-if="isPlaying">一時停止<rt>いちじていし</rt></ruby>
-              <ruby v-else>再生する<rt>さいせいする</rt></ruby>
-            </span>
-          </button>
-
-          <!-- 重播 -->
-          <button @click="restartStep" 
-                  class="h-full px-4 bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 rounded-2xl flex flex-col items-center justify-center shadow-md transition active:scale-95 min-w-[95px] cursor-pointer">
-            <span class="text-2xl mb-1">🔄</span>
-            <span class="text-xs font-black tracking-tighter"><ruby>もう一度<rt>もういちど</rt></ruby></span>
-          </button>
-        </div>
-
-      </div>
-
-      <!-- 2. 中部：视频播放主屏幕 (自带左右侧物理大箭头触控热区) -->
-      <div class="relative flex-1 my-3 bg-black rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center">
+      <!-- 中部主屏幕：现在完全占据上方区域，视频纵向扩张至红框区域 -->
+      <div class="relative flex-1 bg-black rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center">
         
         <!-- 视频容器，绑定长按事件 -->
         <div class="w-full h-full relative"
@@ -309,15 +249,59 @@
                  @play="onVideoPlay"
                  @pause="onVideoPause"
                  @ended="onVideoEnded">
-            <ruby>お使いの端末はビデオ再生に対応していません。<rt>おつかいのたんまつはびでおさいせいにたいおうしていません</rt></ruby>
+            お使いの端末はビデオ再生に対応していません。
           </video>
+
+          <!-- ==================== 浮层1：左上角配料小卡片 (悬浮式，极为紧凑) ==================== -->
+          <div class="absolute top-4 left-4 z-30 bg-white/95 backdrop-blur-md border-2 border-brandOrange rounded-2xl p-3 shadow-xl max-w-[320px] pointer-events-none">
+            <div class="text-xs font-bold text-brandOrange tracking-wider flex items-center gap-1 mb-1">
+              📌 この手順で使う材料
+            </div>
+            <div class="text-lg font-black text-gray-800 flex flex-wrap gap-x-2 gap-y-1">
+              <span v-for="(ing, idx) in currentStep.ingredients" :key="idx" class="inline-block bg-orange-50 px-2 py-0.5 rounded-lg border border-orange-100">
+                {{ ing.name }} <span class="text-brandOrange font-extrabold">{{ ing.amount }}</span>
+              </span>
+              <span v-if="!currentStep.ingredients || currentStep.ingredients.length === 0" class="text-gray-400 text-sm">
+                特別な材料はありません
+              </span>
+            </div>
+          </div>
+
+          <!-- ==================== 浮层2：右上角控制矩阵 (悬浮式，紧凑分配) ==================== -->
+          <div class="absolute top-4 right-4 z-30 flex gap-2 items-center bg-white/80 backdrop-blur-md p-2 rounded-2xl shadow-xl">
+            <!-- 字幕切换 -->
+            <button @click.stop="toggleSubtitle" 
+                    class="h-16 px-4 rounded-xl flex flex-col items-center justify-center transition active:scale-95 border-2 min-w-[85px] cursor-pointer"
+                    :class="isSubtitleOn ? 'bg-brandOrange border-brandOrange text-white' : 'bg-white border-gray-300 text-gray-700'">
+              <span class="text-xl mb-0.5">💬</span>
+              <span class="text-[11px] font-black tracking-tighter">字幕 {{ isSubtitleOn ? 'ON' : 'OFF' }}</span>
+            </button>
+
+            <!-- 播放/暂停 -->
+            <button @click.stop="togglePlay" 
+                    class="h-16 px-4 rounded-xl flex flex-col items-center justify-center transition active:scale-95 border-2 min-w-[95px] cursor-pointer"
+                    :class="isPlaying ? 'bg-brandGreen border-brandGreen text-white' : 'bg-red-500 border-red-500 text-white animate-pulse'">
+              <span class="text-xl mb-0.5">{{ isPlaying ? '⏸️' : '▶️' }}</span>
+              <span class="text-[11px] font-black tracking-tighter">
+                <span v-if="isPlaying">一時停止</span>
+                <span v-else>再生する</span>
+              </span>
+            </button>
+
+            <!-- 重播 -->
+            <button @click.stop="restartStep" 
+                    class="h-16 px-4 bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 rounded-xl flex flex-col items-center justify-center transition active:scale-95 min-w-[85px] cursor-pointer">
+              <span class="text-xl mb-0.5">🔄</span>
+              <span class="text-[11px] font-black tracking-tighter">もう一度</span>
+            </button>
+          </div>
 
           <!-- 1.5倍速长按动画浮层 -->
           <div v-show="isFastForwarding" class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none transition-all duration-200">
             <div class="bg-brandOrange text-white text-2xl font-black px-6 py-4 rounded-2xl shadow-2xl border-4 border-white flex items-center gap-3 animate-pulse">
               <span>⏩ 1.5倍速（はやおくり中）</span>
             </div>
-            <p class="text-white font-bold mt-2 text-md text-shadow">指を離すといつもの速さに戻ります</p>
+            <p class="text-white font-bold mt-2 text-md text-shadow">指を離すといつもの速さにもどります</p>
           </div>
 
           <!-- 暂停状态巨大提示浮层 -->
@@ -329,24 +313,21 @@
           <!-- 加载中浮层 -->
           <div v-show="videoLoading" class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center pointer-events-none">
             <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-brandOrange"></div>
-            <p class="text-white text-xl font-bold mt-4"><ruby>動画を読み込み中...<rt>どうがをよみこみちゅう</rt></ruby></p>
+            <p class="text-white text-xl font-bold mt-4">動画を読み込み中...</p>
           </div>
 
-          <!-- CC 实时字幕，显示在视频下方中央位置（大字号、带黑色厚重半透明底色，确保任何视频背景下老人都看得懂） -->
+          <!-- CC 实时字幕：纯日语（已去除任何中文） -->
           <div v-if="isSubtitleOn" class="absolute bottom-6 left-4 right-4 text-center pointer-events-none z-10">
-            <div class="inline-block bg-black/80 px-6 py-3 rounded-2xl border-2 border-white shadow-2xl max-w-[90%]">
+            <div class="inline-block bg-black/85 px-8 py-4 rounded-2xl border-2 border-white shadow-2xl max-w-[90%]">
               <p class="text-white text-2xl font-black leading-relaxed tracking-wider">
                 {{ currentStep.subtitle }}
-              </p>
-              <p class="text-orange-300 text-md font-bold mt-1">
-                {{ currentStep.subtitleTranslate }}
               </p>
             </div>
           </div>
 
         </div>
 
-        <!-- 物理大箭头：最左侧/最右侧中段，超大透明热区，完美防误触 -->
+        <!-- 左右大物理箭头（超大透明触控热区） -->
         <!-- 左侧【まえへ】 -->
         <button @click="prevStep" 
                 class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black/50 to-transparent hover:from-black/70 flex items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
@@ -368,11 +349,11 @@
       </div>
 
       <!-- 3. 底部：整体时间进度条 + 步骤数 + 番茄钟计时 -->
-      <div class="bg-white rounded-3xl border-2 border-brandOrange/60 p-4 shrink-0 flex flex-col justify-between h-[155px]">
+      <div class="bg-white rounded-3xl border-2 border-brandOrange/60 p-4 shrink-0 flex flex-col justify-between h-[155px] mt-3">
         
         <!-- 进度条区域 -->
         <div class="w-full flex items-center gap-4 py-1">
-          <span class="text-lg font-bold text-gray-500 shrink-0"><ruby>スタート<rt>すたーと</rt></ruby></span>
+          <span class="text-lg font-bold text-gray-500 shrink-0">スタート</span>
           
           <div class="relative flex-1 h-5 bg-gray-200 rounded-full flex items-center justify-between px-2">
             <!-- 激活部分背景条 -->
@@ -392,12 +373,12 @@
             </button>
           </div>
           
-          <span class="text-lg font-bold text-gray-500 shrink-0"><ruby>できあがり<rt>できあがり</rt></ruby></span>
+          <span class="text-lg font-bold text-gray-500 shrink-0">できあがり</span>
         </div>
 
         <!-- 步骤详情与番茄钟底栏 -->
         <div class="flex justify-between items-center mt-2 flex-1">
-          <!-- 步骤详细名称 -->
+          <!-- 步骤详细名称（纯净大字版，无拼音） -->
           <div class="flex items-center gap-3">
             <span class="text-4xl font-black text-brandOrange tracking-tighter">
               {{ formatStepNumber(currentStep.id) }} <span class="text-2xl text-gray-400">/ 09</span>
@@ -425,7 +406,7 @@
               ⏰
             </button>
             <div class="text-right flex flex-col justify-center select-none">
-              <span class="text-xs font-extrabold text-gray-500"><ruby>めやす残り時間<rt>めやすのこりじかん</rt></ruby></span>
+              <span class="text-xs font-extrabold text-gray-500">目安残り時間</span>
               <span class="text-3xl font-black font-mono leading-none tracking-wider text-brandOrange"
                     :class="{'text-brandGreen': timer === 0, 'animate-pulse': timerRunning}">
                 {{ formatTime(timer) }}
@@ -433,7 +414,7 @@
             </div>
             <!-- 重置倒计时 -->
             <button @click="resetTimer" class="px-3 py-1 bg-white border border-gray-300 text-sm font-bold rounded-lg hover:border-gray-400 text-gray-600 active:scale-95 transition cursor-pointer">
-              <ruby>リセット<rt>りせっと</rt></ruby>
+              リセット
             </button>
           </div>
 
@@ -445,13 +426,13 @@
 
     <!-- 顶层遮罩：恭喜完成层 -->
     <div v-if="showSuccessOverlay" class="absolute inset-0 z-50 bg-black/80 flex flex-col items-center justify-center p-6 text-center">
-      <div class="bg-brandCream rounded-3xl p-8 max-w-2xl border-8 border-brandGreen shadow-2xl animate-bounce-slow">
+      <div class="bg-brandCream rounded-3xl p-8 max-w-2xl border-8 border-brandGreen shadow-2xl">
         <span class="text-8xl">🎉</span>
         <h1 class="text-5xl font-black text-brandGreen mt-6">
-          <ruby>完成しました！<rt>かんせいしました！</rt></ruby>
+          完成しました！
         </h1>
         <p class="text-2xl font-bold text-gray-700 mt-4 leading-relaxed">
-          とっても<ruby>美味しそう<rt>おいしそう</rt></ruby>な<br>ゴーヤーキムチ炒めのできあがりです！
+          とっても美味しそうな<br>ゴーヤーキムチ炒めのできあがりです！
         </p>
         <p class="text-lg text-brandOrange font-extrabold mt-2">
           温かいうちにお召し上がりください。
@@ -459,10 +440,10 @@
         
         <div class="flex gap-4 justify-center mt-8">
           <button @click="restartFromBeginning" class="px-8 py-4 bg-brandOrange hover:bg-brandOrangeHover text-white text-2xl font-black rounded-full shadow-lg transition active:scale-95 border-2 border-white cursor-pointer">
-            🔄 <ruby>もう一度作る<rt>もういちどつくる</rt></ruby>
+            🔄 もう一度作る
           </button>
           <button @click="showSuccessOverlay = false" class="px-8 py-4 bg-gray-500 text-white text-2xl font-black rounded-full shadow-lg transition active:scale-95 border-2 border-white cursor-pointer">
-            ❌ <ruby>閉じる<rt>とじる</rt></ruby>
+            ❌ 閉じる
           </button>
         </div>
       </div>
@@ -525,7 +506,7 @@
           { name: 'フライパン', checked: false }
         ]);
 
-        // 精心编排的 9 步电子菜谱数据（含双语字幕展示：汉字加大+大字号日文平假名释义，保障高龄友好）
+        // 精心编排的 9 步电子菜谱数据（已去除所有中文翻译）
         const steps = [
           {
             id: 1,
@@ -534,7 +515,6 @@
             titleHiragana: 'ゴーヤーを たてにきり、わた と たねを とる',
             duration: 240, // 4分钟
             subtitle: 'まずはゴーヤーを縦半分に切り、スプーンで綿と種を綺麗にくり抜きます。',
-            subtitleTranslate: '（首先将苦瓜纵向切半，用勺子将瓜瓤和籽彻底刮除干净。）',
             ingredients: [
               { name: 'ゴーヤー', amount: '1/2本' }
             ]
@@ -546,7 +526,6 @@
             titleHiragana: 'ゴーヤーを ６から７ミリの はばに きる',
             duration: 120, // 2分钟
             subtitle: 'ゴーヤーを6から7ミリ幅の薄切りにしていきます。厚みを揃えるのがコツです。',
-            subtitleTranslate: '（将苦瓜切成6至7毫米宽的薄片。厚度均匀是好吃的秘诀。）',
             ingredients: [
               { name: 'ゴーヤー', amount: '切ったもの' }
             ]
@@ -558,7 +537,6 @@
             titleHiragana: 'しおを ふって もみ、みずあらいして みずけを きる',
             duration: 180, // 3分钟
             subtitle: '塩を振って優しく揉み込み、少し置いてから水で洗い流して、しっかり水気を切ります。',
-            subtitleTranslate: '（撒入适量盐轻轻揉搓，静置片刻后用清水洗净，彻底沥干水分。）',
             ingredients: [
               { name: '切ったゴーヤー', amount: '全量' },
               { name: '塩', amount: '適量' }
@@ -571,7 +549,6 @@
             titleHiragana: 'たまねぎを うすぎりに する',
             duration: 120, // 2分钟
             subtitle: '玉ねぎ4分の1個を、繊維に沿って薄切りにスライスします。',
-            subtitleTranslate: '（将1/4个洋葱顺着纤维纹路切成薄片。）',
             ingredients: [
               { name: '玉ねぎ', amount: '1/4個' }
             ]
@@ -583,7 +560,6 @@
             titleHiragana: 'はくさいキムチを たべやすい おおきさに きる',
             duration: 60, // 1分钟
             subtitle: '白菜キムチ50グラムを、食べやすい大きさにざっくりとカットします。',
-            subtitleTranslate: '（将50克白菜泡菜大致切成方便入口的小块。）',
             ingredients: [
               { name: '白菜キムチ', amount: '50g' }
             ]
@@ -592,10 +568,9 @@
             id: 6,
             videoUrl: '6.mov',
             titleKanji: '豚肉を一口大に切り、調味料Aを揉み込む',
-            titleHiragana: 'ぶたにくを ひとくchいだいに きり、ちょうみりょうＡを もみこむ',
+            titleHiragana: 'ぶたにくを ひとくちだいに きり、ちょうみりょうＡを もみこむ',
             duration: 240, // 4分钟
             subtitle: '豚肉を一口大に切り、生姜汁と酒の調味料Aを揉み込んで下味をつけます。',
-            subtitleTranslate: '（将猪肉切成一口大小，揉入生姜汁和料酒调料组A进行腌制入味。）',
             ingredients: [
               { name: '豚バラ薄切り肉', amount: '90g' },
               { name: '【A】生姜汁', amount: '1/4片分' },
@@ -609,7 +584,6 @@
             titleHiragana: 'あぶらを ねっし、たまねぎ と ぶたにくを いためる',
             duration: 180, // 3分钟
             subtitle: 'フライパンに油を熱し、玉ねぎと豚肉を炒めます。お肉の色が変わるまでしっかり。',
-            subtitleTranslate: '（在平底锅中热油，下洋葱和猪肉翻炒。直到肉色完全变白熟透。）',
             ingredients: [
               { name: '下味をつけた豚肉', amount: '全量' },
               { name: 'スライス玉ねぎ', amount: '全量' },
@@ -623,7 +597,6 @@
             titleHiragana: 'ゴーヤーを くわえて いため、さらに キムチを いためる',
             duration: 120, // 2分钟
             subtitle: 'ゴーヤーを加えて少し炒め、火が通ったらキムチを投入して全体を炒め合わせます。',
-            subtitleTranslate: '（加入苦瓜稍微翻炒，断生后投入泡菜，让整体风味融合翻炒。）',
             ingredients: [
               { name: '水気を切ったゴーヤー', amount: '全量' },
               { name: 'カットした白菜キムチ', amount: '全量' }
@@ -636,7 +609,6 @@
             titleHiragana: 'ちょうみりょうＢを いれ、いためあわせて かんせい！',
             duration: 120, // 2分钟
             subtitle: '仕上げに調味料Bを回し入れ、手早く炒め合わせたら、器に盛り付けて完成です！',
-            subtitleTranslate: '（最后转圈倒入调味汁B，快速翻炒均匀，即可出锅装盘享用！）',
             ingredients: [
               { name: '【B】調味料セット', amount: '全量' }
             ]
@@ -650,25 +622,23 @@
           currentView.value = view;
         }
 
-        // 开始烹饪：绕过 iOS Safari 自动播放限制
+        // 开始烹饪
         function startCooking() {
           currentView.value = 'cooking';
           currentStepIndex.value = 0;
           initTimer();
 
-          // 关键：在用户点击按钮的手势回调中触发加载和播放，解锁 Safari 媒体播放通道
           nextTick(() => {
             if (cookingVideo.value) {
               videoLoading.value = true;
               cookingVideo.value.load();
-              // 顺应 Webkit Autoplay 机制
               const playPromise = cookingVideo.value.play();
               if (playPromise !== undefined) {
                 playPromise.then(() => {
                   isPlaying.value = true;
                   videoLoading.value = false;
                 }).catch(err => {
-                  console.log("iOS Safari Autoplay blocked or interrupted:", err);
+                  console.log("Autoplay blocked or interrupted:", err);
                   isPlaying.value = false;
                   videoLoading.value = false;
                 });
@@ -687,7 +657,6 @@
             if (timerRunning.value && timer.value > 0) {
               timer.value--;
               if (timer.value === 0) {
-                // 倒计时结束时的安全反馈
                 timerRunning.value = false;
               }
             }
@@ -730,7 +699,6 @@
           if (currentStepIndex.value < steps.length - 1) {
             jumpToStep(currentStepIndex.value + 1);
           } else {
-            // 完成全部，显示恭喜层
             showSuccessOverlay.value = true;
           }
         }
@@ -778,13 +746,10 @@
           const deltaX = e.changedTouches[0].clientX - touchStartX;
           const deltaY = e.changedTouches[0].clientY - touchStartY;
           
-          // 滑动识别敏感阈值设为 100px 左右，同时限制垂直位移，防老人滑动偏差误触发
           if (Math.abs(deltaX) > 100 && Math.abs(deltaY) < 60) {
             if (deltaX > 0) {
-              // 右滑：上一步 (まえへ)
               prevStep();
             } else {
-              // 左滑：下一步 (つぎへ)
               nextStep();
             }
           }
@@ -800,15 +765,10 @@
         }
 
         function onVideoEnded() {
-          // 当前步骤播放完毕，自动暂停并提示老人进入下一步
           isPlaying.value = false;
-          // 若不自动跳转，可以让其停留在末尾，或者自动转到下一步
-          if (currentStepIndex.value < steps.length - 1) {
-             // 可以留存让老人手动点击跳转
-          }
         }
 
-        // ==================== 长按 1.5倍速播放功能（兼容 iPad 触控与鼠标事件） ====================
+        // ==================== 长按 1.5倍速播放功能 ====================
         function startFastForward() {
           if (!cookingVideo.value) return;
           isFastForwarding.value = true;
@@ -823,13 +783,12 @@
 
         // 触控版长按实现
         function handleVideoTouchStart(e) {
-          // 阻止长按弹出上下文菜单
           e.preventDefault();
           isLongPressActive = false;
           longPressTimeout = setTimeout(() => {
             isLongPressActive = true;
             startFastForward();
-          }, 400); // 长按定为 400毫秒 响应
+          }, 400);
         }
 
         function handleVideoTouchEnd(e) {
@@ -838,12 +797,11 @@
             stopFastForward();
             isLongPressActive = false;
           } else {
-            // 如果只是普通轻点，触发播放/暂停
             togglePlay();
           }
         }
 
-        // PC/调试环境鼠标模拟
+        // 鼠标模拟
         function handleVideoMouseDown(e) {
           isLongPressActive = false;
           longPressTimeout = setTimeout(() => {
@@ -858,7 +816,6 @@
             stopFastForward();
             isLongPressActive = false;
           } else {
-            // 轻点
             togglePlay();
           }
         }
@@ -868,7 +825,6 @@
           showSuccessOverlay.value = false;
           currentView.value = 'guide';
           currentStepIndex.value = 0;
-          // 重置物料清单勾选状态
           ingredients.value.forEach(i => i.checked = false);
           seasonings.value.forEach(s => s.checked = false);
           tools.value.forEach(t => t.checked = false);
@@ -881,7 +837,7 @@
           return `${m}:${s}`;
         }
 
-        // 格式化大步骤号 (e.g., "01")
+        // 格式化大步骤号
         function formatStepNumber(num) {
           return num.toString().padStart(2, '0');
         }
