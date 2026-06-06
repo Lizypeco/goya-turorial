@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <!-- 禁用缩放以防止老人误触放大页面，完美适配 iPad 7 分辨率 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- Safari 全屏 Web App 支持（添加到主屏幕后体验绝佳） -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="らくらくレシピ">
+  
+  <title>ゴーヤーキムチ炒め - らくらく電子レシピ</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- Tailwind Custom Colors Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandOrange: '#e67e22',
+            brandOrangeHover: '#d35400',
+            brandGreen: '#27ae60',
+            brandGreenHover: '#219653',
+            brandCream: '#fdfcf7',
+            brandDark: '#2c3e50',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* 针对老年人防误触、防系统菜单弹出的关键 CSS 适配 */
+    body {
+      -webkit-touch-callout: none; /* 禁用 Safari 长按呼出菜单 */
+      -webkit-user-select: none;   /* 禁用文字选中 */
+      user-select: none;
+      background-color: #fdfcf7;
+      overflow: hidden; /* iPad 7 全屏无滚动条 */
+    }
+    
+    /* 极致平滑过渡效果 */
+    .view-transition {
+      transition: all 0.4s ease-in-out;
+    }
+  </style>
+</head>
+<body class="w-screen h-screen font-sans text-brandDark">
+
+  <div id="app" class="relative w-full h-full flex flex-col justify-between overflow-hidden p-4">
+    
+    <!-- ==================== 视图 0：つかいかた案内（使用指南） ==================== -->
+    <div v-if="currentView === 'guide'" class="absolute inset-0 z-50 bg-brandCream flex flex-col justify-between p-6 overflow-y-auto">
+      <!-- 头部 -->
+      <div class="text-center py-2">
+        <h1 class="text-4xl font-extrabold text-brandOrange tracking-wide flex justify-center items-center gap-2">
+          🍳 簡単！料理レシピアプリ
+        </h1>
+        <p class="text-xl text-gray-600 mt-2 font-bold">
+          このアプリの操作方法
+        </p>
+      </div>
+
+      <!-- 操作卡片网格 -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 my-auto max-w-5xl mx-auto w-full">
+        <!-- 卡片：上一步/下一步 -->
+        <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+            <span class="text-3xl">⬅️ ➡️</span>
+          </div>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">進む・もどる</h3>
+          <p class="text-sm text-gray-600 leading-relaxed font-semibold">
+            画面の左右にある大きな矢印を押すか、画面を左右に指でスライドします。
+          </p>
+        </div>
+
+        <!-- 卡片：暂停与播放 -->
+        <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+            <span class="text-3xl">⏸️</span>
+          </div>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">一時停止 / 再生</h3>
+          <p class="text-sm text-gray-600 leading-relaxed font-semibold">
+            動画を止めたい時は、右上の「一時停止」ボタンを押します。
+          </p>
+        </div>
+
+        <!-- 卡片：字幕开关 -->
+        <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+            <span class="text-3xl">💬</span>
+          </div>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">字幕の表示</h3>
+          <p class="text-sm text-gray-600 leading-relaxed font-semibold">
+            話している言葉を文字で読みたい時は「字幕」ボタンを押します。
+          </p>
+        </div>
+
+        <!-- 卡片：重播 -->
+        <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+            <span class="text-3xl">🔄</span>
+          </div>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">最初から見直す</h3>
+          <p class="text-sm text-gray-600 leading-relaxed font-semibold">
+            今のステップをもう一度見たい時は「もう一度」ボタンを押します。
+          </p>
+        </div>
+
+        <!-- 卡片：1.5倍速 -->
+        <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center col-span-1">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+            <span class="text-3xl">⏩</span>
+          </div>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">長押しで早送り</h3>
+          <p class="text-sm text-gray-600 leading-relaxed font-semibold">
+            動画の部分を長く指で押している間、動画が少し早く進みます。
+          </p>
+        </div>
+
+        <!-- 卡片：温馨定时器 -->
+        <div class="bg-white p-4 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center col-span-1 md:col-span-1">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+            <span class="text-3xl">⏰</span>
+          </div>
+          <h3 class="text-xl font-bold text-brandOrange mb-1">目安タイマー</h3>
+          <p class="text-sm text-gray-600 leading-relaxed font-semibold">
+            調理時間の目安をカウントダウンします。一時停止も可能です。
+          </p>
+        </div>
+      </div>
+
+      <!-- 底部巨大闪烁开始按钮 -->
+      <div class="text-center mt-6">
+        <button @click="goToView('checklist')" class="animate-bounce inline-flex items-center justify-center px-12 py-5 bg-brandOrange hover:bg-brandOrangeHover text-white text-3xl font-black rounded-full shadow-2xl transition duration-300 transform active:scale-95 border-4 border-white cursor-pointer min-h-[70px]">
+          👍 内容を確認した！食材の準備へ
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ==================== 视图 1：材料・道具リスト（食材与工具备料单） ==================== -->
+    <div v-if="currentView === 'checklist'" class="absolute inset-0 z-40 bg-brandCream flex flex-col justify-between p-6 overflow-y-auto">
+      
+      <!-- 头部：标题与引导语 -->
+      <div class="text-center py-2 shrink-0">
+        <h2 class="text-3xl font-black text-brandOrange flex justify-center items-center gap-2">
+          🥗 調理準備：材料と道具の確認
+        </h2>
+        <p class="text-lg text-gray-700 mt-2 font-bold">
+          必要なものを机の上にそろえましょう。準備できたら丸を押してチェックしてください。
+        </p>
+      </div>
+
+      <!-- 主要内容：物料列表（网格布局适配 iPad 7） -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto max-w-6xl mx-auto w-full">
+        
+        <!-- 食材分类 -->
+        <div class="bg-white p-5 rounded-2xl shadow-lg border-t-8 border-brandOrange flex flex-col">
+          <h3 class="text-2xl font-bold text-brandOrange mb-4 flex items-center gap-2">
+            🍖 食材
+          </h3>
+          <div class="space-y-3 flex-1">
+            <label v-for="(item, index) in ingredients" :key="index" 
+                   class="flex items-center gap-3 p-3 bg-orange-50/50 rounded-xl cursor-pointer active:bg-orange-100 transition">
+              <input type="checkbox" v-model="item.checked" class="w-8 h-8 text-brandOrange border-gray-300 rounded focus:ring-brandOrange">
+              <span class="text-xl font-extrabold" :class="{'line-through text-gray-400': item.checked}">
+                {{ item.name }} <span class="text-brandOrange ml-1 text-lg">({{ item.amount }})</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 调味料分类 -->
+        <div class="bg-white p-5 rounded-2xl shadow-lg border-t-8 border-brandGreen flex flex-col">
+          <h3 class="text-2xl font-bold text-brandGreen mb-4 flex items-center gap-2">
+            🧂 調味料
+          </h3>
+          <div class="space-y-3 flex-1 overflow-y-auto max-h-[320px] pr-1">
+            <label v-for="(item, index) in seasonings" :key="index" 
+                   class="flex items-center gap-3 p-3 bg-green-50/50 rounded-xl cursor-pointer active:bg-green-100 transition">
+              <input type="checkbox" v-model="item.checked" class="w-8 h-8 text-brandGreen border-gray-300 rounded focus:ring-brandGreen">
+              <div class="text-lg font-extrabold flex flex-col" :class="{'line-through text-gray-400': item.checked}">
+                <span>{{ item.name }}</span>
+                <span class="text-brandGreen text-sm font-bold">{{ item.amount }}</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- 厨房工具分类 -->
+        <div class="bg-white p-5 rounded-2xl shadow-lg border-t-8 border-blue-500 flex flex-col">
+          <h3 class="text-2xl font-bold text-blue-600 mb-4 flex items-center gap-2">
+            🍳 使う道具
+          </h3>
+          <div class="space-y-3 flex-1">
+            <label v-for="(item, index) in tools" :key="index" 
+                   class="flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl cursor-pointer active:bg-blue-100 transition">
+              <input type="checkbox" v-model="item.checked" class="w-8 h-8 text-blue-500 border-gray-300 rounded focus:ring-blue-500">
+              <span class="text-xl font-extrabold" :class="{'line-through text-gray-400': item.checked}">
+                {{ item.name }}
+              </span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 底部启动烹饪按钮 -->
+      <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-6 shrink-0 gap-4">
+        <button @click="goToView('guide')" class="px-6 py-4 bg-gray-300 hover:bg-gray-400 text-gray-800 text-xl font-bold rounded-xl active:scale-95 transition">
+          ⬅️ 操作説明へもどる
+        </button>
+        <button @click="startCooking" class="flex-1 max-w-2xl py-5 bg-brandGreen hover:bg-brandGreenHover text-white text-3xl font-black rounded-full shadow-2xl border-4 border-white transition active:scale-95 text-center cursor-pointer min-h-[70px]">
+          🔥 準備完了！料理をスタート
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ==================== 视图 2：メイン調理ワークスペース（主烹饪界面） ==================== -->
+    <div v-if="currentView === 'cooking'" class="w-full h-full flex flex-col justify-between"
+         @touchstart="handleTouchStart" @touchend="handleTouchEnd">
+      
+      <!-- 1. 顶部：实时信息卡 + 控制矩阵 -->
+      <div class="w-full flex justify-between items-stretch gap-4 h-[115px] shrink-0">
+        
+        <!-- 左侧：【实时配料卡片】动态呈现当前步骤所需耗材 -->
+        <div class="flex-1 bg-white border-2 border-brandOrange rounded-2xl p-3 shadow-md flex flex-col justify-center">
+          <div class="text-xs font-bold text-brandOrange tracking-wider flex items-center gap-1 mb-1">
+            📌 この手順で使う材料
+          </div>
+          <div class="text-lg font-black text-gray-800 flex flex-wrap gap-x-4 gap-y-1">
+            <span v-for="(ing, idx) in currentStep.ingredients" :key="idx" class="inline-block bg-orange-50 px-2 py-0.5 rounded-lg border border-orange-100">
+              {{ ing.name }} <span class="text-brandOrange font-extrabold">{{ ing.amount }}</span>
+            </span>
+            <span v-if="!currentStep.ingredients || currentStep.ingredients.length === 0" class="text-gray-400 text-md">
+              特別な材料はありません
+            </span>
+          </div>
+        </div>
+
+        <!-- 右侧：【控制矩阵】3个大字号操作按钮，防老人误触、带文字标签 -->
+        <div class="flex gap-2 shrink-0 items-center">
+          <!-- 字幕切换 -->
+          <button @click="toggleSubtitle" 
+                  class="h-full px-4 rounded-2xl flex flex-col items-center justify-center shadow-md transition active:scale-95 border-2 min-w-[95px] cursor-pointer"
+                  :class="isSubtitleOn ? 'bg-brandOrange border-brandOrange text-white' : 'bg-white border-gray-300 text-gray-700'">
+            <span class="text-2xl mb-1">💬</span>
+            <span class="text-xs font-black tracking-tighter">字幕 {{ isSubtitleOn ? 'ＯＮ' : 'ＯＦＦ' }}</span>
+          </button>
+
+          <!-- 播放/暂停 -->
+          <button @click="togglePlay" 
+                  class="h-full px-4 rounded-2xl flex flex-col items-center justify-center shadow-md transition active:scale-95 border-2 min-w-[110px] cursor-pointer"
+                  :class="isPlaying ? 'bg-brandGreen border-brandGreen text-white' : 'bg-red-500 border-red-500 text-white animate-pulse'">
+            <span class="text-2xl mb-1">{{ isPlaying ? '⏸️' : '▶️' }}</span>
+            <span class="text-xs font-black tracking-tighter">
+              <span v-if="isPlaying">一時停止</span>
+              <span v-else>再生する</span>
+            </span>
+          </button>
+
+          <!-- 重播 -->
+          <button @click="restartStep" 
+                  class="h-full px-4 bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 rounded-2xl flex flex-col items-center justify-center shadow-md transition active:scale-95 min-w-[95px] cursor-pointer">
+            <span class="text-2xl mb-1">🔄</span>
+            <span class="text-xs font-black tracking-tighter">もう一度</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- 2. 中部：视频播放主屏幕 (自带左右侧物理大箭头触控热区) -->
+      <div class="relative flex-1 my-3 bg-black rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center">
+        
+        <!-- 视频容器，绑定长按事件 -->
+        <div class="w-full h-full relative"
+             @touchstart="handleVideoTouchStart"
+             @touchend="handleVideoTouchEnd"
+             @touchcancel="handleVideoTouchEnd"
+             @mousedown="handleVideoMouseDown"
+             @mouseup="handleVideoMouseUp"
+             @mouseleave="handleVideoMouseUp">
+          
+          <video ref="cookingVideo" 
+                 class="w-full h-full object-contain"
+                 :src="currentStep.videoUrl"
+                 playsinline
+                 webkit-playsinline
+                 @play="onVideoPlay"
+                 @pause="onVideoPause"
+                 @ended="onVideoEnded">
+            お使いの端末はビデオ再生に対応していません。
+          </video>
+
+          <!-- 1.5倍速长按动画浮层 -->
+          <div v-show="isFastForwarding" class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none transition-all duration-200">
+            <div class="bg-brandOrange text-white text-2xl font-black px-6 py-4 rounded-2xl shadow-2xl border-4 border-white flex items-center gap-3 animate-pulse">
+              <span>⏩ 1.5倍速（はやおくり中）</span>
+            </div>
+            <p class="text-white font-bold mt-2 text-md text-shadow">指を離すといつもの速さにもどります</p>
+          </div>
+
+          <!-- 暂停状态巨大提示浮层 -->
+          <div v-show="!isPlaying && !isFastForwarding" class="absolute inset-0 bg-black/30 flex items-center justify-center pointer-events-none">
+            <div class="w-20 h-20 bg-brandOrange/90 rounded-full flex items-center justify-center shadow-lg border-2 border-white animate-ping"></div>
+            <span class="absolute text-5xl text-white">⏸️</span>
+          </div>
+
+          <!-- 加载中浮层 -->
+          <div v-show="videoLoading" class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center pointer-events-none">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-brandOrange"></div>
+            <p class="text-white text-xl font-bold mt-4">動画を読み込み中...</p>
+          </div>
+
+          <!-- CC 实时字幕，显示在视频下方中央位置（大字号、带黑色厚重半透明底色，确保任何视频背景下老人都看得懂） -->
+          <div v-if="isSubtitleOn" class="absolute bottom-6 left-4 right-4 text-center pointer-events-none z-10">
+            <div class="inline-block bg-black/80 px-6 py-3 rounded-2xl border-2 border-white shadow-2xl max-w-[90%]">
+              <p class="text-white text-2xl font-black leading-relaxed tracking-wider">
+                {{ currentStep.subtitle }}
+              </p>
+              <p class="text-orange-300 text-md font-bold mt-1">
+                {{ currentStep.subtitleTranslate }}
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 物理大箭头：最左侧/最右侧中段，超大透明热区，完美防误触 -->
+        <!-- 左侧【まえへ】 -->
+        <button @click="prevStep" 
+                class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black/50 to-transparent hover:from-black/70 flex items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
+          <div class="bg-black/40 p-4 rounded-full group-hover:bg-brandOrange/80 border-2 border-white/50 transition">
+            <span class="text-4xl block transform group-active:-translate-x-2 transition">◀️</span>
+          </div>
+          <span class="absolute bottom-4 left-2 text-xs font-extrabold text-white bg-black/80 px-1 py-0.5 rounded border border-white/20">まえへ</span>
+        </button>
+
+        <!-- 右侧【つぎへ】 -->
+        <button @click="nextStep" 
+                class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black/50 to-transparent hover:from-black/70 flex items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
+          <div class="bg-black/40 p-4 rounded-full group-hover:bg-brandOrange/80 border-2 border-white/50 transition">
+            <span class="text-4xl block transform group-active:translate-x-2 transition">▶️</span>
+          </div>
+          <span class="absolute bottom-4 right-2 text-xs font-extrabold text-white bg-black/80 px-1 py-0.5 rounded border border-white/20">つぎへ</span>
+        </button>
+
+      </div>
+
+      <!-- 3. 底部：整体时间进度条 + 步骤数 + 番茄钟计时 -->
+      <div class="bg-white rounded-3xl border-2 border-brandOrange/60 p-4 shrink-0 flex flex-col justify-between h-[155px]">
+        
+        <!-- 进度条区域 -->
+        <div class="w-full flex items-center gap-4 py-1">
+          <span class="text-lg font-bold text-gray-500 shrink-0">スタート</span>
+          
+          <div class="relative flex-1 h-5 bg-gray-200 rounded-full flex items-center justify-between px-2">
+            <!-- 激活部分背景条 -->
+            <div class="absolute left-0 top-0 h-full bg-brandOrange/40 rounded-full pointer-events-none transition-all duration-300"
+                 :style="{ width: (currentStepIndex / 8 * 100) + '%' }"></div>
+            
+            <!-- 9个物理球形阶段节点，点击直达 -->
+            <button v-for="(step, idx) in steps" :key="step.id" 
+                    @click="jumpToStep(idx)"
+                    class="relative z-10 w-9 h-9 rounded-full flex items-center justify-center font-black text-sm border-2 transition-all cursor-pointer transform active:scale-125"
+                    :class="[
+                      idx === currentStepIndex ? 'bg-brandOrange text-white scale-125 border-white shadow-lg ring-4 ring-brandOrange/30' : '',
+                      idx < currentStepIndex ? 'bg-brandGreen text-white border-white shadow' : '',
+                      idx > currentStepIndex ? 'bg-white text-gray-600 border-gray-300 hover:border-brandOrange' : ''
+                    ]">
+              {{ step.id }}
+            </button>
+          </div>
+          
+          <span class="text-lg font-bold text-gray-500 shrink-0">できあがり</span>
+        </div>
+
+        <!-- 步骤详情与番茄钟底栏 -->
+        <div class="flex justify-between items-center mt-2 flex-1">
+          <!-- 步骤详细名称 -->
+          <div class="flex items-center gap-3">
+            <span class="text-4xl font-black text-brandOrange tracking-tighter">
+              {{ formatStepNumber(currentStep.id) }} <span class="text-2xl text-gray-400">/ 09</span>
+            </span>
+            <div class="h-8 w-1 bg-gray-300"></div>
+            <div>
+              <h4 class="text-2xl font-black text-brandDark">
+                {{ currentStep.titleKanji }}
+              </h4>
+              <p class="text-sm text-gray-500 font-bold tracking-wide">
+                {{ currentStep.titleHiragana }}
+              </p>
+            </div>
+          </div>
+
+          <!-- 番茄钟：倒计时小闹钟组件 -->
+          <div class="flex items-center gap-3 bg-orange-50 px-4 py-2 rounded-2xl border-2 border-brandOrange/30 shadow-inner">
+            <button @click="toggleTimer" 
+                    class="w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow transition active:scale-95 cursor-pointer"
+                    :class="[
+                      timerRunning ? 'bg-brandOrange text-white animate-spin-slow' : 'bg-gray-300 text-gray-600',
+                      timer === 0 ? 'bg-brandGreen text-white' : ''
+                    ]"
+                    :style="timerRunning ? 'animation: spin 12s linear infinite' : ''">
+              ⏰
+            </button>
+            <div class="text-right flex flex-col justify-center select-none">
+              <span class="text-xs font-extrabold text-gray-500">目安残り時間</span>
+              <span class="text-3xl font-black font-mono leading-none tracking-wider text-brandOrange"
+                    :class="{'text-brandGreen': timer === 0, 'animate-pulse': timerRunning}">
+                {{ formatTime(timer) }}
+              </span>
+            </div>
+            <!-- 重置倒计时 -->
+            <button @click="resetTimer" class="px-3 py-1 bg-white border border-gray-300 text-sm font-bold rounded-lg hover:border-gray-400 text-gray-600 active:scale-95 transition cursor-pointer">
+              リセット
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 顶层遮罩：恭喜完成层 -->
+    <div v-if="showSuccessOverlay" class="absolute inset-0 z-50 bg-black/80 flex flex-col items-center justify-center p-6 text-center">
+      <div class="bg-brandCream rounded-3xl p-8 max-w-2xl border-8 border-brandGreen shadow-2xl animate-bounce-slow">
+        <span class="text-8xl">🎉</span>
+        <h1 class="text-5xl font-black text-brandGreen mt-6">
+          完成しました！
+        </h1>
+        <p class="text-2xl font-bold text-gray-700 mt-4 leading-relaxed">
+          とっても美味しそうな<br>ゴーヤーキムチ炒めのできあがりです！
+        </p>
+        <p class="text-lg text-brandOrange font-extrabold mt-2">
+          温かいうちにお召し上がりください。
+        </p>
+        
+        <div class="flex gap-4 justify-center mt-8">
+          <button @click="restartFromBeginning" class="px-8 py-4 bg-brandOrange hover:bg-brandOrangeHover text-white text-2xl font-black rounded-full shadow-lg transition active:scale-95 border-2 border-white cursor-pointer">
+            🔄 もう一度作る
+          </button>
+          <button @click="showSuccessOverlay = false" class="px-8 py-4 bg-gray-500 text-white text-2xl font-black rounded-full shadow-lg transition active:scale-95 border-2 border-white cursor-pointer">
+            ❌ 閉じる
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const { createApp, ref, computed, watch, onMounted, nextTick } = Vue;
+
+    createApp({
+      setup() {
+        const currentView = ref('guide'); // 'guide', 'checklist', 'cooking'
+        const currentStepIndex = ref(0);
+        const isPlaying = ref(false);
+        const isSubtitleOn = ref(true);
+        const isFastForwarding = ref(false);
+        const videoLoading = ref(false);
+        
+        const cookingVideo = ref(null);
+        
+        // 步骤番茄钟计时器状态
+        const timer = ref(240);
+        const timerRunning = ref(false);
+        let timerInterval = null;
+
+        // 长按加速计时器
+        let longPressTimeout = null;
+        let isLongPressActive = false;
+
+        // 手势滑动的坐标状态
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        // 完结撒花浮层
+        const showSuccessOverlay = ref(false);
+
+        // 材料备选清单数据
+        const ingredients = ref([
+          { name: 'ゴーヤー (苦瓜)', amount: '1/2 本', checked: false },
+          { name: '玉ねぎ (洋葱)', amount: '1/4 個', checked: false },
+          { name: '白菜キムチ (泡菜)', amount: '50 g', checked: false },
+          { name: '豚バラ薄切り肉 (五花肉)', amount: '90 g', checked: false }
+        ]);
+
+        const seasonings = ref([
+          { name: '塩 (揉み込み用)', amount: '適量 (分量外)', checked: false },
+          { name: '【A】生姜の搾り汁', amount: '1/4 片分', checked: false },
+          { name: '【A】酒', amount: '大さじ 1/4', checked: false },
+          { name: '【B】酒', amount: '大さじ 1/2', checked: false },
+          { name: '【B】しょうゆ', amount: '大さじ 1/4', checked: false },
+          { name: '【B】砂糖', amount: '小さじ 1/2', checked: false },
+          { name: '【B】塩・コショウ', amount: '少々', checked: false },
+          { name: 'サラダ油', amount: '大さじ 1/2', checked: false }
+        ]);
+
+        const tools = ref([
+          { name: '包丁 (ほうちょう)', checked: false },
+          { name: 'まな板 (まないた)', checked: false },
+          { name: 'フライパン', checked: false }
+        ]);
+
+        // 精心编排的 9 步电子菜谱数据（含双语字幕展示）
+        const steps = [
+          {
+            id: 1,
+            videoUrl: '1.mp4',
+            titleKanji: 'ゴーヤーを縦に切り、綿と種を取る',
+            titleHiragana: 'ゴーヤーを たてにきり、わた と たねを とる',
+            duration: 240, // 4分钟
+            subtitle: 'まずはゴーヤーを縦半分に切り、スプーンで綿と種を綺麗にくり抜きます。',
+            subtitleTranslate: '（首先将苦瓜纵向切半，用勺子将瓜瓤和籽彻底刮除干净。）',
+            ingredients: [
+              { name: 'ゴーヤー', amount: '1/2本' }
+            ]
+          },
+          {
+            id: 2,
+            videoUrl: '2.mp4',
+            titleKanji: 'ゴーヤーを６〜７ミリ幅で切る',
+            titleHiragana: 'ゴーヤーを ６から７ミリの はばに きる',
+            duration: 120, // 2分钟
+            subtitle: 'ゴーヤーを6から7ミリ幅の薄切りにしていきます。厚みを揃えるのがコツです。',
+            subtitleTranslate: '（将苦瓜切成6至7毫米宽的薄片。厚度均匀是好吃的秘诀。）',
+            ingredients: [
+              { name: 'ゴーヤー', amount: '切ったもの' }
+            ]
+          },
+          {
+            id: 3,
+            videoUrl: '3.mp4',
+            titleKanji: '塩を振って揉み、水洗いして水気を切る',
+            titleHiragana: 'しおを ふって もみ、みずあらいして みずけを きる',
+            duration: 180, // 3分钟
+            subtitle: '塩を振って優しく揉み込み、少し置いてから水で洗い流して、しっかり水気を切ります。',
+            subtitleTranslate: '（撒入适量盐轻轻揉搓，静置片刻后用清水洗净，彻底沥干水分。）',
+            ingredients: [
+              { name: '切ったゴーヤー', amount: '全量' },
+              { name: '塩', amount: '適量' }
+            ]
+          },
+          {
+            id: 4,
+            videoUrl: '4.mp4',
+            titleKanji: '玉ねぎを薄切りにする',
+            titleHiragana: 'たまねぎを うすぎりに する',
+            duration: 120, // 2分钟
+            subtitle: '玉ねぎ4分の1個を、繊維に沿って薄切りにスライスします。',
+            subtitleTranslate: '（将1/4个洋葱顺着纤维纹路切成薄片。）',
+            ingredients: [
+              { name: '玉ねぎ', amount: '1/4個' }
+            ]
+          },
+          {
+            id: 5,
+            videoUrl: '5.mp4',
+            titleKanji: '白菜キムチをカットする',
+            titleHiragana: 'はくさいキムチを たべやすい おおきさに きる',
+            duration: 60, // 1分钟
+            subtitle: '白菜キムチ50グラムを、食べやすい大きさにざっくりとカットします。',
+            subtitleTranslate: '（将50克白菜泡菜大致切成方便入口的小块。）',
+            ingredients: [
+              { name: '白菜キムチ', amount: '50g' }
+            ]
+          },
+          {
+            id: 6,
+            videoUrl: '6.mp4',
+            titleKanji: '豚肉を一口大に切り、調味料Aを揉み込む',
+            titleHiragana: 'ぶたにくを ひとくちだいに きり、ちょうみりょうＡを もみこむ',
+            duration: 240, // 4分钟
+            subtitle: '豚肉を一口大に切り、生姜汁と酒の調味料Aを揉み込んで下味をつけます。',
+            subtitleTranslate: '（将猪肉切成一口大小，揉入生姜汁和料酒调料组A进行腌制入味。）',
+            ingredients: [
+              { name: '豚バラ薄切り肉', amount: '90g' },
+              { name: '【A】生姜汁', amount: '1/4片分' },
+              { name: '【A】酒', amount: '大さじ1/4' }
+            ]
+          },
+          {
+            id: 7,
+            videoUrl: '7.mp4',
+            titleKanji: '油を熱し、玉ねぎと豚肉を炒める',
+            titleHiragana: 'あぶらを ねっし、たまねぎ と ぶたにくを いためる',
+            duration: 180, // 3分钟
+            subtitle: 'フライパンに油を熱し、玉ねぎと豚肉を炒めます。お肉の色が変わるまでしっかり。',
+            subtitleTranslate: '（在平底锅中热油，下洋葱和猪肉翻炒。直到肉色完全变白熟透。）',
+            ingredients: [
+              { name: '下味をつけた豚肉', amount: '全量' },
+              { name: 'スライス玉ねぎ', amount: '全量' },
+              { name: 'サラダ油', amount: '大さじ1/2' }
+            ]
+          },
+          {
+            id: 8,
+            videoUrl: '8.mp4',
+            titleKanji: 'ゴーヤーを加え炒め、さらにキムチを炒める',
+            titleHiragana: 'ゴーヤーを くわえて いため、さらに キムチを いためる',
+            duration: 120, // 2分钟
+            subtitle: 'ゴーヤーを加えて少し炒め、火が通ったらキムチを投入して全体を炒め合わせます。',
+            subtitleTranslate: '（加入苦瓜稍微翻炒，断生后投入泡菜，让整体风味融合翻炒。）',
+            ingredients: [
+              { name: '水気を切ったゴーヤー', amount: '全量' },
+              { name: 'カットした白菜キムチ', amount: '全量' }
+            ]
+          },
+          {
+            id: 9,
+            videoUrl: '9.mp4',
+            titleKanji: '調味料Bを入れ、炒め合わせて完成！',
+            titleHiragana: 'ちょうみりょうＢを いれ、いためあわせて かんせい！',
+            duration: 120, // 2分钟
+            subtitle: '仕上げに調味料Bを回し入れ、手早く炒め合わせたら、器に盛り付けて完成です！',
+            subtitleTranslate: '（最后转圈倒入调味汁B，快速翻炒均匀，即可出锅装盘享用！）',
+            ingredients: [
+              { name: '【B】調味料セット', amount: '全量' }
+            ]
+          }
+        ];
+
+        const currentStep = computed(() => steps[currentStepIndex.value]);
+
+        // 视图跳转
+        function goToView(view) {
+          currentView.value = view;
+        }
+
+        // 开始烹饪：绕过 iOS Safari 自动播放限制
+        function startCooking() {
+          currentView.value = 'cooking';
+          currentStepIndex.value = 0;
+          initTimer();
+
+          // 关键：在用户点击按钮的手势回调中触发加载和播放，解锁 Safari 媒体播放通道
+          nextTick(() => {
+            if (cookingVideo.value) {
+              videoLoading.value = true;
+              cookingVideo.value.load();
+              // 顺应 Webkit Autoplay 机制
+              const playPromise = cookingVideo.value.play();
+              if (playPromise !== undefined) {
+                playPromise.then(() => {
+                  isPlaying.value = true;
+                  videoLoading.value = false;
+                }).catch(err => {
+                  console.log("iOS Safari Autoplay blocked or interrupted:", err);
+                  isPlaying.value = false;
+                  videoLoading.value = false;
+                });
+              }
+            }
+          });
+        }
+
+        // 初始化倒计时
+        function initTimer() {
+          clearInterval(timerInterval);
+          timer.value = currentStep.value.duration;
+          timerRunning.value = true;
+          
+          timerInterval = setInterval(() => {
+            if (timerRunning.value && timer.value > 0) {
+              timer.value--;
+              if (timer.value === 0) {
+                // 倒计时结束时的安全反馈
+                timerRunning.value = false;
+              }
+            }
+          }, 1000);
+        }
+
+        function toggleTimer() {
+          timerRunning.value = !timerRunning.value;
+        }
+
+        function resetTimer() {
+          timer.value = currentStep.value.duration;
+          timerRunning.value = false;
+        }
+
+        // 切换步骤
+        function jumpToStep(index) {
+          if (index < 0 || index >= steps.length) return;
+          currentStepIndex.value = index;
+          initTimer();
+          
+          nextTick(() => {
+            if (cookingVideo.value) {
+              videoLoading.value = true;
+              cookingVideo.value.load();
+              cookingVideo.value.play()
+                .then(() => {
+                  isPlaying.value = true;
+                  videoLoading.value = false;
+                })
+                .catch(() => {
+                  isPlaying.value = false;
+                  videoLoading.value = false;
+                });
+            }
+          });
+        }
+
+        function nextStep() {
+          if (currentStepIndex.value < steps.length - 1) {
+            jumpToStep(currentStepIndex.value + 1);
+          } else {
+            // 完成全部，显示恭喜层
+            showSuccessOverlay.value = true;
+          }
+        }
+
+        function prevStep() {
+          if (currentStepIndex.value > 0) {
+            jumpToStep(currentStepIndex.value - 1);
+          }
+        }
+
+        // 字幕切换
+        function toggleSubtitle() {
+          isSubtitleOn.value = !isSubtitleOn.value;
+        }
+
+        // 播放 / 一时停止
+        function togglePlay() {
+          if (!cookingVideo.value) return;
+          if (isPlaying.value) {
+            cookingVideo.value.pause();
+          } else {
+            cookingVideo.value.play().catch(e => console.log(e));
+          }
+        }
+
+        // 重播本步骤
+        function restartStep() {
+          if (!cookingVideo.value) return;
+          cookingVideo.value.currentTime = 0;
+          cookingVideo.value.play()
+            .then(() => {
+              isPlaying.value = true;
+            })
+            .catch(e => console.log(e));
+          initTimer();
+        }
+
+        // 手势：左右滑动监控
+        function handleTouchStart(e) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }
+
+        function handleTouchEnd(e) {
+          const deltaX = e.changedTouches[0].clientX - touchStartX;
+          const deltaY = e.changedTouches[0].clientY - touchStartY;
+          
+          // 滑动识别敏感阈值设为 100px 左右，同时限制垂直位移，防老人滑动偏差误触发
+          if (Math.abs(deltaX) > 100 && Math.abs(deltaY) < 60) {
+            if (deltaX > 0) {
+              // 右滑：上一步 (まえへ)
+              prevStep();
+            } else {
+              // 左滑：下一步 (つぎへ)
+              nextStep();
+            }
+          }
+        }
+
+        // 视频监听器同步状态
+        function onVideoPlay() {
+          isPlaying.value = true;
+        }
+
+        function onVideoPause() {
+          isPlaying.value = false;
+        }
+
+        function onVideoEnded() {
+          isPlaying.value = false;
+        }
+
+        // ==================== 长按 1.5倍速播放功能（兼容 iPad 触控与鼠标事件） ====================
+        function startFastForward() {
+          if (!cookingVideo.value) return;
+          isFastForwarding.value = true;
+          cookingVideo.value.playbackRate = 1.5;
+        }
+
+        function stopFastForward() {
+          if (!cookingVideo.value) return;
+          isFastForwarding.value = false;
+          cookingVideo.value.playbackRate = 1.0;
+        }
+
+        // 触控版长按实现
+        function handleVideoTouchStart(e) {
+          // 阻止长按弹出上下文菜单
+          e.preventDefault();
+          isLongPressActive = false;
+          longPressTimeout = setTimeout(() => {
+            isLongPressActive = true;
+            startFastForward();
+          }, 400); // 长按定为 400毫秒 响应
+        }
+
+        function handleVideoTouchEnd(e) {
+          clearTimeout(longPressTimeout);
+          if (isLongPressActive) {
+            stopFastForward();
+            isLongPressActive = false;
+          } else {
+            // 如果只是普通轻点，触发播放/暂停
+            togglePlay();
+          }
+        }
+
+        // PC/调试环境鼠标模拟
+        function handleVideoMouseDown(e) {
+          isLongPressActive = false;
+          longPressTimeout = setTimeout(() => {
+            isLongPressActive = true;
+            startFastForward();
+          }, 400);
+        }
+
+        function handleVideoMouseUp(e) {
+          clearTimeout(longPressTimeout);
+          if (isLongPressActive) {
+            stopFastForward();
+            isLongPressActive = false;
+          } else {
+            // 轻点
+            togglePlay();
+          }
+        }
+
+        // 重设回第一步
+        function restartFromBeginning() {
+          showSuccessOverlay.value = false;
+          currentView.value = 'guide';
+          currentStepIndex.value = 0;
+          // 重置物料清单勾选状态
+          ingredients.value.forEach(i => i.checked = false);
+          seasonings.value.forEach(s => s.checked = false);
+          tools.value.forEach(t => t.checked = false);
+        }
+
+        // 格式化秒数为 MM:SS
+        function formatTime(seconds) {
+          const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+          const s = (seconds % 60).toString().padStart(2, '0');
+          return `${m}:${s}`;
+        }
+
+        // 格式化大步骤号 (e.g., "01")
+        function formatStepNumber(num) {
+          return num.toString().padStart(2, '0');
+        }
+
+        return {
+          currentView,
+          currentStepIndex,
+          steps,
+          currentStep,
+          isPlaying,
+          isSubtitleOn,
+          isFastForwarding,
+          videoLoading,
+          cookingVideo,
+          timer,
+          timerRunning,
+          showSuccessOverlay,
+          ingredients,
+          seasonings,
+          tools,
+          goToView,
+          startCooking,
+          toggleTimer,
+          resetTimer,
+          jumpToStep,
+          nextStep,
+          prevStep,
+          toggleSubtitle,
+          togglePlay,
+          restartStep,
+          handleTouchStart,
+          handleTouchEnd,
+          onVideoPlay,
+          onVideoPause,
+          onVideoEnded,
+          handleVideoTouchStart,
+          handleVideoTouchEnd,
+          handleVideoMouseDown,
+          handleVideoMouseUp,
+          restartFromBeginning,
+          formatTime,
+          formatStepNumber
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
