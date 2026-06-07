@@ -37,7 +37,6 @@
   </script>
 
   <style>
-    /* 针对老年人防误触、防系统菜单弹出的关键 CSS 适配 */
     body {
       -webkit-touch-callout: none; /* 禁用 Safari 长按呼出菜单 */
       -webkit-user-select: none;   /* 禁用文字选中 */
@@ -156,7 +155,7 @@
           </div>
           <h3 class="text-base font-bold text-brandOrange mb-0.5">最初から見直す</h3>
           <p class="text-[11px] text-gray-600 leading-tight font-semibold">
-            今のステップをもう一度見たい時は「もう一度」ボタンを押します。
+            今のステップをもう一度见たい時は「もう一度」ボタンを押します。
           </p>
         </div>
 
@@ -206,7 +205,7 @@
         <!-- 左侧：菜品官方美图 -->
         <div class="flex flex-col items-center">
           <div class="bg-white p-1.5 rounded-2xl shadow-md border-2 border-orange-100">
-            <!-- 限制图片最大高度，完美为下方留出安全空间 -->
+            <!-- 限制图片最大高度，并配置优雅的 placeholder 自动降级 -->
             <img :src="coverImageSrc" @error="handleImageError" alt="ゴーヤーたっぷり豚キムチ" class="rounded-xl max-w-full h-auto object-cover max-h-[170px] shadow-sm">
           </div>
         </div>
@@ -258,14 +257,14 @@
       <!-- 头部：标题与引导语 -->
       <div class="text-center py-1 shrink-0">
         <h2 class="text-2xl font-black text-brandOrange flex justify-center items-center gap-2">
-          調理準備：材料と道具の确认
+          調理準備：材料と道具の確認
         </h2>
         <p class="text-xs text-gray-700 mt-0.5 font-bold">
           必要なものを机の上にそろえましょう。準備できたら丸を押してチェックしてください。
         </p>
       </div>
 
-      <!-- 主要内容：物料列表（彻底不带 Emoji，精简无中文汉字与注音） -->
+      <!-- 主要内容：物料列表 -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 my-auto max-w-6xl mx-auto w-full">
         
         <!-- 食材分类 -->
@@ -319,12 +318,14 @@
 
       </div>
 
-      <!-- 底部启动烹饪按钮：高度安全上推 py-2.5 -->
+      <!-- 底部启动烹饪按钮：未完全打勾时显示为橙色，打勾完成后显示为绿色 -->
       <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-2 mb-2 shrink-0 gap-3">
         <button @click="goToView('preview')" class="px-5 py-2.5 bg-gray-300 hover:bg-gray-400 text-gray-800 text-base font-bold rounded-xl active:scale-95 transition">
           もどる
         </button>
-        <button @click="startCooking" class="flex-1 max-w-2xl py-2.5 bg-brandGreen hover:bg-brandGreenHover text-white text-xl font-black rounded-full shadow-md border-2 border-white transition active:scale-95 text-center cursor-pointer">
+        <button @click="startCooking" 
+                class="flex-1 max-w-2xl py-2.5 text-white text-xl font-black rounded-full shadow-md border-2 border-white transition active:scale-95 text-center cursor-pointer"
+                :class="isAllPrepared ? 'bg-brandGreen hover:bg-brandGreenHover' : 'bg-brandOrange hover:bg-brandOrangeHover'">
           準備完了！料理をスタート
         </button>
       </div>
@@ -335,10 +336,10 @@
     <div v-if="currentView === 'cooking'" class="w-full h-full flex flex-col justify-between"
          @touchstart="handleTouchStart" @touchend="handleTouchEnd">
       
-      <!-- 中部主屏幕：视频占满全部可用高度，视频上方的独立进度条已被完全彻底删除 -->
+      <!-- 中部主屏幕 -->
       <div class="relative flex-1 bg-black rounded-3xl overflow-hidden shadow-md flex items-center justify-center">
         
-        <!-- 视频容器，绑定长按事件 -->
+        <!-- 视频容器，绑定长按和双击过滤事件 -->
         <div class="w-full h-full relative"
              @touchstart="handleVideoTouchStart"
              @touchend="handleVideoTouchEnd"
@@ -393,7 +394,7 @@
               <span class="text-[10px] font-black tracking-tighter">字幕 {{ isSubtitleOn ? 'ON' : 'OFF' }}</span>
             </button>
 
-            <!-- 播放/暂停（彻底移除闪烁） -->
+            <!-- 播放/暂停 -->
             <button @click.stop="togglePlay" 
                     class="h-14 px-3 rounded-xl flex flex-col items-center justify-center transition active:scale-95 border-2 min-w-[85px] cursor-pointer bg-white border-gray-300">
               <!-- isPlaying 为真（播放中）：显示【暂停】键 SVG -->
@@ -406,7 +407,7 @@
                 </defs>
               </svg>
 
-              <!-- isPlaying 为假（暂停中）：显示【播放/切换播放】键 SVG -->
+              <!-- isPlaying 为假（暂停中）：显示【播放】键 SVG -->
               <svg v-else width="22" height="22" viewBox="0 0 24 24" fill="none" class="mb-0.5">
                 <path d="M11.97 2C6.45 2 1.97 6.48 1.97 12C1.97 17.52 6.45 22 11.97 22C17.49 22 21.97 17.52 21.97 12C21.97 6.48 17.5 2 11.97 2ZM14.97 14.23L12.07 15.9C11.71 16.11 11.31 16.21 10.92 16.21C10.52 16.21 10.13 16.11 9.77 15.9C9.05 15.48 8.62 14.74 8.62 13.9V10.55C8.62 9.72 9.05 8.97 9.77 8.55C10.49 8.13 11.35 8.13 12.08 8.55L14.98 10.22C15.7 10.64 16.13 11.38 16.13 12.22C16.13 13.06 15.7 13.81 14.97 14.23Z" fill="url(#paint0_linear_cooking_play)"/>
                 <defs>
@@ -451,7 +452,7 @@
             <p class="text-white font-bold mt-2 text-md text-shadow">指を離すといつもの速さにもどります</p>
           </div>
 
-          <!-- 暂停状态巨大提示浮层（移除闪烁） -->
+          <!-- 暂停状态巨大提示浮层 -->
           <div v-show="!isPlaying && !isFastForwarding" class="absolute inset-0 bg-black/30 flex items-center justify-center pointer-events-none">
             <div class="w-16 h-16 bg-white/95 rounded-full flex items-center justify-center shadow-lg border-2 border-brandOrange">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
@@ -471,10 +472,10 @@
             <p class="text-white text-lg font-bold mt-3">動画を読み込み中...</p>
           </div>
 
-          <!-- CC 实时字幕：纯日语、半透明背景 YouTube 气泡框、绝不遮挡画面 -->
+          <!-- CC 实时字幕：纯日语、半透明 YouTube 精致样式、绝不遮挡画面 -->
           <div v-if="isSubtitleOn" class="absolute bottom-6 left-4 right-4 text-center pointer-events-none z-10">
-            <div class="inline-block bg-black/65 backdrop-blur-sm px-6 py-2.5 rounded-2xl border border-white/20 shadow-xl max-w-[90%]">
-              <p class="text-white text-xl font-black leading-relaxed tracking-wider">
+            <div class="inline-block bg-black/55 px-5 py-2 rounded-lg shadow-md max-w-[90%]">
+              <p class="text-white text-xl font-black leading-relaxed tracking-wider" style="text-shadow: 0 2px 4px rgba(0,0,0,0.85)">
                 {{ currentStep.subtitle }}
               </p>
             </div>
@@ -483,7 +484,7 @@
         </div>
 
         <!-- 左右大物理箭头（超大透明触控热区） -->
-        <!-- 左侧【まえへ】 (もどる SVG) -->
+        <!-- 左侧【まえへ】 -->
         <button @click="prevStep" 
                 class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black/50 to-transparent hover:from-black/70 flex flex-col items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
           <div class="bg-black/40 p-3 rounded-full group-hover:bg-brandOrange/80 border-2 border-white/50 transition">
@@ -504,7 +505,7 @@
           <span class="absolute bottom-4 left-2 text-xs font-extrabold text-white bg-black/80 px-2 py-1 rounded border border-white/20">まえへ</span>
         </button>
 
-        <!-- 右侧【つぎへ】 (次へ SVG) -->
+        <!-- 右侧【つぎへ】 -->
         <button @click="nextStep" 
                 class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black/50 to-transparent hover:from-black/70 flex flex-col items-center justify-center text-white active:scale-95 transition-all group cursor-pointer z-20">
           <div class="bg-black/40 p-3 rounded-full group-hover:bg-brandOrange/80 border-2 border-white/50 transition">
@@ -563,7 +564,7 @@
           <span class="text-xs font-bold text-gray-400 shrink-0 select-none">できあがり</span>
         </div>
 
-        <!-- 步骤详情：完全水平、垂直绝对居中排版，大字眼，护眼关怀 -->
+        <!-- 步骤详情：完全水平、垂直绝对居中排版 -->
         <div class="flex-1 flex flex-col justify-center items-center text-center mt-1">
           <h4 class="text-xl font-black text-brandDark tracking-wide">
             {{ currentStep.titleKanji }}
@@ -682,8 +683,8 @@
         // 封面图调用指定的高清主图
         const coverImageSrc = ref('https://life.ja-group.jp/upload/recipe/main/33_1.jpg');
         function handleImageError() {
-          console.warn("JA Cover image loaded failed. Swapping to local fallback.");
-          coverImageSrc.value = 'image_c877dd.jpg';
+          console.warn("JA Cover image loaded failed. Swapping to standard fallback placeholder.");
+          coverImageSrc.value = 'https://placehold.co/600x400/fdfcf7/e67e22?text=ゴーヤーたっぷり豚キムチ';
         }
 
         // 材料备选清单数据
@@ -710,6 +711,13 @@
           { name: 'まな板', checked: false },
           { name: 'フライパン', checked: false }
         ]);
+
+        // 是否全部备齐（所有单子全部打勾）
+        const isAllPrepared = computed(() => {
+          return ingredients.value.every(i => i.checked) &&
+                 seasonings.value.every(s => s.checked) &&
+                 tools.value.every(t => t.checked);
+        });
 
         // 精心编排的 9 步电子菜谱数据
         const steps = [
@@ -814,16 +822,13 @@
         const currentStep = computed(() => steps[currentStepIndex.value]);
 
         // 【大步骤点对点流水式时间轴进度计算】
-        // 利用: 当前大步骤数 + 当前视频播放比率 丝滑流淌连接在 1~9 数字节点之间
+        // 随视频播放比率丝滑连接在 1~9 节点之间
         const continuousProgress = computed(() => {
           const stepContribution = currentStepIndex.value;
           const totalSteps = steps.length;
           if (totalSteps <= 1) return 0;
 
-          // 当前步骤视频内的实时进度比率
           const videoFraction = videoDuration.value ? (videoCurrentTime.value / videoDuration.value) : 0;
-          
-          // 在 9 个节点围成的 8 个接力线区间中做无缝归一化插值
           const fraction = (stepContribution + videoFraction) / (totalSteps - 1);
           return Math.min(Math.max(fraction * 100, 0), 100);
         });
@@ -888,7 +893,7 @@
           if (currentStepIndex.value < steps.length - 1) {
             jumpToStep(currentStepIndex.value + 1);
           } else {
-            // 第九步（currentStepIndex 为 8）点击つぎへ，触发料理完成确认询问弹窗
+            // 第九步点击つぎへ，触发料理完成确认询问弹窗
             showConfirmCompletionModal.value = true;
           }
         }
@@ -998,8 +1003,11 @@
           cookingVideo.value.playbackRate = 1.0;
         }
 
-        // 触控版长按实现
+        // 触控版长按实现（排查 interactive 按钮，100% 避让点击事件）
         function handleVideoTouchStart(e) {
+          if (e.target.closest('button') || e.target.closest('.z-30')) {
+            return; // 避让右上角和左上角绝对定位的操作面板与按钮，不进行 preventDefault
+          }
           e.preventDefault();
           isLongPressActive = false;
           longPressTimeout = setTimeout(() => {
@@ -1009,6 +1017,9 @@
         }
 
         function handleVideoTouchEnd(e) {
+          if (e.target.closest('button') || e.target.closest('.z-30')) {
+            return;
+          }
           clearTimeout(longPressTimeout);
           if (isLongPressActive) {
             stopFastForward();
@@ -1020,6 +1031,9 @@
 
         // 鼠标模拟
         function handleVideoMouseDown(e) {
+          if (e.target.closest('button') || e.target.closest('.z-30')) {
+            return;
+          }
           isLongPressActive = false;
           longPressTimeout = setTimeout(() => {
             isLongPressActive = true;
@@ -1028,6 +1042,9 @@
         }
 
         function handleVideoMouseUp(e) {
+          if (e.target.closest('button') || e.target.closest('.z-30')) {
+            return;
+          }
           clearTimeout(longPressTimeout);
           if (isLongPressActive) {
             stopFastForward();
@@ -1093,6 +1110,7 @@
           ingredients,
           seasonings,
           tools,
+          isAllPrepared,
           goToView,
           startCooking,
           jumpToStep,
@@ -1120,3 +1138,23 @@
   </script>
 </body>
 </html>
+``` deof
+
+---
+
+### 🚀 如何部署更新到 GitHub Pages？
+
+在本地 VS Code 的 `index.html` 完成保存后，直接执行下面三行干净的命令即可：
+
+```bash
+# 1. 暂存所有修改的文件和跟踪本地未提交更改
+git add .
+
+# 2. 提交更新说明，记录已经删除 image_c877dd.jpg 相关的本地文件依赖
+git commit -m "Remove local image_c877dd.jpg file reference and clean up error fallback handlers"
+
+# 3. 部署并推送到 GitHub 线上
+git push
+```
+
+推送成功后大约 1 分钟，在 iPad 上**长按刷新按钮**重载缓存，便可以查看到干净简洁的高品质电子菜谱，完全独立免除对 `image_c877dd.jpg` 本地图片的任何强绑定关系了！预祝您的实机测试和研究进展顺利！
