@@ -278,7 +278,8 @@
             <label v-for="(item, index) in ingredients" :key="index" 
                    class="flex items-center gap-2.5 p-2 bg-orange-50/50 rounded-xl cursor-pointer active:bg-orange-100 transition">
               <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-brandOrange border-gray-300 rounded focus:ring-brandOrange">
-              <span class="text-base font-black" :class="{'line-through text-gray-400': item.checked}">
+              <!-- 精美 checked 反馈：字体转绿，去除删除线，老人友好 -->
+              <span class="text-base font-black transition-colors duration-150" :class="item.checked ? 'text-brandGreen' : 'text-brandDark'">
                 {{ item.name }} <span class="text-brandOrange ml-1 text-sm font-black">({{ item.amount }})</span>
               </span>
             </label>
@@ -295,7 +296,7 @@
             <label v-for="(item, index) in seasonings" :key="index" 
                    class="flex items-center gap-2.5 p-2 bg-green-50/50 rounded-xl cursor-pointer active:bg-green-100 transition">
               <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-brandGreen border-gray-300 rounded focus:ring-brandGreen">
-              <div class="text-base font-black flex flex-col" :class="{'line-through text-gray-400': item.checked}">
+              <div class="text-base font-black flex flex-col transition-colors duration-150" :class="item.checked ? 'text-brandGreen' : 'text-brandDark'">
                 <span>{{ item.name }}</span>
                 <span class="text-brandGreen text-xs font-black">{{ item.amount }}</span>
               </div>
@@ -313,7 +314,7 @@
             <label v-for="(item, index) in tools" :key="index" 
                    class="flex items-center gap-2.5 p-2 bg-blue-50/50 rounded-xl cursor-pointer active:bg-blue-100 transition">
               <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-blue-500 border-gray-300 rounded focus:ring-blue-500">
-              <span class="text-base font-black" :class="{'line-through text-gray-400': item.checked}">
+              <span class="text-base font-black transition-colors duration-150" :class="item.checked ? 'text-brandGreen' : 'text-brandDark'">
                 {{ item.name }}
               </span>
             </label>
@@ -322,14 +323,15 @@
 
       </div>
 
-      <!-- 底部启动烹饪按钮：未完全打勾时显示为橙色，打勾完成后显示为绿色。高度安全上推 mb-10 pb-4 -->
+      <!-- 底部启动烹饪按钮：未完全打勾时显示为橙色且禁用，打勾完成后显示为绿色并激活解锁。高度安全上推 mb-10 pb-4 -->
       <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-2 mb-10 pb-4 shrink-0 gap-3">
         <button @click="goToView('preview')" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 text-lg font-bold rounded-xl active:scale-95 transition">
           もどる
         </button>
-        <button @click="startCooking" 
-                class="flex-1 max-w-2xl py-3 text-white text-2xl font-black rounded-full shadow-md border-2 border-white transition active:scale-95 text-center cursor-pointer"
-                :class="isAllPrepared ? 'bg-brandGreen hover:bg-brandGreenHover' : 'bg-brandOrange hover:bg-brandOrangeHover'">
+        <button @click="isAllPrepared ? startCooking() : null" 
+                :disabled="!isAllPrepared"
+                class="flex-1 max-w-2xl py-3 text-white text-2xl font-black rounded-full shadow-md border-2 border-white transition text-center"
+                :class="isAllPrepared ? 'bg-brandGreen hover:bg-brandGreenHover cursor-pointer active:scale-95' : 'bg-gray-300 cursor-not-allowed opacity-50'">
           準備完了！料理をスタート
         </button>
       </div>
@@ -476,10 +478,10 @@
             <p class="text-white text-lg font-bold mt-3">動画を読み込み中...</p>
           </div>
 
-          <!-- CC 实时字幕：纯日语、半透明 YouTube 精致样式、绝不遮挡画面 -->
+          <!-- CC 实时字幕：纯日语、特大号、半透明 YouTube 精致样式、绝不遮挡画面 -->
           <div v-if="isSubtitleOn" class="absolute bottom-6 left-4 right-4 text-center pointer-events-none z-10">
-            <div class="inline-block bg-black/55 px-5 py-2 rounded-lg shadow-md max-w-[90%]">
-              <p class="text-white text-xl font-black leading-relaxed tracking-wider" style="text-shadow: 0 2px 4px rgba(0,0,0,0.85)">
+            <div class="inline-block bg-black/55 px-5 py-3 rounded-2xl shadow-lg max-w-[90%] border border-white/10">
+              <p class="text-white text-xl md:text-2xl lg:text-3xl font-black leading-snug tracking-wider" style="text-shadow: 0 2px 4px rgba(0,0,0,0.85)">
                 {{ currentStep.subtitle }}
               </p>
             </div>
@@ -515,13 +517,13 @@
           <div class="bg-black/40 p-3 rounded-full group-hover:bg-brandOrange/80 border-2 border-white/50 transition">
             <!-- 次へ SVG -->
             <svg class="w-7 h-7 transform group-active:translate-x-2 transition" viewBox="0 0 24 24" fill="none">
-              <path d="M3.75999 7.22V16.79C3.75999 18.75 5.88999 19.98 7.58999 19L11.74 16.61L15.89 14.21C17.59 13.23 17.59 10.78 15.89 9.8L11.74 7.4L7.58999 5.01C5.88999 4.03 3.75999 5.25 3.75999 7.22Z" fill="url(#paint0_linear_arrow_next)"/>
-              <path d="M20.24 18.93C19.83 18.93 19.49 18.59 19.49 18.18V5.82C19.49 5.41 19.83 5.07 20.24 5.07C20.65 5.07 20.99 5.41 20.99 5.82V18.18C20.99 18.59 20.66 18.93 20.24 18.93Z" fill="url(#paint1_linear_arrow_next)"/>
+              <path d="M3.75999 7.22V16.79C3.75999 18.75 5.88999 19.98 7.58999 19L11.74 16.61L15.89 14.21C17.59 13.23 17.59 10.78 15.89 9.8L11.74 7.4L7.58999 5.01C5.88999 4.03 3.75999 5.25 3.75999 7.22Z" fill="url(#paint0_linear_guide_next)"/>
+              <path d="M20.24 18.93C19.83 18.93 19.49 18.59 19.49 18.18V5.82C19.49 5.41 19.83 5.07 20.24 5.07C20.65 5.07 20.99 5.41 20.99 5.82V18.18C20.99 18.59 20.66 18.93 20.24 18.93Z" fill="url(#paint1_linear_guide_next)"/>
               <defs>
-                <linearGradient id="paint0_linear_arrow_next" x1="3.75999" y1="12.0043" x2="17.165" y2="12.0043" gradientUnits="userSpaceOnUse">
+                <linearGradient id="paint0_linear_guide_next" x1="3.75999" y1="12.0043" x2="17.165" y2="12.0043" gradientUnits="userSpaceOnUse">
                   <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
                 </linearGradient>
-                <linearGradient id="paint1_linear_arrow_next" x1="19.49" y1="12" x2="20.99" y2="12" gradientUnits="userSpaceOnUse">
+                <linearGradient id="paint1_linear_guide_next" x1="19.49" y1="12" x2="20.99" y2="12" gradientUnits="userSpaceOnUse">
                   <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
                 </linearGradient>
               </defs>
@@ -714,7 +716,8 @@
         const tools = ref([
           { name: '包丁', checked: false },
           { name: 'まな板', checked: false },
-          { name: 'フライパン', checked: false }
+          { name: 'フライパン', checked: false },
+          { name: 'キッチンスケール', checked: false }
         ]);
 
         // 是否全部备齐（所有单子全部打勾）
@@ -731,7 +734,7 @@
             videoUrl: '1.mov',
             titleKanji: 'ゴーヤーを縦に切り、綿と種を取る',
             titleHiragana: 'ゴーヤーを たてにきり、わた と たねを とる',
-            subtitle: 'まずはゴーヤーを縦半分に切り、スプーンで綿と種を綺麗にくり抜きます。',
+            subtitle: 'まずは、ゴーヤーを半分の長さに切ります。使う分をさらに縦半分に切り、スプーンで種とわたを綺麗にくり抜きます。',
             ingredients: [
               { name: 'ゴーヤー', amount: '1/2本' }
             ]
@@ -741,7 +744,7 @@
             videoUrl: '2.mov',
             titleKanji: 'ゴーヤーを６〜７ミリ幅で切る',
             titleHiragana: 'ゴーヤーを ６から７ミリの はばに きる',
-            subtitle: 'ゴーヤーを6から7ミリ幅 of 薄切りにしていきます。厚みを揃えるのがコツです。',
+            subtitle: 'わたを取ったゴーヤーを、６から７ミリ幅の薄切りにします。',
             ingredients: [
               { name: 'ゴーヤー', amount: '切ったもの' }
             ]
@@ -751,7 +754,7 @@
             videoUrl: '3.mov',
             titleKanji: '塩を振って揉み、水洗いして水気を切る',
             titleHiragana: 'しおを ふって もみ、みずあらいして みずけを きる',
-            subtitle: '塩を振って優しく揉み込み、少し置いてから水で洗い流して、しっかり水気を切ります。',
+            subtitle: 'ボウルの水につけ、塩を振って優しく揉み込み、苦味を抜いておきます。',
             ingredients: [
               { name: '切ったゴーヤー', amount: '全量' },
               { name: '塩', amount: '適量' }
@@ -762,7 +765,7 @@
             videoUrl: '4.mov',
             titleKanji: '玉ねぎを薄切りにする',
             titleHiragana: 'たまねぎを うすぎりに する',
-            subtitle: '玉ねぎ4分の1個を、繊維に沿って薄切りにスライスします。',
+            subtitle: '次に、玉ねぎ４分の１個を薄切りにします。',
             ingredients: [
               { name: '玉ねぎ', amount: '1/4個' }
             ]
@@ -772,7 +775,7 @@
             videoUrl: '5.mov',
             titleKanji: '白菜キムチをカットする',
             titleHiragana: 'はくさいキムチを たべやすい おおきさに きる',
-            subtitle: '白菜キムチ50グラムを、食べやすい大きさにざっくりとカットします。',
+            subtitle: '白菜キムチ５０グラムは、食べやすい大きさにざっくりと切っておきます。',
             ingredients: [
               { name: '白菜キムチ', amount: '50g' }
             ]
@@ -782,7 +785,7 @@
             videoUrl: '6.mov',
             titleKanji: '豚肉を一口大に切り、调味料を揉み込む',
             titleHiragana: 'ぶたにくを ひとくちだいに きり、ちょうみりょうを もみこむ',
-            subtitle: '豚肉を一口大に切り、生姜汁と酒の調味料を揉み込んで下味をつけます。',
+            subtitle: '豚バラ肉90グラムをひと口大に切ります。ボウルに入れて、生姜のしぼり汁と酒大さじ４分の１を加え、手でよく揉み込んで下味をつけます。',
             ingredients: [
               { name: '豚バラ薄切り肉', amount: '90g' },
               { name: '生姜の搾り汁', amount: '1/4片分' },
@@ -794,7 +797,7 @@
             videoUrl: '7.mov',
             titleKanji: '油を熱し、玉ねぎと豚肉を炒める',
             titleHiragana: 'あぶらを ねっし、たまねぎ と ぶたにくを いためる',
-            subtitle: 'フライパンに油を熱し、玉ねぎと豚肉を炒めます。お肉の色が変わるまでしっかり。',
+            subtitle: 'フライパンにサラダ油大さじ２分の１を熱し、まずは玉ねぎと下味味をつけた豚肉を入れます。',
             ingredients: [
               { name: 'サラダ油', amount: '大さじ1/2' }
             ]
@@ -804,7 +807,7 @@
             videoUrl: '8.mov',
             titleKanji: 'ゴーヤーを加え炒め、さらにキムチを炒める',
             titleHiragana: 'ゴーヤーを くわえて いため、さらに キムチを いためる',
-            subtitle: 'ゴーヤーを加えて少し炒め、火が通ったらキムチを投入して全体を炒め合わせます。',
+            subtitle: 'お肉の色が変わって火が通ってきたら、水気を切ったゴーヤーを加えて、サッと炒め合わせます。ゴーヤーに火が通ったら、キムチを加えます。さらにお酒大さじ２分の１と、しょうゆ大さじ４分の１を回し入れます。',
             ingredients: [
               { name: 'しょうゆ', amount: '大さじ1/4' },
               { name: '酒', amount: '大さじ1/2' }
@@ -815,7 +818,7 @@
             videoUrl: '9.mov',
             titleKanji: '調味料を入れ、炒め合わせて完成！',
             titleHiragana: 'ちょうみりょうを いれ、いためあわせて かんせい！',
-            subtitle: '仕上げに調味料を回し入れ、手早く炒め合わせたら、器に盛り付けて完成です！',
+            subtitle: '仕上げに砂糖小さじ２分の１と、塩・コショウを少々振り、全体によく味を馴染ませたら完成です！',
             ingredients: [
               { name: '砂糖', amount: '小さじ1/2' },
               { name: '塩', amount: '少々' },
@@ -1011,7 +1014,7 @@
         // 触控版长按实现（排查 interactive 按钮，100% 避让点击事件）
         function handleVideoTouchStart(e) {
           if (e.target.closest('button') || e.target.closest('.z-30')) {
-            return; // 避让右上角和左上角绝对定位的操作面板与按钮，不进行 preventDefault
+            return; // 避让右上角 and 左上角绝对定位的操作面板与按钮，不进行 preventDefault
           }
           e.preventDefault();
           isLongPressActive = false;
@@ -1046,6 +1049,7 @@
           }, 400);
         }
 
+        // 鼠标放开
         function handleVideoMouseUp(e) {
           if (e.target.closest('button') || e.target.closest('.z-30')) {
             return;
