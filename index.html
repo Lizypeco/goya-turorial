@@ -986,11 +986,12 @@
           isPlaying.value = false;
         }
 
-        // 视频播放结束时的行为
+        // 视频播放结束时的行为：自动顺序播放下一步，直到最后一步触发完成弹窗
         function onVideoEnded() {
-          isPlaying.value = false;
-          // 如果是最后一步（第九步）播放结束，触发完成确认弹窗
-          if (currentStepIndex.value === 8) {
+          if (currentStepIndex.value < steps.length - 1) {
+            jumpToStep(currentStepIndex.value + 1);
+          } else {
+            isPlaying.value = false;
             showConfirmCompletionModal.value = true;
           }
         }
