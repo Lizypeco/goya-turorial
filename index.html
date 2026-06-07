@@ -1138,23 +1138,3 @@
   </script>
 </body>
 </html>
-``` deof
-
----
-
-### 🚀 如何部署更新到 GitHub Pages？
-
-在本地 VS Code 的 `index.html` 完成保存后，直接执行下面三行干净的命令即可：
-
-```bash
-# 1. 暂存所有修改的文件和跟踪本地未提交更改
-git add .
-
-# 2. 提交更新说明，记录已经删除 image_c877dd.jpg 相关的本地文件依赖
-git commit -m "Remove local image_c877dd.jpg file reference and clean up error fallback handlers"
-
-# 3. 部署并推送到 GitHub 线上
-git push
-```
-
-推送成功后大约 1 分钟，在 iPad 上**长按刷新按钮**重载缓存，便可以查看到干净简洁的高品质电子菜谱，完全独立免除对 `image_c877dd.jpg` 本地图片的任何强绑定关系了！预祝您的实机测试和研究进展顺利！
