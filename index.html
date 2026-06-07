@@ -37,6 +37,7 @@
   </script>
 
   <style>
+    /* 针对老年人防误触、防系统菜单弹出的关键 CSS 适配 */
     body {
       -webkit-touch-callout: none; /* 禁用 Safari 长按呼出菜单 */
       -webkit-user-select: none;   /* 禁用文字选中 */
@@ -67,7 +68,7 @@
         </p>
       </div>
 
-      <!-- 操作卡片网格：极致收缩内边距和高度，完美预留底部空间 -->
+      <!-- 操作卡片网格：极致收缩内边距和高度 -->
       <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5 my-auto max-w-5xl mx-auto w-full">
         <!-- 卡片：上一步/下一步 -->
         <div class="bg-white p-2.5 rounded-2xl shadow-sm border-2 border-orange-100 flex flex-col items-center text-center justify-center min-h-[110px]">
@@ -155,7 +156,7 @@
           </div>
           <h3 class="text-base font-bold text-brandOrange mb-0.5">最初から見直す</h3>
           <p class="text-[11px] text-gray-600 leading-tight font-semibold">
-            今のステップをもう一度见たい時は「もう一度」ボタンを押します。
+            今のステップをもう一度見たい時は「もう一度」ボタンを押します。
           </p>
         </div>
 
@@ -182,9 +183,9 @@
         </div>
       </div>
 
-      <!-- 底部静态开始按钮（安全收缩高度 py-2.5，杜绝 Safari 遮挡） -->
-      <div class="text-center mt-2 mb-2 shrink-0">
-        <button @click="goToView('preview')" class="inline-flex items-center justify-center px-8 py-2.5 bg-brandOrange hover:bg-brandOrangeHover text-xl font-black text-white rounded-full shadow-md transition duration-300 transform active:scale-95 border-2 border-white cursor-pointer">
+      <!-- 底部静态开始按钮（安全上拉 mt-2 mb-10 pb-4，完美适配 Safari 控制横条，防止贴底） -->
+      <div class="text-center mt-2 mb-10 pb-4 shrink-0">
+        <button @click="goToView('preview')" class="inline-flex items-center justify-center px-10 py-3 bg-brandOrange hover:bg-brandOrangeHover text-xl font-black text-white rounded-full shadow-md transition duration-300 transform active:scale-95 border-2 border-white cursor-pointer">
           内容を確認した！レシピを見る
         </button>
       </div>
@@ -239,12 +240,12 @@
         </div>
       </div>
 
-      <!-- 底部控制按钮：高度安全上推 py-2.5 -->
-      <div class="flex justify-between items-center max-w-5xl w-full mx-auto mt-2 mb-2 shrink-0 gap-3">
-        <button @click="goToView('guide')" class="px-5 py-2.5 bg-gray-300 hover:bg-gray-400 text-gray-800 text-base font-bold rounded-xl active:scale-95 transition">
+      <!-- 底部控制按钮：高度安全上提 mb-10 pb-4 -->
+      <div class="flex justify-between items-center max-w-5xl w-full mx-auto mt-2 mb-10 pb-4 shrink-0 gap-3">
+        <button @click="goToView('guide')" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 text-base font-bold rounded-xl active:scale-95 transition">
           もどる
         </button>
-        <button @click="goToView('checklist')" class="flex-1 py-2.5 bg-brandOrange hover:bg-brandOrangeHover text-white text-xl font-black rounded-full shadow-md border-2 border-white transition active:scale-95 text-center cursor-pointer">
+        <button @click="goToView('checklist')" class="flex-1 py-3 bg-brandOrange hover:bg-brandOrangeHover text-white text-xl font-black rounded-full shadow-md border-2 border-white transition active:scale-95 text-center cursor-pointer">
           食材と道具の確認へ進む
         </button>
       </div>
@@ -264,15 +265,16 @@
         </p>
       </div>
 
-      <!-- 主要内容：物料列表 -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 my-auto max-w-6xl mx-auto w-full">
+      <!-- 主要内容：物料列表。items-start 确保高度不强制等高，各框自适应 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 my-auto max-w-6xl mx-auto w-full items-start">
         
-        <!-- 食材分类 -->
+        <!-- 食材分类：少于6行自动适应其行数，底部不补足空白 -->
         <div class="bg-white p-3 rounded-2xl shadow-sm border-t-4 border-brandOrange flex flex-col">
           <h3 class="text-base font-bold text-brandOrange mb-1.5 flex items-center gap-2">
             食材
           </h3>
-          <div class="space-y-1.5 flex-1">
+          <!-- max-h-[270px] 保证正好能容纳6行，多于6行时产生平滑滚动 -->
+          <div class="space-y-1.5 overflow-y-auto max-h-[270px] pr-1">
             <label v-for="(item, index) in ingredients" :key="index" 
                    class="flex items-center gap-2 p-1.5 bg-orange-50/50 rounded-xl cursor-pointer active:bg-orange-100 transition">
               <input type="checkbox" v-model="item.checked" class="w-5.5 h-5.5 text-brandOrange border-gray-300 rounded focus:ring-brandOrange">
@@ -283,12 +285,13 @@
           </div>
         </div>
 
-        <!-- 调味料分类 -->
+        <!-- 调味料分类：包含8行，正好超过6行，容器会产生安全滑动 -->
         <div class="bg-white p-3 rounded-2xl shadow-sm border-t-4 border-brandGreen flex flex-col">
           <h3 class="text-base font-bold text-brandGreen mb-1.5 flex items-center gap-2">
             調味料
           </h3>
-          <div class="space-y-1.5 flex-1 overflow-y-auto max-h-[140px] pr-1">
+          <!-- max-h-[270px] 锁定6行高度 -->
+          <div class="space-y-1.5 overflow-y-auto max-h-[270px] pr-1">
             <label v-for="(item, index) in seasonings" :key="index" 
                    class="flex items-center gap-2 p-1.5 bg-green-50/50 rounded-xl cursor-pointer active:bg-green-100 transition">
               <input type="checkbox" v-model="item.checked" class="w-5.5 h-5.5 text-brandGreen border-gray-300 rounded focus:ring-brandGreen">
@@ -300,12 +303,13 @@
           </div>
         </div>
 
-        <!-- 厨房工具分类 -->
+        <!-- 厨房工具分类：少于6行自动收拢高度，绝不等长拉伸 -->
         <div class="bg-white p-3 rounded-2xl shadow-sm border-t-4 border-blue-500 flex flex-col">
           <h3 class="text-base font-bold text-blue-600 mb-1.5 flex items-center gap-2">
             使う道具
           </h3>
-          <div class="space-y-1.5 flex-1">
+          <!-- max-h-[270px] 锁定6行高度 -->
+          <div class="space-y-1.5 overflow-y-auto max-h-[270px] pr-1">
             <label v-for="(item, index) in tools" :key="index" 
                    class="flex items-center gap-2 p-1.5 bg-blue-50/50 rounded-xl cursor-pointer active:bg-blue-100 transition">
               <input type="checkbox" v-model="item.checked" class="w-5.5 h-5.5 text-blue-500 border-gray-300 rounded focus:ring-blue-500">
@@ -318,13 +322,13 @@
 
       </div>
 
-      <!-- 底部启动烹饪按钮：未完全打勾时显示为橙色，打勾完成后显示为绿色 -->
-      <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-2 mb-2 shrink-0 gap-3">
-        <button @click="goToView('preview')" class="px-5 py-2.5 bg-gray-300 hover:bg-gray-400 text-gray-800 text-base font-bold rounded-xl active:scale-95 transition">
+      <!-- 底部启动烹饪按钮：未完全打勾时显示为橙色，打勾完成后显示为绿色。高度安全上推 mb-10 pb-4 -->
+      <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-2 mb-10 pb-4 shrink-0 gap-3">
+        <button @click="goToView('preview')" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 text-base font-bold rounded-xl active:scale-95 transition">
           もどる
         </button>
         <button @click="startCooking" 
-                class="flex-1 max-w-2xl py-2.5 text-white text-xl font-black rounded-full shadow-md border-2 border-white transition active:scale-95 text-center cursor-pointer"
+                class="flex-1 max-w-2xl py-3 text-white text-xl font-black rounded-full shadow-md border-2 border-white transition active:scale-95 text-center cursor-pointer"
                 :class="isAllPrepared ? 'bg-brandGreen hover:bg-brandGreenHover' : 'bg-brandOrange hover:bg-brandOrangeHover'">
           準備完了！料理をスタート
         </button>
@@ -680,14 +684,14 @@
         const showConfirmCompletionModal = ref(false);
         const showSuccessOverlay = ref(false);
 
-        // 封面图调用指定的高清主图
+        // 封面图使用官方链接
         const coverImageSrc = ref('https://life.ja-group.jp/upload/recipe/main/33_1.jpg');
         function handleImageError() {
           console.warn("JA Cover image loaded failed. Swapping to standard fallback placeholder.");
           coverImageSrc.value = 'https://placehold.co/600x400/fdfcf7/e67e22?text=ゴーヤーたっぷり豚キムチ';
         }
 
-        // 材料备选清单数据
+        // 材料备选清单数据（彻底移除中文汉字说明与注音，保留极简名称）
         const ingredients = ref([
           { name: 'ゴーヤー', amount: '1/2 本', checked: false },
           { name: '玉ねぎ', amount: '1/4 個', checked: false },
@@ -695,14 +699,15 @@
           { name: '豚バラ薄切り肉', amount: '90 g', checked: false }
         ]);
 
+        // 调味料清单数据：彻底去除 “【A】” 和 “【B】” 标签分组，实现极简化平铺
         const seasonings = ref([
           { name: '塩 (揉み込み用)', amount: '適量 (分量外)', checked: false },
-          { name: '【A】生姜の搾り汁', amount: '1/4 片分', checked: false },
-          { name: '【A】酒', amount: '大さじ 1/4', checked: false },
-          { name: '【B】酒', amount: '大さじ 1/2', checked: false },
-          { name: '【B】しょうゆ', amount: '大さじ 1/4', checked: false },
-          { name: '【B】砂糖', amount: '小さじ 1/2', checked: false },
-          { name: '【B】塩・コショウ', amount: '少々', checked: false },
+          { name: '生姜の搾り汁', amount: '1/4 片分', checked: false },
+          { name: '酒', amount: '大さじ 1/4', checked: false },
+          { name: '酒', amount: '大さじ 1/2', checked: false },
+          { name: 'しょうゆ', amount: '大さじ 1/4', checked: false },
+          { name: '砂糖', amount: '小さじ 1/2', checked: false },
+          { name: '塩・コショウ', amount: '少々', checked: false },
           { name: 'サラダ油', amount: '大さじ 1/2', checked: false }
         ]);
 
@@ -719,7 +724,7 @@
                  tools.value.every(t => t.checked);
         });
 
-        // 精心编排的 9 步电子菜谱数据
+        // 精心编排的 9 步电子菜谱数据（精确匹配无 A/B 标注版调料名）
         const steps = [
           {
             id: 1,
@@ -775,19 +780,19 @@
           {
             id: 6,
             videoUrl: '6.mov',
-            titleKanji: '豚肉を一口大に切り、調味料Aを揉み込む',
-            titleHiragana: 'ぶたにくを ひとくちだいに きり、ちょうみりょうＡを もみこむ',
-            subtitle: '豚肉を一口大に切り、生姜汁 and 酒の調味料Aを揉み込んで下味をつけます。',
+            titleKanji: '豚肉を一口大に切り、調味料を揉み込む',
+            titleHiragana: 'ぶたにくを ひとくちだいに きり、ちょうみりょうを もみこむ',
+            subtitle: '豚肉を一口大に切り、生姜汁と酒の調味料を揉み込んで下味をつけます。',
             ingredients: [
               { name: '豚バラ薄切り肉', amount: '90g' },
-              { name: '【A】生姜汁', amount: '1/4片分' },
-              { name: '【A】酒', amount: '大さじ1/4' }
+              { name: '生姜の搾り汁', amount: '1/4片分' },
+              { name: '酒', amount: '大さじ1/4' }
             ]
           },
           {
             id: 7,
             videoUrl: '7.mov',
-            titleKanji: '油を热し、玉ねぎと豚肉を炒める',
+            titleKanji: '油を熱し、玉ねぎと豚肉を炒める',
             titleHiragana: 'あぶらを ねっし、たまねぎ と ぶたにくを いためる',
             subtitle: 'フライパンに油を熱し、玉ねぎと豚肉を炒めます。お肉の色が変わるまでしっかり。',
             ingredients: [
@@ -808,9 +813,9 @@
           {
             id: 9,
             videoUrl: '9.mov',
-            titleKanji: '調味料Bを入れ、炒め合わせて完成！',
-            titleHiragana: 'ちょうみりょうＢを いれ、いためあわせて かんせい！',
-            subtitle: '仕上げに調味料Bを回し入れ、手早く炒め合わせたら、器に盛り付けて完成です！',
+            titleKanji: '調味料を入れ、炒め合わせて完成！',
+            titleHiragana: 'ちょうみりょうを いれ、いためあわせて かんせい！',
+            subtitle: '仕上げに調味料を回し入れ、手早く炒め合わせたら、器に盛り付けて完成です！',
             ingredients: [
               { name: '砂糖', amount: '小さじ1/2' },
               { name: '塩', amount: '少々' },
