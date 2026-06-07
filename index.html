@@ -295,7 +295,7 @@
           <div class="space-y-1.5 overflow-y-auto max-h-[270px] pr-1">
             <label v-for="(item, index) in seasonings" :key="index" 
                    class="flex items-center gap-2.5 p-2 bg-green-50/50 rounded-xl cursor-pointer active:bg-green-100 transition">
-              <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-brandGreen border-gray-300 rounded focus:ring-brandGreen">
+              <input type="checkbox" v-model="item.checked" class="w-5.5 h-5.5 text-brandGreen border-gray-300 rounded focus:ring-brandGreen">
               <div class="text-base font-black flex flex-col transition-colors duration-150" :class="item.checked ? 'text-brandGreen' : 'text-brandDark'">
                 <span>{{ item.name }}</span>
                 <span class="text-brandGreen text-xs font-black">{{ item.amount }}</span>
@@ -306,14 +306,19 @@
 
         <!-- 厨房工具分类：少于6行自动收拢高度，绝不等长拉伸 -->
         <div class="bg-white p-3 rounded-2xl shadow-sm border-t-4 border-blue-500 flex flex-col">
-          <h3 class="text-xl font-black text-blue-600 mb-2 flex items-center gap-2">
-            使う道具
-          </h3>
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="text-xl font-black text-blue-600 flex items-center gap-2">
+              使う道具
+            </h3>
+            <button @click="toggleAllTools" class="px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 rounded-xl text-xs font-black active:scale-95 transition cursor-pointer">
+              {{ isAllToolsChecked ? 'すべて消す' : 'すべて選ぶ' }}
+            </button>
+          </div>
           <!-- max-h-[270px] 锁定6行高度 -->
           <div class="space-y-1.5 overflow-y-auto max-h-[270px] pr-1">
             <label v-for="(item, index) in tools" :key="index" 
                    class="flex items-center gap-2.5 p-2 bg-blue-50/50 rounded-xl cursor-pointer active:bg-blue-100 transition">
-              <input type="checkbox" v-model="item.checked" class="w-6 h-6 text-blue-500 border-gray-300 rounded focus:ring-blue-500">
+              <input type="checkbox" v-model="item.checked" class="w-5.5 h-5.5 text-blue-500 border-gray-300 rounded focus:ring-blue-500">
               <span class="text-base font-black transition-colors duration-150" :class="item.checked ? 'text-brandGreen' : 'text-brandDark'">
                 {{ item.name }}
               </span>
@@ -323,12 +328,7 @@
 
       </div>
 
-      <!-- 底部启动烹饪按钮：未完全打勾时显示为橙色且禁用，打勾完成后显示为绿色并激活解锁。高度安全上推 mb-10 pb-4 -->
-      <div class="flex justify-between items-center max-w-6xl w-full mx-auto mt-2 mb-10 pb-4 shrink-0 gap-3">
-        <button @click="goToView('preview')" class="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 text-lg font-bold rounded-xl active:scale-95 transition">
-          もどる
-        </button>
-        <button @click="isAllPrepared ? startCooking() : null" 
+      <!-- 底部启动烹饪按钮：未完全打勾时显示为橙色，打勾完成后显示为绿色。高度安全上推 mb-10 pb-4 -->
                 :disabled="!isAllPrepared"
                 class="flex-1 max-w-2xl py-3 text-white text-2xl font-black rounded-full shadow-md border-2 border-white transition text-center"
                 :class="isAllPrepared ? 'bg-brandGreen hover:bg-brandGreenHover cursor-pointer active:scale-95' : 'bg-gray-300 cursor-not-allowed opacity-50'">
@@ -719,6 +719,15 @@
           { name: 'フライパン', checked: false },
           { name: 'キッチンスケール', checked: false }
         ]);
+
+        const isAllToolsChecked = computed(() => {
+          return tools.value.every(t => t.checked);
+        });
+
+        function toggleAllTools() {
+          const targetState = !isAllToolsChecked.value;
+          tools.value.forEach(t => t.checked = targetState);
+        }
 
         // 是否全部备齐（所有单子全部打勾）
         const isAllPrepared = computed(() => {
@@ -1120,6 +1129,8 @@
           seasonings,
           tools,
           isAllPrepared,
+          isAllToolsChecked,
+          toggleAllTools,
           goToView,
           startCooking,
           jumpToStep,
