@@ -128,7 +128,7 @@
         <div class="bg-white p-2.5 rounded-2xl shadow-md border-2 border-orange-100 flex flex-col items-center text-center justify-center min-h-[110px]">
           <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mb-1">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-              <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM6.5 12.57H9.27C9.68 12.57 10.02 12.91 10.02 13.32C10.02 13.73 9.68 14.07 9.27 14.07H6.5C6.09 14.07 5.75 13.73 5.75 13.32C5.75 12.91 6.09 12.57 6.5 12.57ZM12.97 17.83H6.5C6.09 17.83 5.75 17.49 5.75 17.08C5.75 16.67 6.09 16.33 6.5 16.33H12.97C13.38 16.33 13.72 16.67 13.72 17.08C13.72 17.49 13.39 17.83 12.97 17.83ZM17.5 17.83H15.65C15.24 17.83 14.9 17.49 14.9 17.08C14.9 16.67 15.24 16.33 15.65 16.33H17.5C17.91 16.33 18.25 16.67 18.25 17.08C18.25 17.49 17.91 17.83 17.5 17.83ZM17.5 14.07H11.97C11.56 14.07 11.22 13.73 11.22 13.32C11.22 12.91 11.56 12.57 11.97 12.57H17.5C17.91 12.57 18.25 12.91 18.25 13.32C18.25 13.73 17.91 14.07 17.5 14.07Z" fill="url(#paint0_linear_guide_sub)"/>
+              <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM6.5 12.57H9.27C9.68 12.57 10.02 12.91 10.02 13.32C10.02 13.73 9.68 14.07 9.27 14.07H6.5C6.09 14.07 5.75 13.73 5.75 13.32C5.75 12.91 6.09 12.57 6.5 12.57ZM12.97 17.83H6.5C6.09 17.83 5.75 17.49 5.75 17.08C5.75 16.67 6.09 16.33 6.5 16.33H12.97C13.38 16.33 13.72 16.67 13.72 17.08C13.72 17.49 13.39 17.83 12.97 17.83ZM17.5 17.83H15.65C15.24 17.83 14.9 17.49 14.9 17.08C14.9 16.67 15.24 16.33 15.65 16.33H17.5C17.91 16.33 18.25 16.67 18.25 17.08C18.25 17.49 17.91 17.83 17.5 17.83ZM17.5 14.07H11.97C11.56 14.07 11.22 13.73 11.22 13.32C11.22 12.91 11.56 12.57 11.97 12.57H17.5C17.91 12.57 18.25 12.91 18.25 13.32C18.25 13.32C17.91 14.07 17.5 14.07Z" fill="url(#paint0_linear_guide_sub)"/>
               <defs>
                 <linearGradient id="paint0_linear_guide_sub" x1="2" y1="12" x2="21.99" y2="12" gradientUnits="userSpaceOnUse">
                   <stop stop-color="#FF8904"/><stop offset="1" stop-color="#FF6900"/>
@@ -246,7 +246,7 @@
           もどる
         </button>
         <button @click="goToView('checklist')" class="flex-1 py-3 bg-brandOrange hover:bg-brandOrangeHover text-white text-xl font-black rounded-full shadow-md border-2 border-white transition active:scale-95 text-center cursor-pointer">
-          食材と道具の確認へ進む
+          食材と道具的確認へ進む
         </button>
       </div>
     </div>
@@ -340,8 +340,8 @@
     <div v-if="currentView === 'cooking'" class="w-full h-full flex flex-col justify-between"
          @touchstart="handleTouchStart" @touchend="handleTouchEnd">
       
-      <!-- 中部主屏幕 -->
-      <div class="relative flex-1 bg-black rounded-3xl overflow-hidden shadow-md flex items-center justify-center">
+      <!-- 中部主屏幕：增加了 min-h-0 确保在 iPad Safari 上高度压缩时能稳定自适应缩放视频 -->
+      <div class="relative flex-1 min-h-0 bg-black rounded-3xl overflow-hidden shadow-md flex items-center justify-center">
         
         <!-- 视频容器，绑定长按和双击过滤事件 -->
         <div class="w-full h-full relative"
@@ -532,8 +532,8 @@
 
       </div>
 
-      <!-- 3. 底部：点对点流水式时间轴进度条 + 居中步骤详情标题 (高度压缩为 115px，确保 iPad 7 完美闭合) -->
-      <div class="bg-white rounded-3xl border-2 border-brandOrange/60 p-3 shrink-0 flex flex-col justify-between h-[115px] mt-2">
+      <!-- 3. 底部：点对点流水式时间轴进度条 + 居中步骤详情标题 (添加 mb-10 强行设置安全底距，确保 iPad 完美显示) -->
+      <div class="bg-white rounded-3xl border-2 border-brandOrange/60 p-3 shrink-0 flex flex-col justify-between h-[115px] mt-2 mb-10">
         
         <!-- 进度条区域（结合大步骤与视频播放百分比，在 1~9 节点之间无缝平滑变化颜色） -->
         <div class="w-full flex items-center gap-3 py-0.5 relative">
@@ -780,7 +780,7 @@
           {
             id: 6,
             videoUrl: '6.mov',
-            titleKanji: '豚肉を一口大に切り、調味料を揉み込む',
+            titleKanji: '豚肉を一口大に切り、调味料を揉み込む',
             titleHiragana: 'ぶたにくを ひとくちだいに きり、ちょうみりょうを もみこむ',
             subtitle: '豚肉を一口大に切り、生姜汁と酒の調味料を揉み込んで下味をつけます。',
             ingredients: [
